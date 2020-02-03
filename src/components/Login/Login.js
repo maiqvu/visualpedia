@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import './Login.scss';
 import axios from 'axios';
+import {Alert} from 'react-bootstrap';
 
 class Login extends Component {
-  state = {email: '', password: ''};
+  state = {
+    email: '',
+    password: '',
+    auth_result: {},
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -16,8 +21,15 @@ class Login extends Component {
           email: this.state.email,
           password: this.state.password,
         })
-        .then(console.log)
-        .catch(console.warn);
+        .then((res) => {
+          console.log(res);
+          this.setState({...this.state, auth_result: res.data});
+        })
+        .catch((error) => {
+          console.warn(error);
+          this.setState(
+              {...this.state, auth_result: {error: 'authentication failure'}});
+        });
   };
 
   handleChange = (event) => {
@@ -28,6 +40,12 @@ class Login extends Component {
   render() {
     return (
         <div className="login-panel">
+          {
+            this.state.auth_result.hasOwnProperty('error') &&
+            <Alert variant="danger">
+              Incorrect email or password.
+            </Alert>
+          }
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
