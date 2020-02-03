@@ -10,6 +10,7 @@ import GDPInfo from './GDPInfo';
 import RecInfo from './RecInfo';
 import TNRRInfo from './TNRRInfo';
 import ContinentMap from './ContinentMap/ContinentMap.js';
+import Login from './Login/Login';
 
 class LandingPage extends React.Component {
 
@@ -26,6 +27,7 @@ class LandingPage extends React.Component {
           <Route exact path='/chart/gdp' component={RecInfo} />
           <Route exact path='/chart/rec' component={RecInfo} />
           <Route exact path='/chart/tnrr' component={TNRRInfo} />
+          <Route exact path='/login' component={Login} />
 
 
         </Router>
