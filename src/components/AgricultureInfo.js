@@ -5,7 +5,7 @@ import CheckBox from './CheckBox'
 import _ from 'lodash/collection';
 const INDICATOR = 'AG.LND.AGRI.ZS';
 const TIME_RANGE = '2006:2015';
-const COUNTRIES = 'br;chl;arg;ecu;sur';
+const COUNTRIES = 'br;mex;arg;ecu;sur';
 const BASE_URL = `http://api.worldbank.org/v2/country/`;
 const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
@@ -15,7 +15,8 @@ class AgricultureInfo extends React.Component {
     sortedResults: [],
     resultsToDisplay: [],
     infoToChart: [],
-    countriesLabel: []
+    countriesLabel: [],
+    countriesToSearch: ''
   }
 
   splitData = (arrayToGroup) => {
@@ -35,8 +36,8 @@ class AgricultureInfo extends React.Component {
 
   } // spilt data
 
-  performSearch = () => {
-    axios.get(`${BASE_URL}${COUNTRIES
+  performSearch = (countries) => {
+    axios.get(`${BASE_URL}${countries
     }${SECOND_HALF}`)
     .then(res => {
       // take base url and call sortData() with data argument
@@ -89,9 +90,17 @@ class AgricultureInfo extends React.Component {
   } // handleChange
 
   componentDidMount(){
-    this.performSearch()
+    this.setState({countriesToSearch: 'br;chl;arg;ecu;sur'})
+    // pass props in imediataly
+    this.performSearch('br;mex;arg;ecu;sur')
   } // componentdidmount
 
+  // componentDidUpdate(prevProps, prevState){
+  //   if (prevProps.countriesToSearch !== this.state.countriesToSearch) {
+  //     console.log("countries passed in", this.state.countriesToSearch);
+  //     // this.performSearch(this.state.countriesToSearch)
+  //   }
+  // }
   render(){
 
     return(
