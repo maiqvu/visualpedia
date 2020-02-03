@@ -12,10 +12,10 @@ const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 class AgricultureInfo extends React.Component {
   state = {
 
-    // countries: [],
     sortedResults: [],
     resultsToDisplay: [],
-    infoToChart: []
+    infoToChart: [],
+    countriesLabel: ['Argentina', 'Brazil', 'Chile', 'Suriname', 'Ecuador']
   }
 
   splitData = (arrayToGroup) => {
@@ -93,7 +93,7 @@ class AgricultureInfo extends React.Component {
 
     return(
       <div>
-        <CheckBox arg={this.state.arg} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         {
           this.state.infoToChart.length !== 0
           ?

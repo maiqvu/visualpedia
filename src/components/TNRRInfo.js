@@ -15,7 +15,8 @@ class TNRRInfo extends React.Component {
 
     sortedResults: [],
     resultsToDisplay: [],
-    infoToChart: []
+    infoToChart: [],
+    countriesLabel: ['Argentina', 'Brazil', 'Chile', 'Suriname', 'Ecuador']
   }
 
   splitData = (arrayToGroup) => {
@@ -93,7 +94,7 @@ class TNRRInfo extends React.Component {
 
     return(
       <div>
-        <CheckBox arg={this.state.arg} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         {
           this.state.infoToChart.length !== 0
           ?
