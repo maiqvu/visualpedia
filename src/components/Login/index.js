@@ -41,11 +41,11 @@ class Login extends Component {
   };
 
   render() {
-    const {authResults} = this.props;
+    const {authResult} = this.props;
     return (
         <div className="login-panel">
           {
-            authResults.hasOwnProperty('error') &&
+            authResult.hasOwnProperty('error') &&
             <Alert variant="danger">
               Incorrect email or password.
             </Alert>
@@ -79,7 +79,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authResults: state.auth,
+  authResult: state.auth,
 });
 
 export default connect(mapStateToProps, actionCreators)(Login);

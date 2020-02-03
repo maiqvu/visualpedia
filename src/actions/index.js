@@ -8,3 +8,7 @@ export const loginSuccess = (payload) => ({
 export const loginFail = () => ({
   type: AUTH.LOGIN_FAIL,
 });
+
+export const logout = () => ({
+  type: AUTH.LOGOUT,
+});

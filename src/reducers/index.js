@@ -5,9 +5,10 @@ const auth = (state = {}, action) => {
   switch (action.type) {
     case AUTH.LOGIN_SUCCESS:
       return action.payload;
-    case AUTH.LOGIN_FAIL: {
+    case AUTH.LOGIN_FAIL:
       return {error: 'login failed'};
-    }
+    case AUTH.LOGOUT:
+      return {};
     default:
       return state;
   }
