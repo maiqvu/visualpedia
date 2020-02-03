@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
-import './Login.scss';
+import { connect } from 'react-redux';
+import * as PropTypes from 'prop-types';
 import axios from 'axios';
 import {Alert} from 'react-bootstrap';
+import * as actionCreators from '../../actions';
+import './style.scss';
 
 class Login extends Component {
   state = {
     email: '',
     password: '',
-    auth_result: {},
   };
 
   handleSubmit = (event) => {
+    const {loginSuccess, loginFail} = this.props;
+
     event.preventDefault();
     axios.post('http://localhost:3000/authenticate'
         , {
@@ -23,12 +27,11 @@ class Login extends Component {
         })
         .then((res) => {
           console.log(res);
-          this.setState({...this.state, auth_result: res.data});
+          loginSuccess(res.data);
         })
         .catch((error) => {
           console.warn(error);
-          this.setState(
-              {...this.state, auth_result: {error: 'authentication failure'}});
+          loginFail();
         });
   };
 
@@ -38,10 +41,11 @@ class Login extends Component {
   };
 
   render() {
+    const {authResults} = this.props;
     return (
         <div className="login-panel">
           {
-            this.state.auth_result.hasOwnProperty('error') &&
+            authResults.hasOwnProperty('error') &&
             <Alert variant="danger">
               Incorrect email or password.
             </Alert>
@@ -68,4 +72,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  loginSuccess: PropTypes.func.isRequired,
+  loginFail: PropTypes.func.isRequired,
+  authResult: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authResults: state.auth,
+});
+
+export default connect(mapStateToProps, actionCreators)(Login);
