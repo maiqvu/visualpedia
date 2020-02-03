@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+
+.contianerInfo {
+  display: inline-flex;
+  justify-content: center;
+
+
+}
+
+.displayGraphDiv {
+  margin: 10px;
+  border-radius: 20px;
+  border: 2px solid black;
+  background-color: darkgoldenrod;
+  justify-content: center;
+
+
+}
+
+.chartDisplay {
+  margin: 10px 5px;
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: 3px 4px 2px;
+  background-color: #FFFAFA;
+  padding: 15px;
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.checkBox {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 3px 2px;
+  background-color: #FFF5EE;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+}
+
+#chartHeading h1 {
+  text-align: center;
+
+}

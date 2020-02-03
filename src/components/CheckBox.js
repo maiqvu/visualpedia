@@ -7,16 +7,15 @@ function CheckBox(props){
           props.countriesLabels.length !== 0
           ?
           <div>
-          <form className="getCountry"  onSubmit={props.handleSubmit}>
+          <form className="chooseCountryForm"  onSubmit={props.handleSubmit}>
 
             {props.countriesLabels.map((c , index) => {
               return (
-                <div key={index}>
-                  <label>{c}</label>
-                  <input type='checkbox'
+                <div key={index} className="chooseCountrydiv">
+                  <label className="chooseCountryLabel">{c}</label>
+                  <input className="chooseCountryInput" type='checkbox'
                   onChange={props.handleChange}
                   value={c}
-
                   />
                 </div>
               ) // return

@@ -1,11 +1,30 @@
-.navBar {
-  margin-top: 1em;
+.navBarDiv {
   margin-bottom: 2em;
-  a:first-child {
-    margin-left: 0.5em;
-  }
-  a:last-child {
-    float: right;
-    margin-right: 0.5em;
+  .navBar {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    color: #B3604D;
+    border-bottom: 3px #9c9c9c double;
+    a {
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+      color: #B3604D;
+    }
+
+    a:first-child {
+      margin-left: 0.5em;
+    }
+
+    a:last-child {
+      float: right;
+      margin-right: 0.5em;
+    }
+
+    button {
+      float: right;
+      color: #B3604D;
+      background-color: transparent;
+      border: 0;
+    }
   }
 }

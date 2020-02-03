@@ -10,7 +10,7 @@ import GDPInfo from './GDPInfo';
 import RecInfo from './RecInfo';
 import TNRRInfo from './TNRRInfo';
 import ContinentMap from './ContinentMap/ContinentMap.js';
-import Login from './Login/Login';
+import Login from './Login';
 
 class LandingPage extends React.Component {
 

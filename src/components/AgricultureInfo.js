@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Chart from './Chart';
-import CheckBox from './CheckBox'
+import CheckBox from './CheckBox';
+import '../App.css'
 import _ from 'lodash/collection';
 const INDICATOR = 'AG.LND.AGRI.ZS';
 const TIME_RANGE = '2006:2015';
@@ -92,6 +93,7 @@ class AgricultureInfo extends React.Component {
   componentDidMount(){
     this.setState({countriesToSearch: 'br;chl;arg;ecu;sur'})
     // pass props in imediataly
+    // pass in countrys to search and indicator
     this.performSearch('br;mex;arg;ecu;sur')
   } // componentdidmount
 
@@ -99,17 +101,21 @@ class AgricultureInfo extends React.Component {
 
     return(
       <div>
-        <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        {
-          this.state.infoToChart.length !== 0
-          ?
-          <div className="agricultureChart">
-            <h1>Agricultural Land in % of area</h1>
-            <Chart dataRange={this.state.infoToChart} />
+        <div className="displayGraphDiv">
+          <div className="checkBox">
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
           </div>
-          :
-          <h1>Loading ..</h1>
-        }
+          {
+            this.state.infoToChart.length !== 0
+            ?
+            <div className="chartDisplay">
+              <h1>Agricultural Land in % of area</h1>
+              <Chart dataRange={this.state.infoToChart} />
+            </div>
+            :
+            <h1>Select some Countries so display</h1>
+          }
+        </div>
       </div>
     ) // render
   } // render
