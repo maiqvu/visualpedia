@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Chart from './Chart';
-import CheckBox from './CheckBox'
+import CheckBox from './CheckBox';
+import '../App.css'
 import _ from 'lodash/collection';
 const INDICATOR = 'AG.LND.AGRI.ZS';
 const TIME_RANGE = '2006:2015';
@@ -101,16 +102,18 @@ class AgricultureInfo extends React.Component {
     return(
       <div>
         <div className="displayGraphDiv">
-          <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          <div className="checkBox">
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          </div>
           {
             this.state.infoToChart.length !== 0
             ?
-            <div className="agricultureChart">
+            <div className="chartDisplay">
               <h1>Agricultural Land in % of area</h1>
               <Chart dataRange={this.state.infoToChart} />
             </div>
             :
-            <h1>Loading ..</h1>
+            <h1>Select some Countries so display</h1>
           }
         </div>
       </div>
