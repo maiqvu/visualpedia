@@ -3,7 +3,7 @@
   .navBar {
     padding-top: 0.4em;
     padding-bottom: 0.4em;
-    color: #B3604D;
+    color: #9c9c9c;
     border-bottom: 3px #9c9c9c double;
     a {
       margin-right: 0.5em;
@@ -15,9 +15,13 @@
       margin-left: 0.5em;
     }
 
-    a:last-child {
+    .user-menu {
       float: right;
-      margin-right: 0.5em;
+      span {
+        margin-right: 1em;
+        font-weight: bold;
+        color: #4e555b;
+      }
     }
 
     button {
