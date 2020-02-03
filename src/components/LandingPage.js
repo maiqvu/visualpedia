@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import NavBar from './NavBar'
 import AgricultureInfo from './AgricultureInfo'
-import ChartGdp from './ChartGDP';
+import GDPInfo from './GDPInfo';
 import RecInfo from './RecInfo';
-import TNRRChart from './ChartTNRR';
+import TNRRInfo from './TNRRInfo';
 import ContinentMap from './ContinentMap/ContinentMap.js';
 
 class LandingPage extends React.Component {
@@ -23,9 +23,9 @@ class LandingPage extends React.Component {
         <Router>
 
           <Route exact path='/chart/agri' component={AgricultureInfo} />
-          <Route exact path='/chart/gdp' component={ChartGdp} />
+          <Route exact path='/chart/gdp' component={RecInfo} />
           <Route exact path='/chart/rec' component={RecInfo} />
-          <Route exact path='/chart/tnrr' component={TNRRChart} />
+          <Route exact path='/chart/tnrr' component={TNRRInfo} />
 
 
         </Router>

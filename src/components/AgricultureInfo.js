@@ -1,40 +1,40 @@
 import React from 'react';
 import axios from 'axios';
-import AgricultureChart from './AgricultureChart'
+import Chart from './Chart';
 import CheckBox from './CheckBox'
 import _ from 'lodash/collection';
-const INDICATOR = 'AG.LND.AGRI.ZS'
-const TIME_RANGE = '2006:2015'
-const COUNTRIES = 'br;sur;jpn;arg;deu'
-const BASE_URL = `http://api.worldbank.org/v2/country/`
+const INDICATOR = 'AG.LND.AGRI.ZS';
+const TIME_RANGE = '2006:2015';
+const COUNTRIES = 'br;chl;arg;ecu;sur';
+const BASE_URL = `http://api.worldbank.org/v2/country/`;
 const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
 class AgricultureInfo extends React.Component {
   state = {
 
-    countries: [],
-    sortedResults: []
+    // countries: [],
+    sortedResults: [],
+    resultsToDisplay: [],
+    infoToChart: []
   }
 
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
+    console.log('split');
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
     // data now array of objects with country name as key
     this.setState({sortedResults: rawData})
+
+    // console.log(this.state.sortedResults);
+
   } // spilt data
 
-  sortData = (res) => {
-    // set allresults to = api results
-    const response = res[1];
-    this.splitData(response)
-
-  } // sort data
-
-  performSearch = (countries) => {
-    axios.get(`${BASE_URL}${countries}${SECOND_HALF}`)
+  performSearch = () => {
+    axios.get(`${BASE_URL}${COUNTRIES
+    }${SECOND_HALF}`)
     .then(res => {
       // take base url and call sortData() with data argument
-      console.log(res);
+      console.log('search');
       this.splitData(res.data[1])
     })
     .catch( err => {
@@ -45,41 +45,61 @@ class AgricultureInfo extends React.Component {
   handleSubmit = (e) => {
     // prevent reload
     e.preventDefault();
-    //join search items
-    let searchString = this.state.countries.join(';')
-    // search for countries to use
-    this.performSearch(searchString )
+    //
+    let listToUpdateState = {};
+    let listToCompareObject = this.state.sortedResults
+    let listToCompareName = this.state.resultsToDisplay
+    console.log("desired result to parse: ", listToCompareObject);
+
+    listToCompareName.forEach(c => {
+      listToUpdateState[c] = listToCompareObject[c]
+    })
+    console.log("current parsing: ", listToUpdateState );
+    this.setState({infoToChart: listToUpdateState})
+
   }
 
   handleChange = (e) => {
+    // get state save as preSelection
+    let preSelection = this.state.resultsToDisplay;
+    // target event
+    const target = e.target;
+    // get value of event
+    const value = target.value;
+    // if state has value
+   if (preSelection.includes(value)) {
+     // remove value from preSelection
+     const toDisplay = preSelection.filter(e => e !== value)
+     // update sates to include only 'ticked' items
+     this.setState({resultsToDisplay: toDisplay})
+     console.log(this.state.resultsToDisplay);
 
-       const target = e.target;
+   } else {
+     console.log('new');
+     console.log(preSelection);
+     // add new county to rest of state save as joined
+     const joined = this.state.resultsToDisplay.concat(value);
+     // update state with new value
+     this.setState({ resultsToDisplay: joined });
+   } // if
 
-       const value = target.value;
-       var joined = this.state.countries.concat(value);
-       this.setState({ countries: joined })
-       console.log(this.state.countries);
-        const name = target.name;
-        // not working replacing each time not 'pushing' end
-        // need to fix
-        // this.setState({toDisplay: {...this.state.toDisplay, countries}})
+  } // handleChange
 
-   } // handleChange
+  componentDidMount(){
+    this.performSearch()
+  } // componentdidmount
 
-  // componentDidMount(){
-  //   this.performSearch()
-  // } // componentdidmount
   render(){
 
     return(
       <div>
-        <CheckBox arg={this.state.arg} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <CheckBox arg={this.state.arg} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         {
-          this.state.sortedResults.length !== 0
+          this.state.infoToChart.length !== 0
           ?
           <div className="agricultureChart">
             <h1>Agricultural Land in % of area</h1>
-            <AgricultureChart dataRange={this.state.sortedResults}/>
+            <Chart dataRange={this.state.infoToChart} />
           </div>
           :
           <h1>Loading ..</h1>
