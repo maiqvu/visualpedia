@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import Chart from './Chart';
 import CheckBox from './CheckBox';
+import SelectIndicator from './SelectIndicator'
 import '../App.css'
 import _ from 'lodash/collection';
 const INDICATOR = 'AG.LND.AGRI.ZS';
 const TIME_RANGE = '2006:2015';
 const COUNTRIES = 'br;chl;arg;ecu;sur';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
-const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
+const SECOND_HALF = `?date=${TIME_RANGE}&format=json`
 
 class AgricultureInfo extends React.Component {
   state = {
@@ -17,7 +18,9 @@ class AgricultureInfo extends React.Component {
     resultsToDisplay: [],
     infoToChart: [],
     countriesLabel: [],
-    countriesToSearch: ''
+    countriesToSearch: '',
+    indicatorToDisplay: ''
+
   }
 
   splitData = (arrayToGroup) => {
@@ -34,12 +37,13 @@ class AgricultureInfo extends React.Component {
     this.setState({countriesLabel: countryEach})
     // search sorted results to rawData
     this.setState({sortedResults: rawData})
+    this.setState({infoToChart: rawData})
 
   } // spilt data
 
-  performSearch = (countries) => {
+  performSearch = (countries, indicator) => {
     axios.get(`${BASE_URL}${countries
-    }${SECOND_HALF}`)
+    }/indicator/${indicator}/${SECOND_HALF}`)
     .then(res => {
       // take base url and call sortData() with data argument
 
@@ -90,34 +94,57 @@ class AgricultureInfo extends React.Component {
 
   } // handleChange
 
+  changeIndicator = (e) => {
+
+    let value = e.target.value
+
+    this.setState({indicatorToDisplay: value})
+
+  } // changeIndicator
+
   componentDidMount(){
-    this.setState({countriesToSearch: 'br;chl;arg;ecu;sur'})
-    // pass props in imediataly
-    // pass in countrys to search and indicator
-    this.performSearch('br;mex;arg;ecu;sur')
+
+    this.performSearch('br;mex;arg;ecu;sur', 'AG.LND.AGRI.ZS')
   } // componentdidmount
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+      this.performSearch('br;mex;arg;ecu;sur', this.state.indicatorToDisplay)
+    } // if
+
+  }
 
   render(){
 
     return(
-      <div>
+      <div className="contianerInfo">
         <div className="displayGraphDiv">
-          <div className="checkBox">
-            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-          </div>
+          <div className="graphFeatures">
+            <div className="checkBox">
+              <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+            </div>
+            <div className="selectIndicator">
+              <SelectIndicator
+              handleChange={this.changeIndicator}
+              countriesLabels={this.state.countriesLabel} />
+            </div>
+
+          <div className="chart">
           {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <h1>Agricultural Land in % of area</h1>
+              <h1 id="chartHeading">Agricultural Land in % of area</h1>
               <Chart dataRange={this.state.infoToChart} />
             </div>
             :
             <h1>Select some Countries so display</h1>
           }
         </div>
+        </div>
       </div>
-    ) // render
+    </div>
+    )
   } // render
 } //ChartCO2
 
