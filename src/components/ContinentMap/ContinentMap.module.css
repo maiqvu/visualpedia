@@ -1,0 +1,12 @@
+.svg {
+  width: 80vw;
+}
+
+.path {
+  fill: #9c9c9c;
+  transition: .6s fill;
+}
+
+.path:hover {
+  fill: #eee;
+}
