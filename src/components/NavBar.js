@@ -28,7 +28,7 @@ class NavBar extends React.Component {
                 <UserBadge></UserBadge>
                 {
                   authResult.auth_token &&
-                  <Link to='/'>Take a Quiz!</Link>
+                  <Link to='/quiz'>Take a Quiz!</Link>
                 }
                 {
                   !authResult.auth_token &&
