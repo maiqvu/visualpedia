@@ -228,18 +228,39 @@ function ContinentMap(props) {
     <svg className={styles.svg} version="1.1" viewBox="0 0 520.49 224.42" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       {/*<Link to="/chart/rec">*/}
       <g transform="translate(94.691 -26.885)">
-       <g transform="matrix(.26458 0 0 .26458 -97.336 6.9359)" fill="#9c9c9c" stroke="#000" strokeLinejoin="round">
+        <g transform="matrix(.26458 0 0 .26458 -97.336 6.9359)" stroke="#000" strokeLinejoin="round">
 
-         {/* North America */}
-         <Link to="/chart/rec" className={styles.path}>
-          {mapCountriesToContinents('northAmerica', ['Anguilla', 'Antigua', 'Aruba', 'Bahamas', 'Barbados', 'Belize', 'Bermuda', 'Bonaire', 'British Virgin', 'Canada', 'Cayman', 'Clipperton', 'Costa Rica', 'Cuba', 'Curaco', 'Dominica', 'Domincan', 'El Salvador', 'Venezuela', 'Greenland', 'Grenada', 'Guadeloupe', 'Guatemala', 'Haiti', 'Honduras', 'Jamaica', 'Martinique', 'Mexico', 'Panama', 'Puerto Rico', 'Kitts', 'Maarten', 'Trinidad', 'United States', 'US Virgin'])}
-        </Link>
+          {/* North America */}
+          <Link to="/northAmerica/charts" className={styles.northAmerica}>
+            {mapCountriesToContinents('northAmerica', ['Anguilla', 'Antigua', 'Aruba', 'Bahamas', 'Barbados', 'Belize', 'Bermuda', 'Bonaire', 'British Virgin', 'Canada', 'Cayman', 'Clipperton', 'Costa Rica', 'Cuba', 'Curaco', 'Dominica', 'Domincan', 'El Salvador', 'Greenland', 'Grenada', 'Guadeloupe', 'Guatemala', 'Haiti', 'Honduras', 'Jamaica', 'Martinique', 'Mexico', 'Panama', 'Puerto Rico', 'Kitts', 'Maarten', 'Trinidad', 'United States', 'US Virgin'])}
+          </Link>
 
-        {/* South America */}
-        <Link to="/chart/rec" className={styles.path}>
-          {mapCountriesToContinents('southAmerica', ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay', 'Peru', 'Suriname', 'Uruguay', 'Venezuela', 'Guiana', 'Falkland', 'Georgia', ])}
-        </Link>
-      </g></g>
+          {/* South America */}
+          <Link to="/southAmerica/charts" className={styles.southAmerica}>
+            {mapCountriesToContinents('southAmerica', ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay', 'Peru', 'Suriname', 'Uruguay', 'Venezuela', 'Guiana', 'Falkland'])}
+          </Link>
+
+          {/* Europe */}
+          <Link to="/europe/charts" className={styles.europe}>
+            {mapCountriesToContinents('europe', ['Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'Kingdom'])}
+          </Link>
+
+          {/* Africa */}
+          <Link to="/africa/charts" className={styles.africa}>
+            {mapCountriesToContinents('africa', ['Algeria', 'Egypt', 'Libya', 'Morocco', 'Sudan', 'Tunisia', 'Sahara', 'Burundi', 'Comoros', 'Djibouti', 'Eritrea', 'Ethiopia', 'Kenya', 'Madagascar','Malawi', 'Mauritius', 'Mayotte', 'Mozambique', 'Reunion', 'Rwanda', 'Seychelles', 'Somalia', 'Tanzania', 'Uganda', 'S. Sudan', 'Angola', 'Congo', 'Rep. Congo', 'Guinea', 'Gabon', 'Principe', 'Botswana', 'Lesotho', 'Namibia', 'Zambia', 'Zimbabwe', 'Africa', 'Benin', 'Burkina', 'Verde', 'Gambia', 'Ghana', 'Bissau', 'Liberia', 'Mali', 'Mauritania', 'Niger', 'Nigeria', 'Senegal', 'Leone', 'Togo', 'Chad', 'Cameroon'])}
+          </Link>
+
+          {/* Asia */}
+          <Link to="/asia/charts" className={styles.asia}>
+            {mapCountriesToContinents('asia', ['Afghanistan', 'Armenia', 'Azerbaijan', 'Bangladesh', 'Bhutan', 'Brunei', 'Cambodia', 'China', 'Timor', 'Georgia', 'India', 'Indonesia', 'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 'Kyrgyzstan', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 'Myanmar', 'Nepal', 'Korea', 'Oman', 'Pakistan', 'Palestine', 'Papua', 'Philippines', 'Qatar', 'Russia', 'Arabia', 'Singapore', 'Dem. Korea', 'Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand', 'Turkey', 'Turkmenistan', 'Emirates', 'Uzbekistan', 'Vietnam', 'Yemen'])}
+          </Link>
+
+          {/* Oceania */}
+          <Link to="/oceania/charts" className={styles.oceania}>
+            {mapCountriesToContinents('oceania', ['Australia', 'Zealand', 'Fiji', 'Caledonia', 'Solomon', 'Vanuatu', 'Nauru', 'Polynesia', 'Pitcairn', 'Tonga'])}
+          </Link>
+        </g>
+      </g>
     </svg>
   );
 }

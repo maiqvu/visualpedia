@@ -2,6 +2,60 @@
   width: 80vw;
 }
 
+.northAmerica {
+  fill: #007700;
+  transition: .6s fill;
+}
+
+.northAmerica:hover {
+  fill: #13cb13;
+}
+
+.southAmerica {
+  fill: #890068;
+  transition: .6s fill;
+}
+
+.southAmerica:hover {
+  fill: #da15ab;
+}
+
+.europe {
+  fill: #008FA0;
+  transition: .6s fill;
+}
+
+.europe:hover {
+  fill: #1fd2e7;
+}
+
+.africa {
+  fill: #FFB402;
+  transition: .6s fill;
+}
+
+.africa:hover {
+  fill: #ffdc22;
+}
+
+.asia {
+  fill: #B20900;
+  transition: .6s fill;
+}
+
+.asia:hover {
+  fill: #ff3b3b;
+}
+
+.oceania {
+  fill: #003AB5;
+  transition: .6s fill;
+}
+
+.oceania:hover {
+  fill: #3e7cff;
+}
+
 .path {
   fill: #9c9c9c;
   transition: .6s fill;
