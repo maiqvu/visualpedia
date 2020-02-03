@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
         <Router>
           <Route exact path='/' component={ContinentMap} />
           <Route exact path='/chart/agri' component={AgricultureInfo} />
-          <Route exact path='/chart/gdp' component={RecInfo} />
+          <Route exact path='/chart/gdp' component={GDPInfo} />
           <Route exact path='/chart/rec' component={RecInfo} />
           <Route exact path='/chart/tnrr' component={TNRRInfo} />
           <Route exact path='/login' component={Login} />
