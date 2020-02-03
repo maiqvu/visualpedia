@@ -4,6 +4,8 @@ import {
   HashRouter as Router
 } from 'react-router-dom';
 
+import './NavBar.scss';
+
 class NavBar extends React.Component {
 
   render(){
@@ -16,6 +18,7 @@ class NavBar extends React.Component {
             <Link to='/chart/gdp'>Gross Domestic Product</Link> | &nbsp;
             <Link to='/chart/tnrr'>Natural Resources Rents</Link> | &nbsp;
             <Link to='/chart/rec'>Renewable Energy Consumption</Link>
+            <Link to='/login'>Login</Link>
           </nav>
         </Router>
       </div>

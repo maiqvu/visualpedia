@@ -6,7 +6,7 @@ import _ from 'lodash/collection';
 const INDICATOR = 'EG.FEC.RNEW.ZS';
 const TIME_RANGE = '2006:2015';
 const COUNTRIES = 'br;chl;arg;ecu;sur';
-const BASE_URL = `http://api.worldbank.org/v2/country/`;
+const BASE_URL = `https://api.worldbank.org/v2/country/`;
 const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
 class RecInfo extends React.Component {

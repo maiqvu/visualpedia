@@ -5,8 +5,8 @@ import CheckBox from './CheckBox'
 import _ from 'lodash/collection';
 const INDICATOR = 'AG.LND.AGRI.ZS';
 const TIME_RANGE = '2006:2015';
-const COUNTRIES = 'br;mex;arg;ecu;sur';
-const BASE_URL = `http://api.worldbank.org/v2/country/`;
+const COUNTRIES = 'br;chl;arg;ecu;sur';
+const BASE_URL = `https://api.worldbank.org/v2/country/`;
 const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
 class AgricultureInfo extends React.Component {
@@ -95,12 +95,6 @@ class AgricultureInfo extends React.Component {
     this.performSearch('br;mex;arg;ecu;sur')
   } // componentdidmount
 
-  // componentDidUpdate(prevProps, prevState){
-  //   if (prevProps.countriesToSearch !== this.state.countriesToSearch) {
-  //     console.log("countries passed in", this.state.countriesToSearch);
-  //     // this.performSearch(this.state.countriesToSearch)
-  //   }
-  // }
   render(){
 
     return(

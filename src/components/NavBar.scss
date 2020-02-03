@@ -1,0 +1,11 @@
+.navBar {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  a:first-child {
+    margin-left: 0.5em;
+  }
+  a:last-child {
+    float: right;
+    margin-right: 0.5em;
+  }
+}
