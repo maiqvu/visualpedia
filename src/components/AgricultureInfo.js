@@ -15,17 +15,23 @@ class AgricultureInfo extends React.Component {
     sortedResults: [],
     resultsToDisplay: [],
     infoToChart: [],
-    countriesLabel: ['Argentina', 'Brazil', 'Chile', 'Suriname', 'Ecuador']
+    countriesLabel: []
   }
 
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
-    console.log('split');
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
-    // data now array of objects with country name as key
+    // create list to get name of all countries from api call
+    let countryEach = []
+    // loop through data get key values
+    for (let key in rawData){
+    // push keys into countryEach
+      countryEach.push(key)
+    }
+    // set countries each to eqaul counties searched for
+    this.setState({countriesLabel: countryEach})
+    // search sorted results to rawData
     this.setState({sortedResults: rawData})
-
-    // console.log(this.state.sortedResults);
 
   } // spilt data
 
@@ -34,8 +40,9 @@ class AgricultureInfo extends React.Component {
     }${SECOND_HALF}`)
     .then(res => {
       // take base url and call sortData() with data argument
-      console.log('search');
-      this.splitData(res.data[1])
+
+      this.splitData(res.data[1]
+      )
     })
     .catch( err => {
       console.warn(err)
@@ -49,12 +56,11 @@ class AgricultureInfo extends React.Component {
     let listToUpdateState = {};
     let listToCompareObject = this.state.sortedResults
     let listToCompareName = this.state.resultsToDisplay
-    console.log("desired result to parse: ", listToCompareObject);
 
     listToCompareName.forEach(c => {
       listToUpdateState[c] = listToCompareObject[c]
     })
-    console.log("current parsing: ", listToUpdateState );
+
     this.setState({infoToChart: listToUpdateState})
 
   }
@@ -72,11 +78,8 @@ class AgricultureInfo extends React.Component {
      const toDisplay = preSelection.filter(e => e !== value)
      // update sates to include only 'ticked' items
      this.setState({resultsToDisplay: toDisplay})
-     console.log(this.state.resultsToDisplay);
 
    } else {
-     console.log('new');
-     console.log(preSelection);
      // add new county to rest of state save as joined
      const joined = this.state.resultsToDisplay.concat(value);
      // update state with new value

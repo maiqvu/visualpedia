@@ -32,7 +32,6 @@ class Chart extends React.Component {
   }
 
   updateDataSets(resultsToSort) {
-    console.log('update');
     const datasets = [];
     // get each county name to loop through and sort with lodash
     for (const country in resultsToSort) {
@@ -65,7 +64,7 @@ class Chart extends React.Component {
   render(){
 
     return(
-      <div className="AgricultureChart">
+      <div className="Chart">
         <Bar data={this.state.data}/>
       </div>
     ) // return
