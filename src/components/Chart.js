@@ -1,5 +1,5 @@
 import React from 'react'
-import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 import _ from 'lodash/collection';
 import randomColor from 'randomcolor';
 
@@ -23,10 +23,10 @@ const chartStyle = () => ({
   pointHitRadius: 10,
 });
 
-class AgricultureChart extends React.Component {
+class Chart extends React.Component {
   state = {
     data: {
-      labels: ['2006', '2007', '2008', '2009', '2010', "2011", '2012', '2013', '2014', '2015'],
+      labels: Array(10).fill(2006).map((y, i) => String(y + i)),
       datasets: []
     }
   }
@@ -42,7 +42,7 @@ class AgricultureChart extends React.Component {
         // side datasets chart js need label and data
         label: country,
         // map through data give the value and spread the chartStyle
-        data: countries.map(v => v.value.toFixed(2)), ...chartStyle(),
+        data: countries.map(v => v.value), ...chartStyle(),
       });// push
     } // for
     // state of data is being changed therefore inner data can replace*
@@ -53,16 +53,22 @@ class AgricultureChart extends React.Component {
 
     this.updateDataSets(this.props.dataRange)
 
+  };
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.dataRange !== this.props.dataRange) {
+    this.updateDataSets(this.props.dataRange)
+    }
   }
 
   render(){
 
     return(
-      <div className="AgricultureChart">
-        <Line data={this.state.data}/>
+      <div className="Chart">
+        <Bar data={this.state.data}/>
       </div>
     ) // return
   } //render
 } // AgricultureChart
 
-export default AgricultureChart
+export default Chart

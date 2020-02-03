@@ -5,11 +5,11 @@ function CheckBox(props){
         <div className='CheckBox'>
 
           <form className="getCountry" onSubmit={props.handleSubmit}>
-            <input type="checkbox" name="arg" value="arg" onChange={props.handleChange} checked={props.arg}  />Argentina |
-            <input type="checkbox" name="bra" value="bra" onChange={props.handleChange}/>Brazil |
-            <input type="checkbox" name="deu" value="deu" onChange={props.handleChange}/>Germany |
-            <input type="checkbox" name="jpn" value="jpn" onChange={props.handleChange}/>Japan |
-            <input type="checkbox" name="sur" value="sur" onChange={props.handleChange}/>Suriname
+            <input type="checkbox" name="arg" value={props.countriesLabels[0]} onChange={props.handleChange} checked={props.arg}/>{props.countriesLabels[0]} |
+            <input type="checkbox" name="bra" value={props.countriesLabels[1]} onChange={props.handleChange}/>{props.countriesLabels[1]} |
+            <input type="checkbox" name="chl" value={props.countriesLabels[2]} onChange={props.handleChange}/>{props.countriesLabels[2]} |
+            <input type="checkbox" name="sur" value={props.countriesLabels[3]} onChange={props.handleChange}/>{props.countriesLabels[3]} |
+            <input type="checkbox" name="ecu" value={props.countriesLabels[4]} onChange={props.handleChange}/>{props.countriesLabels[4]}
             <input type="submit" value="Submit"  />
           </form>
 

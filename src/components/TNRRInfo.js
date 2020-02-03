@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import Chart from './Chart';
+import Chart from './Chart'
 import CheckBox from './CheckBox'
 import _ from 'lodash/collection';
-const INDICATOR = 'EG.FEC.RNEW.ZS';
-const TIME_RANGE = '2006:2015';
-const COUNTRIES = 'br;chl;arg;ecu;sur';
-const BASE_URL = `http://api.worldbank.org/v2/country/`;
+const INDICATOR = 'NY.GDP.TOTL.RT.ZS';
+const TIME_RANGE = '2006:2015'
+const COUNTRIES = 'br;chl;arg;ecu;sur'
+const BASE_URL = `http://api.worldbank.org/v2/country/`
 const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
-class RecInfo extends React.Component {
+class TNRRInfo extends React.Component {
   state = {
 
-    // countries: [],
+
     sortedResults: [],
     resultsToDisplay: [],
     infoToChart: [],
@@ -21,7 +21,6 @@ class RecInfo extends React.Component {
 
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
-
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
     // create list to get name of all countries from api call
     let countryEach = []
@@ -61,7 +60,6 @@ class RecInfo extends React.Component {
     listToCompareName.forEach(c => {
       listToUpdateState[c] = listToCompareObject[c]
     })
-
     this.setState({infoToChart: listToUpdateState})
 
   }
@@ -79,8 +77,8 @@ class RecInfo extends React.Component {
      const toDisplay = preSelection.filter(e => e !== value)
      // update sates to include only 'ticked' items
      this.setState({resultsToDisplay: toDisplay})
-   } else {
 
+   } else {
      // add new county to rest of state save as joined
      const joined = this.state.resultsToDisplay.concat(value);
      // update state with new value
@@ -101,8 +99,8 @@ class RecInfo extends React.Component {
         {
           this.state.infoToChart.length !== 0
           ?
-          <div className="agricultureChart">
-            <h1>Renewable Consupstion</h1>
+          <div className="TNRR Chart">
+            <h1>Natural Resource Rents</h1>
             <Chart dataRange={this.state.infoToChart} />
           </div>
           :
@@ -113,4 +111,4 @@ class RecInfo extends React.Component {
   } // render
 } //ChartCO2
 
-export default RecInfo
+export default TNRRInfo;
