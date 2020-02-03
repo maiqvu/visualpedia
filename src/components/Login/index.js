@@ -28,6 +28,7 @@ class Login extends Component {
         .then((res) => {
           console.log(res);
           loginSuccess(res.data);
+          this.props.history.push('/');
         })
         .catch((error) => {
           console.warn(error);

@@ -15,9 +15,13 @@
       margin-left: 0.5em;
     }
 
-    a:last-child {
+    .user-menu {
       float: right;
-      margin-right: 0.5em;
+      span {
+        margin-right: 1em;
+        font-weight: bold;
+        color: #4e555b;
+      }
     }
 
     button {
