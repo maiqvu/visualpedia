@@ -3,16 +3,29 @@ import React from 'react';
 function CheckBox(props){
     return(
         <div className='CheckBox'>
+          {
+          props.countriesLabels.length !== 0
+          ?
+          <div>
+          <form className="chooseCountryForm"  onSubmit={props.handleSubmit}>
 
-          <form className="getCountry" onSubmit={props.handleSubmit}>
-            <input type="checkbox" name="arg" value={props.countriesLabels[0]} onChange={props.handleChange} checked={props.arg}/>{props.countriesLabels[0]} |
-            <input type="checkbox" name="bra" value={props.countriesLabels[1]} onChange={props.handleChange}/>{props.countriesLabels[1]} |
-            <input type="checkbox" name="chl" value={props.countriesLabels[2]} onChange={props.handleChange}/>{props.countriesLabels[2]} |
-            <input type="checkbox" name="sur" value={props.countriesLabels[3]} onChange={props.handleChange}/>{props.countriesLabels[3]} |
-            <input type="checkbox" name="ecu" value={props.countriesLabels[4]} onChange={props.handleChange}/>{props.countriesLabels[4]}
+            {props.countriesLabels.map((c , index) => {
+              return (
+                <div key={index} className="chooseCountrydiv">
+                  <label className="chooseCountryLabel">{c}</label>
+                  <input className="chooseCountryInput" type='checkbox'
+                  onChange={props.handleChange}
+                  value={c}
+                  />
+                </div>
+              ) // return
+            })}
             <input type="submit" value="Submit"  />
           </form>
-
+          </div>
+          :
+          <h1>Loading .. 2</h1>
+        }
         </div>
       ) // return
 }
