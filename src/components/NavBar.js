@@ -20,6 +20,7 @@ class NavBar extends React.Component {
         <div className="navBarDiv">
           <Router>
             <nav className="navBar">
+              <Link to='/'>Visualpedia</Link>
               <div className="user-menu">
                 <UserBadge></UserBadge>
                 {

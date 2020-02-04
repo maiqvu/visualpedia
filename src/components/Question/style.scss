@@ -1,3 +1,8 @@
 .question-pane {
   margin-top: 2em;
+  .correct {
+    font-size: 2em;
+    font-weight: bold;
+    color: darkgreen;
+  }
 }

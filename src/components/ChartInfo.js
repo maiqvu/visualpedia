@@ -131,7 +131,8 @@ class ChartInfo extends React.Component {
 
     return(
       <div>
-        <div className="displayGraphDiv">
+      <div className="contianerInfo">
+        <div className="displaycheckBoxDiv">
           <div className="checkBox">
             <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  />
             <div className="indicator">
@@ -140,18 +141,19 @@ class ChartInfo extends React.Component {
               handleChange={this.changeIndicator} />
             </div>
           </div>
-
-          <div className="chart">
+          </div>
+          <div className="chartDiv">
           {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <h1>{this.state.indicatorToDisplay}</h1>
+              <h4>{this.state.indicatorToDisplay}</h4>
               <Chart dataRange={this.state.infoToChart} />
             </div>
             :
-            <h1>Select some Countries so display</h1>
+            <h1></h1>
           }
+
           </div>
         </div>
       </div>
