@@ -9,6 +9,7 @@ import './style.scss';
 class Quiz extends Component {
   state = {
     showSolution: false,
+    answerIsCorrect: null
   };
 
   handleSubmission = ((answerIsCorrect) => {
@@ -17,14 +18,16 @@ class Quiz extends Component {
 
   handleNext = () => {
     const {nextQuestion} = this.props;
-    this.setState({showSolution: false});
+    this.setState({showSolution: false, answerIsCorrect: null});
     nextQuestion();
   };
 
   componentDidMount() {
     console.log('Fetching questions...');
 
-    const {authResult: {auth_token}, questionsFetched} = this.props;
+    const auth_token = localStorage.getItem('auth_token');
+
+    const {questionsFetched} = this.props;
     console.log('Token', auth_token);
 
     axios.get('http://localhost:3000/quiz/20.json', {
@@ -53,14 +56,15 @@ class Quiz extends Component {
               question={questions[currentQuestion]}
               showSolution={this.state.showSolution}
               handleSubmission={this.handleSubmission}
+              seq={currentQuestion}
           />}
           {
             !this.state.showSolution &&
             <button
                 type="button"
-                className="btn btn-success float-right"
+                className="btn btn-secondary float-right"
                 onClick={() => this.setState({showSolution: true})}
-                disabled={this.state.hasOwnProperty('answerIsCorrect')
+                disabled={this.state.answerIsCorrect !== null
                     ? ''
                     : 'disabled'}>
               Submit
@@ -70,7 +74,7 @@ class Quiz extends Component {
             this.state.showSolution &&
             <button
                 type="button"
-                className="btn btn-success float-right"
+                className="btn btn-info float-right"
                 onClick={this.handleNext}>
               Next
             </button>
