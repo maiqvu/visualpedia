@@ -26,7 +26,7 @@ class Login extends Component {
           password: this.state.password,
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           loginSuccess(res.data);
           localStorage.setItem('auth_token', res.data.auth_token);
           localStorage.setItem('name', res.data.name);
