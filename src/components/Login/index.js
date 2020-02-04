@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as PropTypes from 'prop-types';
-import axios from 'axios';
 import {Alert} from 'react-bootstrap';
 import * as actionCreators from '../../actions';
 import './style.scss';
@@ -13,30 +12,13 @@ class Login extends Component {
   };
 
   handleSubmit = (event) => {
-    const {loginSuccess, loginFail} = this.props;
+    const {login, loginSuccess, loginFail} = this.props;
 
     event.preventDefault();
-    axios.post('http://localhost:3000/authenticate'
-        , {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-          },
-          email: this.state.email,
-          password: this.state.password,
-        })
-        .then((res) => {
-          // console.log(res);
-          loginSuccess(res.data);
-          localStorage.setItem('auth_token', res.data.auth_token);
-          localStorage.setItem('name', res.data.name);
-          localStorage.setItem('email', res.data.email);
-          this.props.history.push('/');
-        })
-        .catch((error) => {
-          console.warn(error);
-          loginFail();
-        });
+
+    login({email: this.state.email, password: this.state.password}).then(() => {
+      this.props.history.push('/');
+    });
   };
 
   handleChange = (event) => {
@@ -77,6 +59,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  login: PropTypes.func.isRequired,
   loginSuccess: PropTypes.func.isRequired,
   loginFail: PropTypes.func.isRequired,
   authResult: PropTypes.object.isRequired,
