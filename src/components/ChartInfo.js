@@ -3,6 +3,7 @@ import axios from 'axios';
 import Chart from './Chart';
 import CheckBox from './CheckBox';
 import SelectIndicator from './SelectIndicator'
+import NewsFeed from './NewsFeed'
 import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
@@ -116,6 +117,26 @@ class ChartInfo extends React.Component {
     this.setState({infoToChart: listToUpdateState})
   }
 
+  getNews(){
+    let continent = this.props.match.params.continent
+    let newsSearch;
+    if (continent === 'africa') {
+      newsSearch = 'ng'
+    } else if (continent === 'northAmerica') {
+      newsSearch = 'us'
+    } else if (continent === 'southAmerica'){
+      newsSearch = 'ar'
+    } else if (continent === "europe") {
+      newsSearch = 'gb'
+    } else if (continent === 'asia') {
+      newsSearch = 'ru'
+    } else {
+      newsSearch = 'au'
+    }
+
+    return newsSearch
+  }
+
   componentDidMount(){
     const continent = this.props.match.params.continent;
     this.setState({currentContinent: continent});
@@ -164,6 +185,9 @@ class ChartInfo extends React.Component {
           }
 
           </div>
+        </div>
+        <div className="newsFeed">
+          <NewsFeed localSearch={this.getNews()}/>
         </div>
       </div>
     ) // render

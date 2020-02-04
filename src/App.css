@@ -4,7 +4,8 @@
 
 body {
   width: 100%;
-  background-color: #FFFAFA;
+  background-color: #C8D5B9;
+  padding-bottom: 5px;
 }
 
 .App-logo {
@@ -45,8 +46,9 @@ body {
 .contianerInfo {
   display: inline-flex;
   justify-content: center;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   width: 100%;
+  background-color: #C8D5B9;
 
 }
 
@@ -56,17 +58,10 @@ body {
   display: inline-block;
   height: 100%;
   padding: 5px;
-  background-color: #FFFAFA;
+  background-color: #6F8F72;
   vertical-align: middle;
   border-radius: 10px;
   box-shadow: 2px 3px 2px;
-  /* margin: 10px;
-  border-radius: 20px;
-
-
-  justify-content: center;
-  vertical-align: top; */
-
 }
 .chartDiv {
 
@@ -86,28 +81,14 @@ body {
   display: inline-block;
   border: 2px solid black;
   padding: 15px;
-  background-color: #FFFAFA;
+  background-color: #FAF3DD;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
-  /*
 
-
-  background-color: #FFF5EE;
-  padding: 15px;
-  width: 100%;
-  display: inline-block;
-   */
 
 }
 
-.checkBox {
-  /* border: 1px solid black;
 
-  background-color: #FFF5EE;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block; */
-}
 
 #chartHeading h1 {
   /* text-align: center; */
@@ -121,4 +102,62 @@ body {
 span.countryLabels {
   position: relative;
   left: 10px;
+}
+
+
+.artilceList  {
+  display: inline-block;
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  background-color: #C8D5B9;
+
+}
+
+.newsfeed {
+  border: 1px solid black;
+  margin: 1px;
+  padding: 25px 0;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  background-color: #6F8F72;
+  flex-shrink: 0;
+  width: 650px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding-left: 40px;
+  box-shadow: -1px -1px ;
+}
+
+.newsfeed:hover {
+  opacity: 0.8;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@keyframes newsfeed {
+  0% {right: 0px;}
+  100% {left: -1562px;}
+}
+
+.navBar {
+  background-color: #FAF3DD;
+}
+
+.navBarDiv {
+  background-color: #C8D5B9;
+  margin-bottom: 0;
+}
+
+.newsHeadline {
+  background-color: #C8D5B9;
+  text-align: center;
+  margin: 0;
 }
