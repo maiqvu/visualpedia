@@ -6,4 +6,5 @@ export const AUTH = {
 
 export const QUIZ = {
   QUESTIONS_FETCHED: 'QUESTIONS_FETCHED',
+  NEXT_QUESTION: 'NEXT_QUESTION',
 };

@@ -149,13 +149,15 @@ class ChartInfo extends React.Component {
       <div>
         <div className="displayGraphDiv">
           <div className="checkBox">
-            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  /> {/* handleSubmit={this.handleSubmit} */}
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  /> 
+            <div className="indicator">
+              <SelectIndicator
+              countriesLabels={this.state.countriesLabel}
+              handleChange={this.changeIndicator} />
+            </div>
           </div>
-          <div className="indicator">
-            <SelectIndicator
-            countriesLabels={this.state.countriesLabel}
-            handleChange={this.changeIndicator} />
-          </div>
+
+          <div className="chart">
           {
             this.state.infoToChart.length !== 0
             ?
@@ -166,6 +168,7 @@ class ChartInfo extends React.Component {
             :
             <h1>Select some Countries so display</h1>
           }
+          </div>
         </div>
       </div>
     ) // render

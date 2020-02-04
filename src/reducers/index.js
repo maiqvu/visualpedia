@@ -17,7 +17,11 @@ const auth = (state = {}, action) => {
 const quiz = (state = {}, action) => {
   switch (action.type) {
     case QUIZ.QUESTIONS_FETCHED:
-      return {...state, questions: action.payload};
+      return {...state, questions: action.payload, currentQuestion: 0};
+    case QUIZ.NEXT_QUESTION: {
+      state.currentQuestion++;
+      return state;
+    }
     default:
       return state;
   }

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
+import Question from '../Question';
+import './style.scss';
 
 class Quiz extends Component {
   componentDidMount() {
@@ -24,9 +26,15 @@ class Quiz extends Component {
   }
 
   render() {
+    const {questions, currentQuestion} = this.props;
+
+    console.log(questions);
+    console.log(currentQuestion);
     return (
-        <div>
-          <h1>Quiz</h1>
+        <div className="quiz-pane">
+          <h2>Question #{currentQuestion + 1}</h2>
+          {questions && currentQuestion !== undefined && <Question question={questions[currentQuestion]} />}
+          <button type="button" className="btn btn-success float-right">Next</button>
         </div>
     );
   }
@@ -39,6 +47,8 @@ Quiz.propTypes = {
 
 const mapStateToProps = (state) => ({
   authResult: state.auth,
+  questions: state.quiz.questions,
+  currentQuestion: state.quiz.currentQuestion,
 });
 
 export default connect(mapStateToProps, actionCreators)(Quiz);
