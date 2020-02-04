@@ -22,7 +22,7 @@ class NewsFeed extends React.Component {
   }
 
   limitString = (longString) => {
-      longString = longString.substring(0,60)
+      longString = longString.substring(0,50)
     return longString
   }
     componentDidMount(){
