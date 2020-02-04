@@ -1,5 +1,6 @@
 import React from 'react';
-import Cable from 'actioncable';
+import ActionCable from 'action-cable-react-jwt';
+// import Cable from 'actioncable';
 import './ChatWidget.css';
 
 class ChatWidget extends React.Component {
@@ -28,11 +29,16 @@ class ChatWidget extends React.Component {
   }
 
   createSocket() {
-    let cable = Cable.createConsumer('ws://localhost:3000/cable');
-    this.chats = cable.subscriptions.create(
+    const yourToken = localStorage.getItem('auth_token');   // get JWT token that is saved in local storage
+
+    this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
+
+    // Subscribe to a channel for receiving data being broadcasted from server-side
+    this.chats = this.cable.subscriptions.create(
       { channel: 'ChatChannel' },
       {
         connected: () => {},
+        disconnected: () => {},
         received: (data) => {
           // console.log(data);
           let chatLogs = this.state.chatLogs;
@@ -46,7 +52,7 @@ class ChatWidget extends React.Component {
     );
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.createSocket();
   }
 
@@ -59,6 +65,12 @@ class ChatWidget extends React.Component {
         </li>
       );
     });
+  }
+
+  componentWillUnmount(){
+    // console.log('unmounting!');
+    this.cable.subscriptions.remove(this.chats);
+    this.cable.disconnect();
   }
 
   render() {

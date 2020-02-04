@@ -11,7 +11,21 @@ class NavBar extends React.Component {
   handleLogout = () => {
     const {logout} = this.props;
     logout();
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
   };
+
+  componentDidMount() {
+    const {loginSuccess} = this.props;
+    const token = localStorage.getItem('auth_token');
+    const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
+
+    if (token && name && email) {
+      loginSuccess({auth_token: token, name, email});
+    }
+  }
 
   render() {
     const {authResult} = this.props;
@@ -25,7 +39,10 @@ class NavBar extends React.Component {
                 <UserBadge></UserBadge>
                 {
                   authResult.auth_token &&
-                  <Link to='/quiz'>Take a Quiz!</Link>
+                  <>
+                    <Link to='/quiz'>Take a Quiz!</Link>
+                    <Link to='/chat'>Chat Box</Link>
+                  </>
                 }
                 {
                   !authResult.auth_token &&
