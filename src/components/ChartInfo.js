@@ -5,6 +5,7 @@ import CheckBox from './CheckBox';
 import SelectIndicator from './SelectIndicator'
 import '../App.css'
 import _ from 'lodash/collection';
+const BASE_URL = `https://api.worldbank.org/v2/country/`;
 
 class ChartInfo extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class ChartInfo extends React.Component {
     resultsToDisplay: [],
     infoToChart: [],
     countriesLabel: [],
+    currentContinent: [],
     countriesToSearch: '',
     indicatorToDisplay: 'AG.LND.AGRI.ZS'
   }
@@ -31,7 +33,7 @@ class ChartInfo extends React.Component {
     this.setState({countriesLabel: countryEach})
     // search sorted results to rawData
     this.setState({sortedResults: rawData})
-
+    this.setState({infoToChart: rawData})
   } // spilt data
 
   getCountryAbbreviations = continent => {
@@ -46,18 +48,10 @@ class ChartInfo extends React.Component {
     return countryAbbreviations[continent];
   }
 
-  performSearch = (indicator=this.state.indicatorToDisplay) => {
+  performSearch = (countries, indicator, timeRange='2006:2015') => {
 
     const continent = this.props.match.params.continent;
-
-    const INDICATOR = indicator;
-    const TIME_RANGE = '2006:2015';
-    const COUNTRIES = this.getCountryAbbreviations(continent);
-    const BASE_URL = `https://api.worldbank.org/v2/country/`;
-    const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
-
-    axios.get(`${BASE_URL}${COUNTRIES
-    }${SECOND_HALF}`)
+    axios.get(`https://api.worldbank.org/v2/country/${countries}/indicator/${indicator}?date=${timeRange}&format=json`)
     .then(res => {
       // take base url and call sortData() with data argument
 
@@ -114,37 +108,39 @@ class ChartInfo extends React.Component {
     let value = e.target.value
 
     this.setState({indicatorToDisplay: value})
-    console.log(value);
 
   } // changeIndicator
 
-  componentDidMount(){
-
-    // pass props in imediataly
-    // pass in countrys to search and indicator
-    this.performSearch()
-  } // componentdidmount
-
-  updateChartDisplay() {
+  updateChartDisplay(){
     let listToUpdateState = {};
     let listToCompareObject = this.state.sortedResults
     let listToCompareName = this.state.resultsToDisplay
 
     listToCompareName.forEach(c => {
       listToUpdateState[c] = listToCompareObject[c]
-    });
+    })
+
     this.setState({infoToChart: listToUpdateState})
   }
 
+  componentDidMount(){
+    const continent = this.props.match.params.continent;
+    this.setState({currentContinent: continent})
+
+    // pass props in imediataly
+    // pass in countrys to search and indicator
+    this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+  } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
-    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-      this.performSearch( this.state.indicatorToDisplay)
-      this.updateChartDisplay();
-    } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
-      this.updateChartDisplay();
-    }
-  }
+      if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+        const continent = this.state.currentContinent
+        this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+      } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+        this.updateChartDisplay()
+      }
+
+
 
   render(){
 

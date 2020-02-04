@@ -111,7 +111,6 @@ class AgricultureInfo extends React.Component {
     if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
       this.performSearch('br;mex;arg;ecu;sur', this.state.indicatorToDisplay)
     } // if
-
   }
 
   render(){

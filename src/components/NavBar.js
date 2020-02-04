@@ -20,11 +20,6 @@ class NavBar extends React.Component {
         <div className="navBarDiv">
           <Router>
             <nav className="navBar">
-              <Link to='/chart/agri'>Agricultural Land</Link>|
-              <Link to='/chart/gdp'>Gross Domestic Product</Link>|
-              <Link to='/chart/tnrr'>Natural Resources Rents</Link>|
-              <Link to='/chart/rec'>Renewable Energy Consumption</Link>|
-              <Link to='/chat'>Chat</Link>
               <div className="user-menu">
                 <UserBadge></UserBadge>
                 {
