@@ -3,3 +3,7 @@ export const AUTH = {
   LOGIN_FAIL: 'LOGIN_FAIL',
   LOGOUT: 'LOGOUT',
 };
+
+export const QUIZ = {
+  QUESTIONS_FETCHED: 'QUESTIONS_FETCHED',
+};

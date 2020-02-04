@@ -55,8 +55,7 @@ class ChartInfo extends React.Component {
     .then(res => {
       // take base url and call sortData() with data argument
 
-      this.splitData(res.data[1]
-      )
+      this.splitData(res.data[1])
     })
     .catch( err => {
       console.warn(err)
@@ -100,6 +99,8 @@ class ChartInfo extends React.Component {
      this.setState({ resultsToDisplay: joined });
    } // if
 
+
+
   } // handleChange
 
   changeIndicator = (e) => {
@@ -109,6 +110,18 @@ class ChartInfo extends React.Component {
     this.setState({indicatorToDisplay: value})
 
   } // changeIndicator
+
+  updateChartDisplay(){
+    let listToUpdateState = {};
+    let listToCompareObject = this.state.sortedResults
+    let listToCompareName = this.state.resultsToDisplay
+
+    listToCompareName.forEach(c => {
+      listToUpdateState[c] = listToCompareObject[c]
+    })
+
+    this.setState({infoToChart: listToUpdateState})
+  }
 
   componentDidMount(){
     const continent = this.props.match.params.continent;
@@ -120,10 +133,12 @@ class ChartInfo extends React.Component {
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
-    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-      const continent = this.state.currentContinent;
-      this.performSearch( this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
-    } // if
+      if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+        const continent = this.state.currentContinent
+        this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+      } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+        this.updateChartDisplay()
+      }
 
   }
 
@@ -133,7 +148,7 @@ class ChartInfo extends React.Component {
       <div>
         <div className="displayGraphDiv">
           <div className="checkBox">
-            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  /> {/* handleSubmit={this.handleSubmit} */}
           </div>
           <div className="indicator">
             <SelectIndicator

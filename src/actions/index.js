@@ -1,4 +1,4 @@
-import {AUTH} from './types';
+import {AUTH, QUIZ} from './types';
 
 export const loginSuccess = (payload) => ({
   type: AUTH.LOGIN_SUCCESS,
@@ -11,4 +11,9 @@ export const loginFail = () => ({
 
 export const logout = () => ({
   type: AUTH.LOGOUT,
+});
+
+export const questionsFetched = (payload) => ({
+  type: QUIZ.QUESTIONS_FETCHED,
+  payload
 });

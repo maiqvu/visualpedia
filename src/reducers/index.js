@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { AUTH } from '../actions/types';
+import {AUTH, QUIZ} from '../actions/types';
 
 const auth = (state = {}, action) => {
   switch (action.type) {
@@ -14,4 +14,13 @@ const auth = (state = {}, action) => {
   }
 };
 
-export default combineReducers({ auth });
+const quiz = (state = {}, action) => {
+  switch (action.type) {
+    case QUIZ.QUESTIONS_FETCHED:
+      return {...state, questions: action.payload};
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ auth, quiz });
