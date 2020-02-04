@@ -9,6 +9,7 @@ import './style.scss';
 class Quiz extends Component {
   state = {
     showSolution: false,
+    answerIsCorrect: null
   };
 
   handleSubmission = ((answerIsCorrect) => {
@@ -17,7 +18,7 @@ class Quiz extends Component {
 
   handleNext = () => {
     const {nextQuestion} = this.props;
-    this.setState({showSolution: false});
+    this.setState({showSolution: false, answerIsCorrect: null});
     nextQuestion();
   };
 
@@ -63,7 +64,7 @@ class Quiz extends Component {
                 type="button"
                 className="btn btn-secondary float-right"
                 onClick={() => this.setState({showSolution: true})}
-                disabled={this.state.hasOwnProperty('answerIsCorrect')
+                disabled={this.state.answerIsCorrect !== null
                     ? ''
                     : 'disabled'}>
               Submit
