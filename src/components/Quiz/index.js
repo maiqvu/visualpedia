@@ -7,6 +7,14 @@ import Question from '../Question';
 import './style.scss';
 
 class Quiz extends Component {
+  state = {
+    showSolution: false
+  };
+
+  handleSubmission = ((answerIsCorrect) => {
+    this.setState({...this.state, answerIsCorrect});
+  });
+
   componentDidMount() {
     console.log('Fetching questions...');
 
@@ -33,8 +41,13 @@ class Quiz extends Component {
     return (
         <div className="quiz-pane">
           <h2>Question #{currentQuestion + 1}</h2>
-          {questions && currentQuestion !== undefined && <Question question={questions[currentQuestion]} />}
-          <button type="button" className="btn btn-success float-right">Next</button>
+          {questions && currentQuestion !== undefined &&
+          <Question
+              question={questions[currentQuestion]}
+              showSolution={this.state.showSolution}
+              handleSubmission={this.handleSubmission}
+          />}
+          <button type="button" className="btn btn-success float-right" onClick={() => this.setState({showSolution: true})}>Submit</button>
         </div>
     );
   }
