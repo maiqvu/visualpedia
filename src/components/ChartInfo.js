@@ -133,13 +133,14 @@ class ChartInfo extends React.Component {
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
-      if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-        const continent = this.state.currentContinent
-        this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
-      } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
-        this.updateChartDisplay()
-      }
-
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+      const continent = this.state.currentContinent
+      this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+      this.updateChartDisplay();
+    } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+      this.updateChartDisplay();
+    }
+  }
 
 
   render(){
