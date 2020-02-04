@@ -15,13 +15,15 @@ class ChartInfo extends React.Component {
     countriesLabel: [],
     currentContinent: [],
     countriesToSearch: '',
-    indicatorToDisplay: 'AG.LND.AGRI.ZS'
+    indicatorToDisplay: 'AG.LND.AGRI.ZS',
+    title: ''
   }
 
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
     // create list to get name of all countries from api call
+    this.setState({title: arrayToGroup[0].indicator.value});
     let countryEach = []
     // loop through data get key values
     for (let key in rawData){
@@ -29,10 +31,12 @@ class ChartInfo extends React.Component {
       countryEach.push(key)
     }
     // set countries each to eqaul counties searched for
-    this.setState({countriesLabel: countryEach})
+    this.setState({countriesLabel: countryEach,
+                   sortedResults: rawData,
+                   infoToChart: rawData});
     // search sorted results to rawData
-    this.setState({sortedResults: rawData})
-    this.setState({infoToChart: rawData})
+    // this.setState({sortedResults: rawData})
+    // this.setState({infoToChart: rawData})
   } // spilt data
 
   getCountryAbbreviations = continent => {
@@ -57,31 +61,13 @@ class ChartInfo extends React.Component {
       this.splitData(res.data[1]);
     })
     .then(() => {
-      console.log('second Then');
-      console.log('data', this.state.infoToChart);
       this.updateChartDisplay();
-
     })
     .catch( err => {
       console.warn(err)
     })
   } // performSearch
 
-  handleSubmit = (e) => {
-    // prevent reload
-    e.preventDefault();
-    //
-    let listToUpdateState = {};
-    let listToCompareObject = this.state.sortedResults
-    let listToCompareName = this.state.resultsToDisplay
-
-    listToCompareName.forEach(c => {
-      listToUpdateState[c] = listToCompareObject[c]
-    })
-
-    this.setState({infoToChart: listToUpdateState})
-
-  }
 
   handleChange = (e) => {
     // get state save as preSelection
@@ -96,8 +82,10 @@ class ChartInfo extends React.Component {
      const toDisplay = preSelection.filter(e => e !== value)
      // update sates to include only 'ticked' items
      this.setState({resultsToDisplay: toDisplay})
+     console.log('selected false');
 
    } else {
+     console.log('selected true');
      // add new county to rest of state save as joined
      const joined = this.state.resultsToDisplay.concat(value);
      // update state with new value
@@ -134,7 +122,7 @@ class ChartInfo extends React.Component {
 
     // pass props in imediataly
     // pass in countrys to search and indicator
-    this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+    this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay);
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
@@ -169,8 +157,7 @@ class ChartInfo extends React.Component {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <h4>{this.state.indicatorToDisplay}</h4>
-              <Chart dataRange={this.state.infoToChart} />
+              <Chart dataRange={this.state.infoToChart} title={this.state.title} />
             </div>
             :
             <h1></h1>
