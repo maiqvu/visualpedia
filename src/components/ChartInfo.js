@@ -5,13 +5,8 @@ import CheckBox from './CheckBox';
 import SelectIndicator from './SelectIndicator'
 import '../App.css'
 import _ from 'lodash/collection';
-const INDICATOR = 'AG.LND.AGRI.ZS';
-const TIME_RANGE = '2006:2015';
-const COUNTRIES = 'br;chl;arg;ecu;sur';
-const BASE_URL = `https://api.worldbank.org/v2/country/`;
-const SECOND_HALF = `?date=${TIME_RANGE}&format=json`
 
-class AgricultureInfo extends React.Component {
+class ChartInfo extends React.Component {
   state = {
 
     sortedResults: [],
@@ -19,8 +14,7 @@ class AgricultureInfo extends React.Component {
     infoToChart: [],
     countriesLabel: [],
     countriesToSearch: '',
-    indicatorToDisplay: ''
-
+    indicatorToDisplay: 'AG.LND.AGRI.ZS'
   }
 
   splitData = (arrayToGroup) => {
@@ -37,13 +31,33 @@ class AgricultureInfo extends React.Component {
     this.setState({countriesLabel: countryEach})
     // search sorted results to rawData
     this.setState({sortedResults: rawData})
-    this.setState({infoToChart: rawData})
 
   } // spilt data
 
-  performSearch = (countries, indicator) => {
-    axios.get(`${BASE_URL}${countries
-    }/indicator/${indicator}/${SECOND_HALF}`)
+  getCountryAbbreviations = continent => {
+    const countryAbbreviations = {
+      northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
+      southAmerica: 'ar;br;sr;ve;co',  // Argentina, Brazil, Suriname, Venezuela, Colombia
+      africa: 'eg;za;ng;sd;cm',  // Egypt, South Africa, Nigeria, Sudan, Cameroon
+      europe: 'at;de;es;fr;gb',  // Austria, Germany, Spain, France, Great Britain
+      asia: 'id;in;kw;cn;ru',  // Indonesia, India, Kuwait, China, Russia
+      oceania: 'au;nz;to;nr;fj'  // Australia, New Zealand, Tonga, Nauru, Fiji
+    };
+    return countryAbbreviations[continent];
+  }
+
+  performSearch = (indicator=this.state.indicatorToDisplay) => {
+
+    const continent = this.props.match.params.continent;
+
+    const INDICATOR = indicator;
+    const TIME_RANGE = '2006:2015';
+    const COUNTRIES = this.getCountryAbbreviations(continent); //'br;chl;arg;ecu;sur';
+    const BASE_URL = `https://api.worldbank.org/v2/country/`;
+    const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
+
+    axios.get(`${BASE_URL}${COUNTRIES
+    }${SECOND_HALF}`)
     .then(res => {
       // take base url and call sortData() with data argument
 
@@ -99,17 +113,19 @@ class AgricultureInfo extends React.Component {
     let value = e.target.value
 
     this.setState({indicatorToDisplay: value})
-
+    console.log(value);
   } // changeIndicator
 
   componentDidMount(){
 
-    this.performSearch('br;mex;arg;ecu;sur', 'AG.LND.AGRI.ZS')
+    // pass props in imediataly
+    // pass in countrys to search and indicator
+    this.performSearch()
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
     if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-      this.performSearch('br;mex;arg;ecu;sur', this.state.indicatorToDisplay)
+      this.performSearch( this.state.indicatorToDisplay)
     } // if
 
   }
@@ -117,35 +133,30 @@ class AgricultureInfo extends React.Component {
   render(){
 
     return(
-      <div className="contianerInfo">
+      <div>
         <div className="displayGraphDiv">
-          <div className="graphFeatures">
-            <div className="checkBox">
-              <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-            </div>
-            <div className="selectIndicator">
-              <SelectIndicator
-              handleChange={this.changeIndicator}
-              countriesLabels={this.state.countriesLabel} />
-            </div>
-
-          <div className="chart">
+          <div className="checkBox">
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          </div>
+          <div className="indicator">
+            <SelectIndicator
+            countriesLabels={this.state.countriesLabel}
+            handleChange={this.changeIndicator} />
+          </div>
           {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <h1 id="chartHeading">Agricultural Land in % of area</h1>
+              <h1>Agricultural Land in % of area</h1>
               <Chart dataRange={this.state.infoToChart} />
             </div>
             :
             <h1>Select some Countries so display</h1>
           }
         </div>
-        </div>
       </div>
-    </div>
-    )
+    ) // render
   } // render
 } //ChartCO2
 
-export default AgricultureInfo
+export default ChartInfo

@@ -14,6 +14,7 @@ import ContinentMap from './ContinentMap/ContinentMap.js';
 import Login from './Login';
 import Quiz from '../components/Quiz';
 import PrivateRoute from './PrivateRoute';
+import ChartInfo from './ChartInfo';
 
 class LandingPage extends React.Component {
   checkLogin = () => this.props.authResult.auth_token;
@@ -33,7 +34,7 @@ class LandingPage extends React.Component {
           <Route exact path='/chart/rec' component={RecInfo} />
           <Route exact path='/chart/tnrr' component={TNRRInfo} />
           <Route exact path='/login' component={Login} />
-          {/*<Route exact path='/quiz' component={Quiz} />*/}
+          <Route exact path='/:continent/charts' component={ChartInfo} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
         </Router>
 
