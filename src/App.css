@@ -81,3 +81,12 @@
   text-align: center;
 
 }
+
+.chart {
+
+  width: 60%;
+}
+
+.chooseCountryInput {
+  right: 5px;
+}
