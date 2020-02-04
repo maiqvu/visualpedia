@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Chart from './Chart';
 import CheckBox from './CheckBox';
+import SelectIndicator from './SelectIndicator'
 import '../App.css'
 import _ from 'lodash/collection';
 
@@ -12,7 +13,8 @@ class ChartInfo extends React.Component {
     resultsToDisplay: [],
     infoToChart: [],
     countriesLabel: [],
-    countriesToSearch: ''
+    countriesToSearch: '',
+    indicatorToDisplay: 'AG.LND.AGRI.ZS'
   }
 
   splitData = (arrayToGroup) => {
@@ -44,11 +46,11 @@ class ChartInfo extends React.Component {
     return countryAbbreviations[continent];
   }
 
-  performSearch = (countries) => {
+  performSearch = (indicator=this.state.indicatorToDisplay) => {
 
     const continent = this.props.match.params.continent;
 
-    const INDICATOR = 'AG.LND.AGRI.ZS';
+    const INDICATOR = indicator;
     const TIME_RANGE = '2006:2015';
     const COUNTRIES = this.getCountryAbbreviations(continent); //'br;chl;arg;ecu;sur';
     const BASE_URL = `https://api.worldbank.org/v2/country/`;
@@ -106,12 +108,27 @@ class ChartInfo extends React.Component {
 
   } // handleChange
 
+  changeIndicator = (e) => {
+
+    let value = e.target.value
+
+    this.setState({indicatorToDisplay: value})
+    console.log(value);
+  } // changeIndicator
+
   componentDidMount(){
-    this.setState({countriesToSearch: 'br;chl;arg;ecu;sur'})
+
     // pass props in imediataly
     // pass in countrys to search and indicator
-    this.performSearch('br;mex;arg;ecu;sur')
+    this.performSearch()
   } // componentdidmount
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+      this.performSearch( this.state.indicatorToDisplay)
+    } // if
+
+  }
 
   render(){
 
@@ -120,6 +137,11 @@ class ChartInfo extends React.Component {
         <div className="displayGraphDiv">
           <div className="checkBox">
             <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+          </div>
+          <div className="indicator">
+            <SelectIndicator
+            countriesLabels={this.state.countriesLabel}
+            handleChange={this.changeIndicator} />
           </div>
           {
             this.state.infoToChart.length !== 0
