@@ -17,3 +17,7 @@ export const questionsFetched = (payload) => ({
   type: QUIZ.QUESTIONS_FETCHED,
   payload
 });
+
+export const nextQuestion = () => ({
+  type: QUIZ.NEXT_QUESTION,
+});
