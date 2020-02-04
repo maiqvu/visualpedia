@@ -19,7 +19,11 @@ const quiz = (state = {}, action) => {
     case QUIZ.QUESTIONS_FETCHED:
       return {...state, questions: action.payload, currentQuestion: 0};
     case QUIZ.NEXT_QUESTION:
-      return {...state, currentQuestion: state.currentQuestion + 1};
+      if (state.currentQuestion < state.questions.length - 1) {
+        return {...state, currentQuestion: state.currentQuestion + 1};
+      } else {
+        return state;
+      }
     default:
       return state;
   }

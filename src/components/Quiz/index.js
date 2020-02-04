@@ -9,11 +9,18 @@ import './style.scss';
 class Quiz extends Component {
   state = {
     showSolution: false,
-    answerIsCorrect: null
+    answerIsCorrect: null,
+    correctCount: 0,
   };
 
   handleSubmission = ((answerIsCorrect) => {
-    this.setState({...this.state, answerIsCorrect});
+    this.setState({
+      ...this.state,
+      answerIsCorrect,
+      correctCount: answerIsCorrect
+          ? this.state.correctCount + 1
+          : this.state.correctCount,
+    });
   });
 
   handleNext = () => {
@@ -30,7 +37,7 @@ class Quiz extends Component {
     const {questionsFetched} = this.props;
     console.log('Token', auth_token);
 
-    axios.get('http://localhost:3000/quiz/20.json', {
+    axios.get('http://localhost:3000/quiz/5.json', {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
@@ -43,13 +50,13 @@ class Quiz extends Component {
   }
 
   render() {
-    const {questions, currentQuestion, nextQuestion} = this.props;
+    const {questions = [], currentQuestion, nextQuestion} = this.props;
 
     console.log(questions);
     console.log(currentQuestion);
     return (
         <div className="quiz-pane">
-          <span>{currentQuestion}</span>
+          <span>Correct Rate: {`${this.state.correctCount} / ${questions.length}`}</span>
           <h2>Question #{currentQuestion + 1}</h2>
           {questions && currentQuestion !== undefined &&
           <Question
@@ -71,7 +78,7 @@ class Quiz extends Component {
             </button>
           }
           {
-            this.state.showSolution &&
+            this.state.showSolution && currentQuestion < questions.length - 1 &&
             <button
                 type="button"
                 className="btn btn-info float-right"
