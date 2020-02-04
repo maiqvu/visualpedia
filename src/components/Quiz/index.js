@@ -7,17 +7,41 @@ import Question from '../Question';
 import './style.scss';
 
 class Quiz extends Component {
+  state = {
+    showSolution: false,
+    answerIsCorrect: null,
+    correctCount: 0,
+  };
+
+  handleSubmission = ((answerIsCorrect) => {
+    this.setState({
+      ...this.state,
+      answerIsCorrect,
+      correctCount: answerIsCorrect
+          ? this.state.correctCount + 1
+          : this.state.correctCount,
+    });
+  });
+
+  handleNext = () => {
+    const {nextQuestion} = this.props;
+    this.setState({showSolution: false, answerIsCorrect: null});
+    nextQuestion();
+  };
+
   componentDidMount() {
     console.log('Fetching questions...');
 
-    const {authResult: {auth_token}, questionsFetched} = this.props;
+    const auth_token = localStorage.getItem('auth_token');
+
+    const {questionsFetched} = this.props;
     console.log('Token', auth_token);
 
-    axios.get('http://localhost:3000/quiz/20.json', {
+    axios.get('http://localhost:3000/quiz/5.json', {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth_token}`
+        'Authorization': `Bearer ${auth_token}`,
       },
     }).then((res) => {
       console.log(res);
@@ -26,15 +50,42 @@ class Quiz extends Component {
   }
 
   render() {
-    const {questions, currentQuestion} = this.props;
+    const {questions = [], currentQuestion, nextQuestion} = this.props;
 
     console.log(questions);
     console.log(currentQuestion);
     return (
         <div className="quiz-pane">
+          <span>Correct Rate: {`${this.state.correctCount} / ${questions.length}`}</span>
           <h2>Question #{currentQuestion + 1}</h2>
-          {questions && currentQuestion !== undefined && <Question question={questions[currentQuestion]} />}
-          <button type="button" className="btn btn-success float-right">Next</button>
+          {questions && currentQuestion !== undefined &&
+          <Question
+              question={questions[currentQuestion]}
+              showSolution={this.state.showSolution}
+              handleSubmission={this.handleSubmission}
+              seq={currentQuestion}
+          />}
+          {
+            !this.state.showSolution &&
+            <button
+                type="button"
+                className="btn btn-secondary float-right"
+                onClick={() => this.setState({showSolution: true})}
+                disabled={this.state.answerIsCorrect !== null
+                    ? ''
+                    : 'disabled'}>
+              Submit
+            </button>
+          }
+          {
+            this.state.showSolution && currentQuestion < questions.length - 1 &&
+            <button
+                type="button"
+                className="btn btn-info float-right"
+                onClick={this.handleNext}>
+              Next
+            </button>
+          }
         </div>
     );
   }
@@ -43,6 +94,7 @@ class Quiz extends Component {
 Quiz.propTypes = {
   authResult: PropTypes.object.isRequired,
   questionsFetched: PropTypes.func.isRequired,
+  nextQuestion: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

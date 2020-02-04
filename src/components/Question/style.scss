@@ -1,3 +1,16 @@
 .question-pane {
   margin-top: 2em;
+  .correct {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: darkgreen !important;
+  }
+
+  label:disabled {
+    background: darkgreen !important;
+  }
+
+  input:disabled {
+    background: darkgreen !important;
+  }
 }

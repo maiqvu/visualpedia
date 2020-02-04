@@ -10,7 +10,6 @@ const BASE_URL = `https://api.worldbank.org/v2/country/`;
 
 class ChartInfo extends React.Component {
   state = {
-
     sortedResults: [],
     resultsToDisplay: [],
     infoToChart: [],
@@ -56,7 +55,13 @@ class ChartInfo extends React.Component {
     .then(res => {
       // take base url and call sortData() with data argument
 
-      this.splitData(res.data[1])
+      this.splitData(res.data[1]);
+    })
+    .then(() => {
+      console.log('second Then');
+      console.log('data', this.state.infoToChart);
+      this.updateChartDisplay();
+
     })
     .catch( err => {
       console.warn(err)
@@ -87,7 +92,7 @@ class ChartInfo extends React.Component {
     // get value of event
     const value = target.value;
     // if state has value
-   if (preSelection.includes(value)) {
+   if (!target.checked) {  // preSelection.includes(value)
      // remove value from preSelection
      const toDisplay = preSelection.filter(e => e !== value)
      // update sates to include only 'ticked' items
@@ -126,7 +131,7 @@ class ChartInfo extends React.Component {
 
   componentDidMount(){
     const continent = this.props.match.params.continent;
-    this.setState({currentContinent: continent})
+    this.setState({currentContinent: continent});
 
     // pass props in imediataly
     // pass in countrys to search and indicator
@@ -134,14 +139,16 @@ class ChartInfo extends React.Component {
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
-      if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-        const continent = this.state.currentContinent
-        this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
-      } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
-        this.updateChartDisplay()
-      }
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+      const continent = this.state.currentContinent
 
+      this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+      //this.updateChartDisplay();
+    } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+      this.updateChartDisplay();
+    }
   }
+
 
   render(){
 
@@ -150,7 +157,7 @@ class ChartInfo extends React.Component {
       <div className="contianerInfo">
         <div className="displaycheckBoxDiv">
           <div className="checkBox">
-            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  />
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  checked={this.state.checked}/>
             <div className="indicator">
               <SelectIndicator
               countriesLabels={this.state.countriesLabel}

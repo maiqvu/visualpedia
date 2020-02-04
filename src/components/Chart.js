@@ -3,11 +3,12 @@ import {Bar} from 'react-chartjs-2';
 import _ from 'lodash/collection';
 import randomColor from 'randomcolor';
 
+
 const chartStyle = () => ({
   fill: false,
   lineTension: 0.1,
-  backgroundColor: randomColor(),
   borderColor: randomColor(),
+  backgroundColor: randomColor(),
   borderCapStyle: 'butt',
   borderDash: [],
   borderDashOffset: 0.0,
@@ -37,16 +38,17 @@ class Chart extends React.Component {
     for (const country in resultsToSort) {
       // sort counrties by order of dates
       let countries = _.sortBy(resultsToSort[country], ['date'])
+
       // push new
       datasets.push({
         // side datasets chart js need label and data
         label: country,
         // map through data give the value and spread the chartStyle
-        data: countries.map(v => v.value), ...chartStyle(),
+        data: countries.map(v => v.value), ...chartStyle()
       });// push
     } // for
     // state of data is being changed therefore inner data can replace*
-    this.setState({data: {...this.state.data, datasets}});
+    this.setState({data: {...this.state.data, datasets: datasets}});
   }
 
   componentDidMount(){
@@ -57,6 +59,7 @@ class Chart extends React.Component {
 
   componentDidUpdate(prevProps, prevState){
     if (prevProps.dataRange !== this.props.dataRange) {
+      console.log('range:', this.props.dataRange);
     this.updateDataSets(this.props.dataRange)
     }
   }
