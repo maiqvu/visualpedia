@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import {compose, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import thunk from 'redux-thunk';
 import './index.css';
 import LandingPage from './components/LandingPage';
 import reducers from './reducers';
@@ -11,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(
     reducers,
-    compose(
+    compose(applyMiddleware(thunk),
         // eslint-disable-next-line no-underscore-dangle
         window.__REDUX_DEVTOOLS_EXTENSION__
         // eslint-disable-next-line no-underscore-dangle
