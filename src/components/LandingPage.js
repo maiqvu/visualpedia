@@ -12,6 +12,7 @@ import Quiz from '../components/Quiz';
 import PrivateRoute from './PrivateRoute';
 import ChartInfo from './ChartInfo';
 import ChatWidget from './ChatWidget/ChatWidget.js';
+import NewsFeed from './NewsFeed'
 
 class LandingPage extends React.Component {
   checkLogin = () => this.props.authResult.auth_token;
@@ -30,6 +31,7 @@ class LandingPage extends React.Component {
           <Route exact path='/:continent/charts' component={ChartInfo} />
           <Route exact path='/chat' component={ChatWidget} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
+          <NewsFeed exact path="/newsfeed" component={NewsFeed} />
         </Router>
 
       </div>

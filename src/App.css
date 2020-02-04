@@ -60,13 +60,6 @@ body {
   vertical-align: middle;
   border-radius: 10px;
   box-shadow: 2px 3px 2px;
-  /* margin: 10px;
-  border-radius: 20px;
-
-
-  justify-content: center;
-  vertical-align: top; */
-
 }
 .chartDiv {
 
@@ -89,25 +82,11 @@ body {
   background-color: #FFFAFA;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
-  /*
 
-
-  background-color: #FFF5EE;
-  padding: 15px;
-  width: 100%;
-  display: inline-block;
-   */
 
 }
 
-.checkBox {
-  /* border: 1px solid black;
 
-  background-color: #FFF5EE;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block; */
-}
 
 #chartHeading h1 {
   /* text-align: center; */
@@ -121,4 +100,29 @@ body {
 span.countryLabels {
   position: relative;
   left: 10px;
+}
+
+
+.artilceList  {
+  display: inline-block;
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+}
+
+
+.newsfeed {
+  padding: 10px 0;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 650px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@keyframes newsfeed {
+
 }

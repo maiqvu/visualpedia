@@ -8,8 +8,6 @@ function CheckBox(props){
           props.countriesLabels.length !== 0
           ?
           <div>
-          {/*<form className="chooseCountryForm"  onSubmit={props.handleSubmit}>*/}
-
             {props.countriesLabels.map((c , index) => {
               return (
                 <div key={index} className="chooseCountrydiv">
@@ -23,8 +21,7 @@ function CheckBox(props){
                 </div>
               ) // return
             })}
-            {/*<input type="submit" value="Submit"  />*/}
-          {/*</form>*/}
+
           </div>
           :
           <h1></h1>

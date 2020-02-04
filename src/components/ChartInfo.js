@@ -3,6 +3,7 @@ import axios from 'axios';
 import Chart from './Chart';
 import CheckBox from './CheckBox';
 import SelectIndicator from './SelectIndicator'
+// import NewsFeed from './NewsFeed'
 import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
@@ -170,6 +171,9 @@ class ChartInfo extends React.Component {
           }
 
           </div>
+        </div>
+        <div className="newsFeed">
+          
         </div>
       </div>
     ) // render
