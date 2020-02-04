@@ -52,7 +52,7 @@ class ChartInfo extends React.Component {
 
     const INDICATOR = indicator;
     const TIME_RANGE = '2006:2015';
-    const COUNTRIES = this.getCountryAbbreviations(continent); //'br;chl;arg;ecu;sur';
+    const COUNTRIES = this.getCountryAbbreviations(continent);
     const BASE_URL = `https://api.worldbank.org/v2/country/`;
     const SECOND_HALF = `/indicator/${INDICATOR}?date=${TIME_RANGE}&format=json`
 
@@ -61,8 +61,7 @@ class ChartInfo extends React.Component {
     .then(res => {
       // take base url and call sortData() with data argument
 
-      this.splitData(res.data[1]
-      )
+      this.splitData(res.data[1])
     })
     .catch( err => {
       console.warn(err)
@@ -106,6 +105,8 @@ class ChartInfo extends React.Component {
      this.setState({ resultsToDisplay: joined });
    } // if
 
+
+
   } // handleChange
 
   changeIndicator = (e) => {
@@ -114,6 +115,7 @@ class ChartInfo extends React.Component {
 
     this.setState({indicatorToDisplay: value})
     console.log(value);
+
   } // changeIndicator
 
   componentDidMount(){
@@ -124,8 +126,18 @@ class ChartInfo extends React.Component {
   } // componentdidmount
 
   componentDidUpdate(prevProps, prevState){
-    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay || prevState.resultsToDisplay !== this.state.resultsToDisplay) {
       this.performSearch( this.state.indicatorToDisplay)
+
+      let listToUpdateState = {};
+      let listToCompareObject = this.state.sortedResults
+      let listToCompareName = this.state.resultsToDisplay
+
+      listToCompareName.forEach(c => {
+        listToUpdateState[c] = listToCompareObject[c]
+      })
+
+      this.setState({infoToChart: listToUpdateState})
     } // if
 
   }
@@ -136,7 +148,7 @@ class ChartInfo extends React.Component {
       <div>
         <div className="displayGraphDiv">
           <div className="checkBox">
-            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+            <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  /> {/* handleSubmit={this.handleSubmit} */}
           </div>
           <div className="indicator">
             <SelectIndicator
@@ -147,7 +159,7 @@ class ChartInfo extends React.Component {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <h1>Agricultural Land in % of area</h1>
+              <h1>{this.state.indicatorToDisplay}</h1>
               <Chart dataRange={this.state.infoToChart} />
             </div>
             :
