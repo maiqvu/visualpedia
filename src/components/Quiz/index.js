@@ -55,12 +55,13 @@ class Quiz extends Component {
               question={questions[currentQuestion]}
               showSolution={this.state.showSolution}
               handleSubmission={this.handleSubmission}
+              seq={currentQuestion}
           />}
           {
             !this.state.showSolution &&
             <button
                 type="button"
-                className="btn btn-success float-right"
+                className="btn btn-secondary float-right"
                 onClick={() => this.setState({showSolution: true})}
                 disabled={this.state.hasOwnProperty('answerIsCorrect')
                     ? ''
@@ -72,7 +73,7 @@ class Quiz extends Component {
             this.state.showSolution &&
             <button
                 type="button"
-                className="btn btn-success float-right"
+                className="btn btn-info float-right"
                 onClick={this.handleNext}>
               Next
             </button>
