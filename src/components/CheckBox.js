@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css'
 
 function CheckBox(props){
     return(
@@ -12,11 +13,13 @@ function CheckBox(props){
             {props.countriesLabels.map((c , index) => {
               return (
                 <div key={index} className="chooseCountrydiv">
+                    <input className="chooseCountryInput" type='checkbox'
+                    onChange={props.handleChange}
+                    value={c}
+                    />
+                    <span className="countryLabels">
                   <label className="chooseCountryLabel">{c}</label>
-                  <input className="chooseCountryInput" type='checkbox'
-                  onChange={props.handleChange}
-                  value={c}
-                  />
+                  </span>
                 </div>
               ) // return
             })}

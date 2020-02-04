@@ -16,7 +16,7 @@ function SelectIndicator(props){
       </select>
       </div>
       :
-      <h1>Loading .. 2</h1>
+      <h1></h1>
     }
     </div>
   ) // return
