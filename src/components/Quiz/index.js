@@ -8,12 +8,18 @@ import './style.scss';
 
 class Quiz extends Component {
   state = {
-    showSolution: false
+    showSolution: false,
   };
 
   handleSubmission = ((answerIsCorrect) => {
     this.setState({...this.state, answerIsCorrect});
   });
+
+  handleNext = () => {
+    const {nextQuestion} = this.props;
+    this.setState({showSolution: false});
+    nextQuestion();
+  };
 
   componentDidMount() {
     console.log('Fetching questions...');
@@ -25,7 +31,7 @@ class Quiz extends Component {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth_token}`
+        'Authorization': `Bearer ${auth_token}`,
       },
     }).then((res) => {
       console.log(res);
@@ -34,12 +40,13 @@ class Quiz extends Component {
   }
 
   render() {
-    const {questions, currentQuestion} = this.props;
+    const {questions, currentQuestion, nextQuestion} = this.props;
 
     console.log(questions);
     console.log(currentQuestion);
     return (
         <div className="quiz-pane">
+          <span>{currentQuestion}</span>
           <h2>Question #{currentQuestion + 1}</h2>
           {questions && currentQuestion !== undefined &&
           <Question
@@ -47,7 +54,27 @@ class Quiz extends Component {
               showSolution={this.state.showSolution}
               handleSubmission={this.handleSubmission}
           />}
-          <button type="button" className="btn btn-success float-right" onClick={() => this.setState({showSolution: true})}>Submit</button>
+          {
+            !this.state.showSolution &&
+            <button
+                type="button"
+                className="btn btn-success float-right"
+                onClick={() => this.setState({showSolution: true})}
+                disabled={this.state.hasOwnProperty('answerIsCorrect')
+                    ? ''
+                    : 'disabled'}>
+              Submit
+            </button>
+          }
+          {
+            this.state.showSolution &&
+            <button
+                type="button"
+                className="btn btn-success float-right"
+                onClick={this.handleNext}>
+              Next
+            </button>
+          }
         </div>
     );
   }
@@ -56,6 +83,7 @@ class Quiz extends Component {
 Quiz.propTypes = {
   authResult: PropTypes.object.isRequired,
   questionsFetched: PropTypes.func.isRequired,
+  nextQuestion: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
