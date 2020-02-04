@@ -11,6 +11,9 @@ class NavBar extends React.Component {
   handleLogout = () => {
     const {logout} = this.props;
     logout();
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
   };
 
   render() {
