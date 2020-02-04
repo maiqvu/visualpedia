@@ -15,18 +15,19 @@ import ChatWidget from './ChatWidget/ChatWidget.js';
 import * as actionCreators from '../actions';
 
 class LandingPage extends React.Component {
-  checkLogin = () => this.props.authResult.auth_token;
+  // checkLogin = () => this.props.authResult.auth_token;
+  checkLogin = () => localStorage.getItem('auth_token');
 
-  componentDidMount() {
-    const {loginSuccess} = this.props;
-    const token = localStorage.getItem('auth_token');
-    const name = localStorage.getItem('name');
-    const email = localStorage.getItem('email');
-
-    if (token && name && email) {
-      loginSuccess({auth_token: token, name, email});
-    }
-  }
+  // componentDidMount() {
+  //   const {loginSuccess} = this.props;
+  //   const token = localStorage.getItem('auth_token');
+  //   const name = localStorage.getItem('name');
+  //   const email = localStorage.getItem('email');
+  //
+  //   if (token && name && email) {
+  //     loginSuccess({auth_token: token, name, email});
+  //   }
+  // }
 
   render(){
 

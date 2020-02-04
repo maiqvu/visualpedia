@@ -14,7 +14,7 @@ const Question = (props) => {
                               tag={i}
                               correct={a.is_correct}
                               showSolution={showSolution}
-                              handleSubmission={handleSubmission} />
+                              handleSubmission={handleSubmission}/>,
         )}
       </div>
   );
@@ -28,7 +28,10 @@ const Answer = (props) => {
           ? 'correct'
           : ''}`}>
         <input className="form-check-input" type="radio" name="answerRadios"
-               id={`answer_${tag}`} value={tag} onClick={() => handleSubmission(correct)}/>
+               id={`answer_${tag}`} value={tag}
+               onClick={() => handleSubmission(correct)}
+
+        />
         <label className="form-check-label" htmlFor={`answer_${tag}`}>
           {answer}
         </label>

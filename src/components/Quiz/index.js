@@ -24,7 +24,9 @@ class Quiz extends Component {
   componentDidMount() {
     console.log('Fetching questions...');
 
-    const {authResult: {auth_token}, questionsFetched} = this.props;
+    const auth_token = localStorage.getItem('auth_token');
+
+    const {questionsFetched} = this.props;
     console.log('Token', auth_token);
 
     axios.get('http://localhost:3000/quiz/20.json', {

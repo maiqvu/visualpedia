@@ -16,6 +16,17 @@ class NavBar extends React.Component {
     localStorage.removeItem('email');
   };
 
+  componentDidMount() {
+    const {loginSuccess} = this.props;
+    const token = localStorage.getItem('auth_token');
+    const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
+
+    if (token && name && email) {
+      loginSuccess({auth_token: token, name, email});
+    }
+  }
+
   render() {
     const {authResult} = this.props;
 
