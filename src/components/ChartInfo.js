@@ -125,21 +125,25 @@ class ChartInfo extends React.Component {
     this.performSearch()
   } // componentdidmount
 
+  updateChartDisplay() {
+    let listToUpdateState = {};
+    let listToCompareObject = this.state.sortedResults
+    let listToCompareName = this.state.resultsToDisplay
+
+    listToCompareName.forEach(c => {
+      listToUpdateState[c] = listToCompareObject[c]
+    });
+    this.setState({infoToChart: listToUpdateState})
+  }
+
+
   componentDidUpdate(prevProps, prevState){
-    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay || prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
       this.performSearch( this.state.indicatorToDisplay)
-
-      let listToUpdateState = {};
-      let listToCompareObject = this.state.sortedResults
-      let listToCompareName = this.state.resultsToDisplay
-
-      listToCompareName.forEach(c => {
-        listToUpdateState[c] = listToCompareObject[c]
-      })
-
-      this.setState({infoToChart: listToUpdateState})
-    } // if
-
+      this.updateChartDisplay();
+    } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+      this.updateChartDisplay();
+    }
   }
 
   render(){
