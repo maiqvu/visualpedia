@@ -57,7 +57,8 @@ class ConversationsList extends React.Component {
           : 
           null
         }
-        <h2>Conversations</h2>
+        <h2>Visualpedia Social</h2>
+        <p>Share your knowledge with other quiz participants</p>
         <ul>{mapConversations(conversations, this.handleClick)}</ul>
         <NewConversationForm />
         {

@@ -1,6 +1,7 @@
 import React from 'react';
 import ActionCable from 'action-cable-react-jwt';
 import ActionCableProvider from 'react-actioncable-provider';
+import { API_WS_ROOT } from '../../constants';
 import './ChatWidget.css';
 
 class ChatWidget extends React.Component {
@@ -31,13 +32,12 @@ class ChatWidget extends React.Component {
   createSocket() {
     const yourToken = localStorage.getItem('auth_token');   // get JWT token that is saved in local storage
 
-    this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
-    // let this.cable;
-    // if (process.env.NODE_ENV !== 'production') {
-    //   this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
-    // } else {
-    //   this.cable = ActionCable.createConsumer('wss://app-academy-sloth.herokuapp.com/cable', yourToken);
-    // }
+    // this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
+    if (process.env.NODE_ENV !== 'production') {
+      this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
+    } else {
+      this.cable = ActionCable.createConsumer('wss://visualpedia-backend.herokuapp.com/cable', yourToken);
+    }
 
     // Subscribe to a channel for receiving data being broadcasted from server-side
     this.chats = this.cable.subscriptions.create(
@@ -84,7 +84,8 @@ class ChatWidget extends React.Component {
       <ActionCableProvider url={ API_WS_ROOT }>
       <div className='App'>
         <div className='stage'>
-          <h1>Chat</h1>
+          <h2>Visualpedia Social</h2>
+          <p>Share your knowledge with other quiz participants</p>
           <div className='chat-logs'>
             <ul className='chat-logs'>
               { this.renderChatLog() }
