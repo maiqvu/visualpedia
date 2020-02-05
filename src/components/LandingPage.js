@@ -12,7 +12,6 @@ import Signup from './Signup';
 import Quiz from '../components/Quiz';
 import PrivateRoute from './PrivateRoute';
 import ChartInfo from './ChartInfo';
-import ChatWidget from './ChatWidget/ChatWidget.js';
 import * as actionCreators from '../actions';
 import ChartAPIRequest from './ChartAPIRequest';
 import NewsFeed from './NewsFeed'
