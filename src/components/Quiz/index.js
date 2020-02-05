@@ -6,11 +6,13 @@ import Question from '../Question';
 import './style.scss';
 
 class Quiz extends Component {
-  state = {
+  initialState = {
     showSolution: false,
     answerIsCorrect: null,
     correctCount: 0,
   };
+
+  state = {...this.initialState};
 
   handleSubmission = ((answerIsCorrect) => {
     this.setState({
@@ -34,7 +36,9 @@ class Quiz extends Component {
     nextQuestion();
   };
 
-  componentDidMount() {
+  loadQuiz = () => {
+    this.setState({...this.initialState});
+    
     console.log('Fetching questions...');
 
     const auth_token = localStorage.getItem('auth_token');
@@ -43,6 +47,10 @@ class Quiz extends Component {
     console.log('Token', auth_token);
 
     fetchQuestions(auth_token);
+  };
+
+  componentDidMount() {
+    this.loadQuiz();
   }
 
   render() {
@@ -92,7 +100,8 @@ class Quiz extends Component {
               </div>
               <button
                   type="button"
-                  className="btn btn-info float-right">
+                  className="btn btn-info float-right"
+                  onClick={this.loadQuiz}>
                 Play again
               </button>
             </>
