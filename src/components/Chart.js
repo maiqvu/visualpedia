@@ -8,7 +8,7 @@ const colorWheel = [
       'rgba(54, 162, 235, 1)',
       'rgba(255, 206, 86, 1)',
       'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
+      'rgba(153, 102, 255, 1)'
 ];
 const chartStyle = () => ({
 
@@ -25,7 +25,8 @@ class Chart extends React.Component {
   static defaultProps = {
     displayTitle: true,
     displayLegend: true,
-    legendPosition: 'right'
+    legendPosition: 'right',
+
   }
 
   updateDataSets(resultsToSort) {
@@ -66,24 +67,129 @@ class Chart extends React.Component {
     }
   }
 
+  getOptionsForChart = chart => {
+    let options = {};
+    switch(chart) {
+      case 'line':
+        options = {
+          legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 18
+            }
+        },
+          scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }
+        };
+        break;
+
+      case 'bar':
+      case 'horziontal':
+        options = {
+
+        };
+        break;
+      case 'radar':
+        options = {
+
+        };
+        break;
+    }
+
+    return options;
+  }
+
+  setGradientColor = (canvas, color, colorStop) => {
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(0.95, colorStop);
+    return gradient;
+  }
+
+  getChartData = canvas => {
+    const data = this.state.data;
+    if (data.datasets) {
+      const colors = ['rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)'
+      ];
+      const colorStops = ['rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)'
+      ];
+      data.datasets.forEach((set, i) => {
+        set.backgroundColor = this.setGradientColor(canvas, colors[i], colorStops[i]);
+        // set.borderColor = "black";
+        // set.borderWidth = 1;
+      });
+    }
+
+    return data;
+  }
+
+
+
+  // addColors = () => {
+  //   const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
+  //   this.setState({
+  //     data: {...this.state.data, datasets: dataWithColors}
+  //   }, () => {
+  //     console.log('data:', this.state.data);
+  //   });
+  // }
+  //
+  // componentDidMount() {
+  //   this.setState({ data: this.props.dataRange }, () => {
+  //     this.addColors();
+  //   });
+  // }
+  //
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.dataRange !== this.props.dataRange) {
+  //     this.setState({data: this.props.dataRange}, () => {
+  //       this.addColors();
+  //     });
+  //   }
+  // }
+
   render(){
+    const components = {
+        bar: Bar,
+        line: Line,
+        horizontal: HorizontalBar,
+        radar: Radar
+      };
+
+    const generalGlobalOptions = {
+      maintainAspectRatio: true,
+      title: {
+        display: true,
+        text: this.props.title,
+        fontSize: 25
+      },
+      legend: {
+        display: this.props.displayLegend,
+        position: this.props.legendPosition,
+        labels: {
+          display: true
+        }
+      }
+    }
+
+
+    const ChartTag = components[this.props.chart];
+
     return(
       <div className="Chart">
-        <Bar data={this.state.data} options={{ //this.props.dataRange
-        maintainAspectRatio: true,
-        title: {
-          display: true,
-          text: this.props.title,
-          fontSize: 25
-        },
-        legend: {
-          display: this.props.displayLegend,
-          position: this.props.legendPosition,
-          labels: {
-            display: true
-          }
-        }
-        }}/>
+        <ChartTag data={this.getChartData} options={{...generalGlobalOptions, ...this.getOptionsForChart(this.props.chart)}}/>
       </div>
     ) // return
   } //render

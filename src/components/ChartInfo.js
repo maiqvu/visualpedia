@@ -4,6 +4,7 @@ import Chart from './Chart';
 import CheckBox from './CheckBox';
 import SelectIndicator from './SelectIndicator'
 import NewsFeed from './NewsFeed'
+import SelectChart from './SelectChart';
 import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
@@ -26,7 +27,8 @@ class ChartInfo extends React.Component {
     currentContinent: [],
     countriesToSearch: '',
     indicatorToDisplay: 'AG.LND.AGRI.ZS',
-    title: ''
+    title: '',
+    chartType: 'bar'
   }
 
   splitData = (arrayToGroup) => {
@@ -123,6 +125,10 @@ class ChartInfo extends React.Component {
     this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
   } // changeIndicator
 
+  changeChart = e => {
+    this.setState({chartType: e.target.value});
+  }
+
   updateChartDisplay(){
     let listToUpdateState = {};
     let listToCompareObject = this.state.sortedResults;
@@ -150,8 +156,6 @@ class ChartInfo extends React.Component {
       newsSearch = 'ar'
     } else if (continent === "europe") {
       newsSearch = 'gb'
-    } else if (continent === 'asia') {
-      newsSearch = 'ru'
     } else {
       newsSearch = 'au'
     }
@@ -168,24 +172,15 @@ class ChartInfo extends React.Component {
     this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay);
   } // componentdidmount
 
-  // componentDidUpdate(prevProps, prevState){
-    // if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-    //   const continent = this.state.currentContinent
-    //
-    //   this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
-    //   //this.updateChartDisplay();
-    // } else
-    // if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
-    //   this.updateChartDisplay();
-    // }
-  // }
-
 
   render(){
 
     return(
       <div>
       <div className="contianerInfo">
+        {
+          this.state.infoToChart.length !== 0
+          ?
         <div className="displaycheckBoxDiv">
           <div className="checkBox">
             <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  checked={this.state.checked}/>
@@ -196,18 +191,27 @@ class ChartInfo extends React.Component {
             </div>
           </div>
           </div>
+          :
+          <h1></h1>
+        }
           <div className="chartDiv">
           {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <Chart dataRange={this.state.infoToChart} title={this.state.title} key={Math.random()}/>
+              <Chart chart={this.state.chartType} dataRange={this.state.infoToChart} title={this.state.title} key={Math.random()}/>
             </div>
             :
-            <h1></h1>
+            <div class="loader"></div>
           }
 
           </div>
+          <div className="displayselectChartDiv">
+            <div className="SelectChart">
+              <SelectChart handleChange={this.changeChart}/>
+            </div>
+          </div>
+          
         </div>
         <div className="newsFeed">
           <NewsFeed localSearch={this.getNews()}/>

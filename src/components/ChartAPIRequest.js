@@ -58,8 +58,11 @@
 //         countriesLabels.push(country);
 //       }
 //
-//       this.setState({data: {datasets: datasets},
-//                      countriesLabels: countriesLabels}, () => console.log('dataa:', this.state.data));  // {data: {...this.state.data, datasets}}
+//       this.setState({data: {datasets},
+//                      countriesLabels: countriesLabels});  // {data: {...this.state.data, datasets}}
+//     })
+//     .then(() => {
+//       this.updateNewRequest();
 //     })
 //     .catch(console.warn);
 //   } // performSearch
@@ -73,11 +76,21 @@
 //   componentDidUpdate(prevProps, prevState){
 //     if (prevState.indicator !== this.state.indicator) {
 //       const continent = this.state.currentContinent
-//       console.log('okkkk');
-//       this.performSearch(this.getCountryAbbreviations(continent), this.state.indicator)
+//       this.performSearch(this.getCountryAbbreviations(continent), this.state.indicator);
+//       //this.setState((state, props) => ({ infoToChart: {...this.state.infoToChart}}));
 //       //this.updateChartDisplay();
 //     }
 //   }
+//
+//   updateNewRequest = () => {
+//     const dataForNewIndicator = [];
+//     for (let i = 0; i < this.state.infoToChart.datasets.length; i++) {
+//       dataForNewIndicator.push(_.find(this.state.data.datasets, {label: this.state.infoToChart.datasets[i].label}))
+//     }
+//     this.setState((state, props) => ({ infoToChart: {datasets: [...dataForNewIndicator] }}));
+//   }
+//
+//
 //
 //   handleChange = e => {
 //     const target = e.target;
@@ -87,25 +100,23 @@
 //      // remove value from preSelection
 //      const toDisplay = this.state.infoToChart.datasets.filter(c => !c.label.includes(value));
 //      // update sates to include only 'ticked' items
-//      this.setState({ infoToChart: toDisplay });
+//      this.setState((state, props) => ({ infoToChart: {...this.state.infoToChart, datasets: [...toDisplay] }}));
 //
 //    } else {
 //      // add new county to rest of state save as joined
 //      const data = _.find(this.state.data.datasets, {label: value});
-//      console.log('data', data);
 //      // const joined = this.state.infoToChart.datasets.concat(restructuredData);
 //      // console.log('joined data', joined);
 //      // update state with new value
 //
-//      this.setState((state, props) => ({ infoToChart: {...state.infoToChart, datasets: [data] }}), () => console.log('infochart', this.state.infoToChart)); // datasets: [{...data}]
+//      this.setState((state, props) => ({ infoToChart: {...this.state.infoToChart, datasets: [...this.state.infoToChart.datasets, data] }}));
 //    }
 //   }
 //
 //   changeIndicator = (e) => {
 //
-//     let value = e.target.value
-//
-//     this.setState({indicator: value})
+//     let value = e.target.value;
+//     this.setState({indicator: value});
 //
 //   }
 //

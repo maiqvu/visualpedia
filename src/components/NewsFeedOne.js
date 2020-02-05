@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import '../NewsFeed.css'
 const URL = 'https://newsapi.org/v2/top-headlines?country='
-const CATAGORY = '&category=science'
-const API_KEY = '&apiKey=fc488d7d92e0499888abe5ddb0f1b9d8'
+
+const API_KEY = 'category=science&apiKey=fc488d7d92e0499888abe5ddb0f1b9d8'
 
 class NewsFeed extends React.Component {
 
@@ -11,7 +11,7 @@ class NewsFeed extends React.Component {
     allArticles: []
   }
   performSearch = (search='us') => {
-    axios.get(`${URL}${search}${CATAGORY}${API_KEY}`)
+    axios.get(`${URL}${search}&${API_KEY}`)
     .then(res => {
       console.log(res.data.articles);
       this.setState({allArticles: res.data.articles})
@@ -33,7 +33,7 @@ class NewsFeed extends React.Component {
     render(){
       return(
         <div className="articles">
-          <h5 className="newsHeadline">In Science News</h5>
+          <h5 className="newsHeadline">Local News</h5>
           {
             this.state.allArticles !== 0
             ?

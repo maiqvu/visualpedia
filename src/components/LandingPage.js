@@ -14,6 +14,7 @@ import PrivateRoute from './PrivateRoute';
 import ChartInfo from './ChartInfo';
 import ChatWidget from './ChatWidget/ChatWidget.js';
 import * as actionCreators from '../actions';
+import ChartAPIRequest from './ChartAPIRequest';
 import NewsFeed from './NewsFeed'
 import VPSocial from './VPSocial/VPSocial';
 class LandingPage extends React.Component {
