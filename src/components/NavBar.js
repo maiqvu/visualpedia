@@ -41,7 +41,7 @@ class NavBar extends React.Component {
                   authResult.auth_token &&
                   <>
                     <Link to='/quiz'>Take a Quiz!</Link>
-                    <Link to='/chat'>Chat Box</Link>
+                    <Link to='/vpsocial'>Visualpedia Social</Link>
                   </>
                 }
                 {

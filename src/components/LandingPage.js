@@ -15,6 +15,7 @@ import ChartInfo from './ChartInfo';
 import ChatWidget from './ChatWidget/ChatWidget.js';
 import * as actionCreators from '../actions';
 import NewsFeed from './NewsFeed'
+import VPSocial from './VPSocial/VPSocial';
 class LandingPage extends React.Component {
   // checkLogin = () => this.props.authResult.auth_token;
   checkLogin = () => localStorage.getItem('auth_token');
@@ -35,7 +36,7 @@ class LandingPage extends React.Component {
           <Route exact path='/newsfeed' component={NewsFeed} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
 
-          <PrivateRoute exact path='/chat' component={ChatWidget} handleAuthCheck={this.checkLogin}/>
+          <PrivateRoute exact path='/vpsocial' component={VPSocial} handleAuthCheck={this.checkLogin}/>
 
         </Router>
 

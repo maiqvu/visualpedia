@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionCable from 'action-cable-react-jwt';
+import ActionCableProvider from 'react-actioncable-provider';
 import './ChatWidget.css';
 
 class ChatWidget extends React.Component {
@@ -80,6 +81,7 @@ class ChatWidget extends React.Component {
 
   render() {
     return (
+      <ActionCableProvider url={ API_WS_ROOT }>
       <div className='App'>
         <div className='stage'>
           <h1>Chat</h1>
@@ -95,6 +97,7 @@ class ChatWidget extends React.Component {
           <button className='send' onClick={ (e) => this.handleSendEvent(e) }>Send</button>
         </div>
       </div>
+      </ActionCableProvider>
     );
   }
 }
