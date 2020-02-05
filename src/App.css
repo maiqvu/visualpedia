@@ -6,7 +6,7 @@ body {
   width: 100%;
   background-color: #F9627D;
   padding-bottom: 5px;
-  background-image: url(/earthNight.jpg);
+  background-image: url(./earthNight.jpg);
   background-size:contain;
   background: cover;
 }
