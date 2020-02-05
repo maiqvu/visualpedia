@@ -45,6 +45,21 @@ export const signup = (userInfo) => (dispatch, getState) => {
       });
 
 };
+
+export const fetchQuestions = (auth_token) => (dispatch, getState) => {
+  axios.get('http://localhost:3000/quiz/5.json', {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`,
+    },
+  }).then((res) => {
+    console.log(res);
+    dispatch(questionsFetched(res.data));
+  }).catch(console.warn);
+};
+
+
 export const loginSuccess = (payload) => ({
   type: AUTH.LOGIN_SUCCESS,
   payload,

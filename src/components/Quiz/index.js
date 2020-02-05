@@ -34,19 +34,10 @@ class Quiz extends Component {
 
     const auth_token = localStorage.getItem('auth_token');
 
-    const {questionsFetched} = this.props;
+    const {fetchQuestions} = this.props;
     console.log('Token', auth_token);
 
-    axios.get('http://localhost:3000/quiz/5.json', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth_token}`,
-      },
-    }).then((res) => {
-      console.log(res);
-      questionsFetched(res.data);
-    }).catch(console.warn);
+    fetchQuestions(auth_token);
   }
 
   render() {
@@ -93,7 +84,7 @@ class Quiz extends Component {
 
 Quiz.propTypes = {
   authResult: PropTypes.object.isRequired,
-  questionsFetched: PropTypes.func.isRequired,
+  fetchQuestions: PropTypes.func.isRequired,
   nextQuestion: PropTypes.func.isRequired,
 };
 
