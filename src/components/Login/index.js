@@ -18,7 +18,7 @@ class Login extends Component {
 
     login({email: this.state.email, password: this.state.password}).then(() => {
       this.props.history.push('/');
-    });
+    }).catch(console.warn);
   };
 
   handleChange = (event) => {
