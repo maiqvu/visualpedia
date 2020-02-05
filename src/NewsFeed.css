@@ -11,6 +11,7 @@ a {
 a.newsFeed {
   /* background-color:	#FF8C00; */
   /* opacity: 0.7; */
+  font-size: 25px;
   color: white;
   display: inline-block;
   width: 650px;
@@ -18,8 +19,9 @@ a.newsFeed {
   margin: 0;
   line-height: 50px;
   text-align: center;
+  text-shadow: 2px 2px black;
   transform:translateX(100%);
-   animation: newsFeed 80s linear infinite;
+  animation: newsFeed 120s linear infinite;
 }
 
 
