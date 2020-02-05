@@ -5,8 +5,10 @@
 
 }
 
-a {
-
+#poweredBy {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 15px;
 }
 a.newsFeed {
   /* background-color:	#FF8C00; */
