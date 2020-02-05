@@ -32,7 +32,7 @@ class LandingPage extends React.Component {
           <Route exact path='/' component={ContinentMap} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
-          <Route exact path='/:continent/charts' component={ChartInfo} />  //ChartInfo
+          <Route exact path='/:continent/charts' component={ChartInfo} /> 
           <Route exact path='/newsfeed' component={NewsFeed} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
 

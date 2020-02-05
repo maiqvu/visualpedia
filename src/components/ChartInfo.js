@@ -156,8 +156,6 @@ class ChartInfo extends React.Component {
       newsSearch = 'ar'
     } else if (continent === "europe") {
       newsSearch = 'gb'
-    } else if (continent === 'asia') {
-      newsSearch = 'ru'
     } else {
       newsSearch = 'au'
     }
@@ -180,6 +178,9 @@ class ChartInfo extends React.Component {
     return(
       <div>
       <div className="contianerInfo">
+        {
+          this.state.infoToChart.length !== 0
+          ?
         <div className="displaycheckBoxDiv">
           <div className="checkBox">
             <CheckBox countriesLabels={this.state.countriesLabel} handleChange={this.handleChange}  checked={this.state.checked}/>
@@ -190,7 +191,9 @@ class ChartInfo extends React.Component {
             </div>
           </div>
           </div>
-
+          :
+          <h1></h1>
+        }
           <div className="chartDiv">
           {
             this.state.infoToChart.length !== 0
@@ -199,7 +202,7 @@ class ChartInfo extends React.Component {
               <Chart chart={this.state.chartType} dataRange={this.state.infoToChart} title={this.state.title} key={Math.random()}/>
             </div>
             :
-            <h1></h1>
+            <div class="loader"></div>
           }
 
           </div>

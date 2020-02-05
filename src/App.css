@@ -4,7 +4,7 @@
 
 body {
   width: 100%;
-  background-color: #C8D5B9;
+  background-color: #F9627D;
   padding-bottom: 5px;
 }
 
@@ -46,10 +46,11 @@ body {
 .contianerInfo {
   display: flex;
   justify-content: space-around;
-  /* border: 2px solid black; */
   width: 100%;
-  background-color: #C8D5B9;
-
+  background-image: url(/earthNight.jpg);
+  background-size:contain;
+  background: cover;
+  padding: 68px 0;
 }
 
 .displaycheckBoxDiv, .displayselectChartDiv {
@@ -58,7 +59,9 @@ body {
   display: inline-block;
   height: 100%;
   padding: 5px;
-  background-color: yellow;
+  background-color: black;
+  color: white;
+  opacity: 0.8;
   vertical-align: middle;
   border-radius: 10px;
   box-shadow: 2px 3px 2px;
@@ -70,7 +73,7 @@ body {
   width: 80%;
   height: 80%;
   justify-content: space-between;
-
+  color: white;
 }
 
 .chartDisplay {
@@ -80,7 +83,9 @@ body {
   display: inline-block;
   border: 2px solid black;
   padding: 15px;
-  background-color: #FAF3DD;
+  background-color: black;
+  color: white;
+  opacity: 0.8;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
 
@@ -88,11 +93,11 @@ body {
 }
 
 .navBar {
-  background-color: #FAF3DD;
+  background-image: url(/headingBackground.png);
 }
 
 .navBarDiv {
-  background-color: #C8D5B9;
+  background-image: url(/headingBackground.png);
   margin-bottom: 0;
 }
 
@@ -119,7 +124,7 @@ span.countryLabels {
   display: flex;
   overflow-x: scroll;
   width: 100%;
-  background-color: #C8D5B9;
+  background-color: #F9627D;
 
 }
 
@@ -130,7 +135,7 @@ span.countryLabels {
   display: inline-block;
   text-decoration: none;
   color: black;
-  background-color: #6F8F72;
+  background-color: #F9627D;
   flex-shrink: 0;
   width: 650px;
   border-radius: 10px;
@@ -157,13 +162,25 @@ a {
   color: black;
 }
 
-
-
-
-
-
 .newsHeadline {
-  background-color: #C8D5B9;
+  background-image: url(/headingBackground.png);
   text-align: center;
+  padding: 10px;
   margin: 0;
+}
+
+/* Loader */
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  margin: 100px 55% 45%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

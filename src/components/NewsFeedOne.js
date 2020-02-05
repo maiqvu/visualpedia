@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../NewsFeed.css'
 const URL = 'https://newsapi.org/v2/top-headlines?country='
 
-const API_KEY = 'apiKey=fc488d7d92e0499888abe5ddb0f1b9d8'
+const API_KEY = 'category=science&apiKey=fc488d7d92e0499888abe5ddb0f1b9d8'
 
 class NewsFeed extends React.Component {
 
