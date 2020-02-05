@@ -15,34 +15,12 @@ class Signup extends Component {
   };
 
   handleSubmit = (event) => {
-    const {loginSuccess, loginFail} = this.props;
+    const {signup} = this.props;
 
     event.preventDefault();
-    axios.post('http://localhost:3000/users.json'
-        , {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-          },
-          user: {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            password_confirmation: this.state.passwordConfirmation,
-          },
-        })
-        .then((res) => {
-          // console.log(res);
-          loginSuccess(res.data);
-          localStorage.setItem('auth_token', res.data.auth_token);
-          localStorage.setItem('name', res.data.name);
-          localStorage.setItem('email', res.data.email);
-          this.props.history.push('/');
-        })
-        .catch((error) => {
-          console.warn(error);
-          loginFail();
-        });
+    signup(this.state).then(() => {
+      this.props.history.push('/');
+    });
   };
 
   handleChange = (event) => {
