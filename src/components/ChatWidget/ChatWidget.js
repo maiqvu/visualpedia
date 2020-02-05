@@ -1,6 +1,5 @@
 import React from 'react';
 import ActionCable from 'action-cable-react-jwt';
-// import Cable from 'actioncable';
 import './ChatWidget.css';
 
 class ChatWidget extends React.Component {
@@ -32,6 +31,12 @@ class ChatWidget extends React.Component {
     const yourToken = localStorage.getItem('auth_token');   // get JWT token that is saved in local storage
 
     this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
+    // let this.cable;
+    // if (process.env.NODE_ENV !== 'production') {
+    //   this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
+    // } else {
+    //   this.cable = ActionCable.createConsumer('wss://app-academy-sloth.herokuapp.com/cable', yourToken);
+    // }
 
     // Subscribe to a channel for receiving data being broadcasted from server-side
     this.chats = this.cable.subscriptions.create(
@@ -87,9 +92,7 @@ class ChatWidget extends React.Component {
                 value={ this.state.currentChatMessage }
                 onChange={ (e) => this.updateCurrentChatMessage(e) }
                 onKeyPress={ (e) => this.handleChatInputKeyPress(e) } />
-          <button className='send' onClick={ (e) => this.handleSendEvent(e) }>
-            Send
-          </button>
+          <button className='send' onClick={ (e) => this.handleSendEvent(e) }>Send</button>
         </div>
       </div>
     );
