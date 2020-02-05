@@ -18,7 +18,37 @@ class Chart extends React.Component {
   state = {
     data: {
       labels: Array(10).fill(2006).map((y, i) => String(y + i)),
-      datasets: []
+      datasets: [],
+      options: {
+        title: {
+          display: true,
+          fontColor: 'white'
+        },
+        legend: {
+          display: true,
+          labels: {
+            fontColor: 'white'
+          }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    fontSize: 18,
+                    stepSize: 1,
+                    beginAtZero: true
+                }
+          }],
+          xAxes: [{
+              ticks: {
+                  fontColor: "white",
+                  fontSize: 14,
+                  stepSize: 1,
+                  beginAtZero: true
+              }
+          }]
+        }
+      }
     }
   }
 
@@ -74,13 +104,17 @@ class Chart extends React.Component {
         options = {
           legend: {
             labels: {
-                fontColor: "white",
+                fontColor: 'white',
                 fontSize: 18
             }
         },
           scales: {
             yAxes: [{
-                stacked: true
+
+              stacked: true,
+              ticks: {
+                fontColor: 'white'
+              }
             }]
         }
         };
@@ -127,38 +161,12 @@ class Chart extends React.Component {
       ];
       data.datasets.forEach((set, i) => {
         set.backgroundColor = this.setGradientColor(canvas, colors[i], colorStops[i]);
-        // set.borderColor = "black";
-        // set.borderWidth = 1;
+
       });
     }
 
     return data;
   }
-
-
-
-  // addColors = () => {
-  //   const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
-  //   this.setState({
-  //     data: {...this.state.data, datasets: dataWithColors}
-  //   }, () => {
-  //     console.log('data:', this.state.data);
-  //   });
-  // }
-  //
-  // componentDidMount() {
-  //   this.setState({ data: this.props.dataRange }, () => {
-  //     this.addColors();
-  //   });
-  // }
-  //
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.dataRange !== this.props.dataRange) {
-  //     this.setState({data: this.props.dataRange}, () => {
-  //       this.addColors();
-  //     });
-  //   }
-  // }
 
   render(){
     const components = {

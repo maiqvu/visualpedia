@@ -85,9 +85,9 @@ body {
   display: inline-block;
   border: 2px solid white;
   padding: 15px;
-  /* background-color: black; */
+  background-color: black;
   color: white;
-  /* opacity: 0.9; */
+  opacity: 0.9;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
 
