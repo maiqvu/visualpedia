@@ -31,7 +31,7 @@ class Signup extends Component {
   render() {
     const {authResult} = this.props;
     return (
-        <div className="login-panel">
+        <div className="sign-panel">
           {
             authResult.hasOwnProperty('error') &&
             <Alert variant="danger">

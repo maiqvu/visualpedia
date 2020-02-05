@@ -9,9 +9,9 @@ a {
 
 }
 a.newsFeed {
-  background-color: #F9ADA0;
-
-  color: black;
+  /* background-color:	#FF8C00; */
+  /* opacity: 0.7; */
+  color: white;
   display: inline-block;
   width: 650px;
   position: relative;

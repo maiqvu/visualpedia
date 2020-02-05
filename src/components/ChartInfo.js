@@ -211,6 +211,7 @@ class ChartInfo extends React.Component {
               <SelectChart handleChange={this.changeChart}/>
             </div>
           </div>
+          
         </div>
         <div className="newsFeed">
           <NewsFeed localSearch={this.getNews()}/>

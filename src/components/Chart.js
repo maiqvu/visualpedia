@@ -72,6 +72,12 @@ class Chart extends React.Component {
     switch(chart) {
       case 'line':
         options = {
+          legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 18
+            }
+        },
           scales: {
             yAxes: [{
                 stacked: true
@@ -113,11 +119,11 @@ class Chart extends React.Component {
                       'rgba(75, 192, 192, 1)',
                       'rgba(153, 102, 255, 1)'
       ];
-      const colorStops = ['rgba(255, 159, 192, 1)',
-                          'rgba(114, 222, 255, 1)',
-                          'rgba(255, 246, 146, 1)',
-                          'rgba(135, 242, 252, 1)',
-                          'rgba(213, 152, 255, 1)'
+      const colorStops = ['rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)'
       ];
       data.datasets.forEach((set, i) => {
         set.backgroundColor = this.setGradientColor(canvas, colors[i], colorStops[i]);

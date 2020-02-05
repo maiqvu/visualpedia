@@ -6,6 +6,9 @@ body {
   width: 100%;
   background-color: #F9627D;
   padding-bottom: 5px;
+  background-image: url(/earthNight.jpg);
+  background-size:contain;
+  background: cover;
 }
 
 .App-logo {
@@ -47,9 +50,7 @@ body {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background-image: url(/earthNight.jpg);
-  background-size:contain;
-  background: cover;
+
   padding: 68px 0;
 }
 
@@ -66,6 +67,7 @@ body {
   border-radius: 10px;
   box-shadow: 2px 3px 2px;
 }
+
 .chartDiv {
 
 
@@ -85,7 +87,7 @@ body {
   padding: 15px;
   background-color: black;
   color: white;
-  opacity: 0.8;
+  opacity: 0.9;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
 
@@ -93,12 +95,15 @@ body {
 }
 
 .navBar {
-  background-image: url(/headingBackground.png);
+  /* background-color:	#FF8C00; */
+  /* opacity: 0.7; */
+  color: black;
 }
 
 .navBarDiv {
   background-image: url(/headingBackground.png);
   margin-bottom: 0;
+  color: black;
 }
 
 #chartHeading h1 {
@@ -124,7 +129,7 @@ span.countryLabels {
   display: flex;
   overflow-x: scroll;
   width: 100%;
-  background-color: #F9627D;
+
 
 }
 
@@ -135,7 +140,7 @@ span.countryLabels {
   display: inline-block;
   text-decoration: none;
   color: black;
-  background-color: #F9627D;
+
   flex-shrink: 0;
   width: 650px;
   border-radius: 10px;
@@ -167,6 +172,9 @@ a {
   text-align: center;
   padding: 10px;
   margin: 0;
+  color: white;
+  /* background-color:	#FF8C00; */
+  /* opacity: 0.9; */
 }
 
 /* Loader */
