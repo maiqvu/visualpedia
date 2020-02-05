@@ -7,7 +7,7 @@ import './index.css';
 import LandingPage from './components/LandingPage';
 import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
-
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(
