@@ -4,6 +4,9 @@
   padding: 2em 2em 4em;
   border: #4e555b 1px solid;
   border-radius: 4px;
+  .answers * {
+    cursor: pointer;
+  }
   button {
     width: 8em;
   }

@@ -38,7 +38,7 @@ class Quiz extends Component {
 
   loadQuiz = () => {
     this.setState({...this.initialState});
-    
+
     console.log('Fetching questions...');
 
     const auth_token = localStorage.getItem('auth_token');
