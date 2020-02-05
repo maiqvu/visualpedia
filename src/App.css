@@ -88,7 +88,14 @@ body {
 
 }
 
+.navBar {
+  background-color: #FAF3DD;
+}
 
+.navBarDiv {
+  background-color: #C8D5B9;
+  margin-bottom: 0;
+}
 
 #chartHeading h1 {
   /* text-align: center; */
@@ -103,6 +110,9 @@ span.countryLabels {
   position: relative;
   left: 10px;
 }
+
+
+/* Articles */
 
 
 .artilceList  {
@@ -133,6 +143,12 @@ span.countryLabels {
   box-shadow: -1px -1px ;
 }
 
+
+@keyframes newsfeed {
+  0% {right: 0px;}
+  100% {left: -1562px;}
+}
+
 .newsfeed:hover {
   opacity: 0.8;
 }
@@ -142,19 +158,10 @@ a {
   color: black;
 }
 
-@keyframes newsfeed {
-  0% {right: 0px;}
-  100% {left: -1562px;}
-}
 
-.navBar {
-  background-color: #FAF3DD;
-}
 
-.navBarDiv {
-  background-color: #C8D5B9;
-  margin-bottom: 0;
-}
+
+
 
 .newsHeadline {
   background-color: #C8D5B9;

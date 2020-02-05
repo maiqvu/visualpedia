@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import NavBar from './NavBar'
 import ContinentMap from './ContinentMap/ContinentMap.js';
 import Login from './Login';
+import Signup from './Signup';
 import Quiz from '../components/Quiz';
 import PrivateRoute from './PrivateRoute';
 import ChartInfo from './ChartInfo';
@@ -17,17 +18,6 @@ import NewsFeed from './NewsFeed'
 class LandingPage extends React.Component {
   // checkLogin = () => this.props.authResult.auth_token;
   checkLogin = () => localStorage.getItem('auth_token');
-
-  // componentDidMount() {
-  //   const {loginSuccess} = this.props;
-  //   const token = localStorage.getItem('auth_token');
-  //   const name = localStorage.getItem('name');
-  //   const email = localStorage.getItem('email');
-  //
-  //   if (token && name && email) {
-  //     loginSuccess({auth_token: token, name, email});
-  //   }
-  // }
 
   render(){
 
@@ -40,7 +30,9 @@ class LandingPage extends React.Component {
         <Router>
           <Route exact path='/' component={ContinentMap} />
           <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={Signup} />
           <Route exact path='/:continent/charts' component={ChartInfo} />
+          <Route exact path='/newsfeed' component={NewsFeed} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
 
           <PrivateRoute exact path='/chat' component={ChatWidget} handleAuthCheck={this.checkLogin}/>

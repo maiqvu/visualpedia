@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import '../App.css'
+import '../NewsFeed.css'
 const URL = 'https://newsapi.org/v2/top-headlines?country='
 
 const API_KEY = 'apiKey=fc488d7d92e0499888abe5ddb0f1b9d8'
@@ -10,7 +10,7 @@ class NewsFeed extends React.Component {
   state = {
     allArticles: []
   }
-  performSearch = (search) => {
+  performSearch = (search='us') => {
     axios.get(`${URL}${search}&${API_KEY}`)
     .then(res => {
       console.log(res.data.articles);
@@ -41,7 +41,8 @@ class NewsFeed extends React.Component {
             {this.state.allArticles.map((t, index) => {
               return (
               <div key={index} className="artilceListDiv">
-                    <a href={t.url} className="newsfeed">{this.limitString(t.title)}...</a>
+                    <a href={t.url} className="newsFeed"
+                    target="_blank"><span>{this.limitString(t.title)}...</span></a>
               </div>
               )
             })}

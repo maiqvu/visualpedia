@@ -1,0 +1,24 @@
+.articleListDiv {
+ overflow: hidden;
+ position: relative;
+}
+
+
+a.newsFeed {
+  border: 2px solid black;
+  display: inline-block;
+  width: 650px;
+  position: relative;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  transform:translateX(100%);
+   animation: newsFeed 80s linear infinite;
+}
+
+
+
+@keyframes newsFeed {
+  0% {transform: translateX(0%);}
+  100% {transform: translateX(-1700%)}
+}

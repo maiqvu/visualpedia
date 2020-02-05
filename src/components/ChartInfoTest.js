@@ -8,15 +8,6 @@ import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
 
-const COUNTRY_ABBREVIATIONS = {
-  northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
-  southAmerica: 'ar;br;sr;ve;co',  // Argentina, Brazil, Suriname, Venezuela, Colombia
-  africa: 'eg;za;ng;sd;cm',  // Egypt, South Africa, Nigeria, Sudan, Cameroon
-  europe: 'at;de;es;fr;gb',  // Austria, Germany, Spain, France, Great Britain
-  asia: 'id;in;kw;cn;ru',  // Indonesia, India, Kuwait, China, Russia
-  oceania: 'au;nz;to;nr;fj'  // Australia, New Zealand, Tonga, Nauru, Fiji
-};
-
 class ChartInfo extends React.Component {
   state = {
     sortedResults: [],
@@ -41,25 +32,24 @@ class ChartInfo extends React.Component {
       countryEach.push(key)
     }
     // set countries each to eqaul counties searched for
-
-    console.log('SPLITDATA');
-    this.setState(
-      {
-        countriesLabel: countryEach,
-        sortedResults: rawData,
-        // infoToChart: rawData
-      },
-      () => this.updateChartDisplay()
-    );
-
-    console.log(this.state.infoToChart);
+    this.setState({countriesLabel: countryEach,
+                   sortedResults: rawData,
+                   infoToChart: rawData});
     // search sorted results to rawData
     // this.setState({sortedResults: rawData})
     // this.setState({infoToChart: rawData})
-    } // spilt data
+  } // spilt data
 
   getCountryAbbreviations = continent => {
-    return COUNTRY_ABBREVIATIONS[continent];
+    const countryAbbreviations = {
+      northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
+      southAmerica: 'ar;br;sr;ve;co',  // Argentina, Brazil, Suriname, Venezuela, Colombia
+      africa: 'eg;za;ng;sd;cm',  // Egypt, South Africa, Nigeria, Sudan, Cameroon
+      europe: 'at;de;es;fr;gb',  // Austria, Germany, Spain, France, Great Britain
+      asia: 'id;in;kw;cn;ru',  // Indonesia, India, Kuwait, China, Russia
+      oceania: 'au;nz;to;nr;fj'  // Australia, New Zealand, Tonga, Nauru, Fiji
+    };
+    return countryAbbreviations[continent];
   }
 
   performSearch = (countries, indicator, timeRange='2006:2015') => {
@@ -70,20 +60,14 @@ class ChartInfo extends React.Component {
       // take base url and call sortData() with data argument
 
       this.splitData(res.data[1]);
-
-      console.log('this.updateChartDisplay()');
     })
-    // .then(() => {
-    //   this.updateChartDisplay();
-    // })
+    .then(() => {
+      this.updateChartDisplay();
+    })
     .catch( err => {
       console.warn(err)
     })
   } // performSearch
-
-  filterCountriesByCheckBox(checkedCountries){
-
-  }
 
 
   handleChange = (e) => {
@@ -96,45 +80,39 @@ class ChartInfo extends React.Component {
     // if state has value
    if (!target.checked) {  // preSelection.includes(value)
      // remove value from preSelection
-     const toDisplay = preSelection.filter( box => box !== value);
+     const toDisplay = preSelection.filter(e => e !== value)
      // update sates to include only 'ticked' items
-     this.setState(
-       {resultsToDisplay: toDisplay},
-       () => this.updateChartDisplay()
-     );
+     this.setState({resultsToDisplay: toDisplay})
      console.log('selected false');
 
    } else {
      console.log('selected true');
      // add new county to rest of state save as joined
-     // const joined = this.state.resultsToDisplay.concat(value);
+     const joined = this.state.resultsToDisplay.concat(value);
      // update state with new value
-     this.setState(
-       { resultsToDisplay: [...this.state.resultsToDisplay, value] },
-       () => this.updateChartDisplay()
-     );
+     this.setState({ resultsToDisplay: joined });
    } // if
+
+
 
   } // handleChange
 
   changeIndicator = (e) => {
-    console.log('change dropdown:', e.target.value);
-    this.setState({indicatorToDisplay: e.target.value});
-    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
+
+    let value = e.target.value
+
+    this.setState({indicatorToDisplay: value})
+
   } // changeIndicator
 
   updateChartDisplay(){
     let listToUpdateState = {};
-    let listToCompareObject = this.state.sortedResults;
-    let listToCompareName = this.state.resultsToDisplay;
-
-    console.log('FULL:', listToCompareObject);
+    let listToCompareObject = this.state.sortedResults
+    let listToCompareName = this.state.resultsToDisplay
 
     listToCompareName.forEach(c => {
       listToUpdateState[c] = listToCompareObject[c]
-    });
-
-    console.log('FILTERED:', listToUpdateState);
+    })
 
     this.setState({infoToChart: listToUpdateState})
   }
@@ -168,17 +146,16 @@ class ChartInfo extends React.Component {
     this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay);
   } // componentdidmount
 
-  // componentDidUpdate(prevProps, prevState){
-    // if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
-    //   const continent = this.state.currentContinent
-    //
-    //   this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
-    //   //this.updateChartDisplay();
-    // } else
-    // if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
-    //   this.updateChartDisplay();
-    // }
-  // }
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.indicatorToDisplay !== this.state.indicatorToDisplay) {
+      const continent = this.state.currentContinent
+
+      this.performSearch(this.getCountryAbbreviations(continent), this.state.indicatorToDisplay)
+      //this.updateChartDisplay();
+    } else if (prevState.resultsToDisplay !== this.state.resultsToDisplay) {
+      this.updateChartDisplay();
+    }
+  }
 
 
   render(){
@@ -201,7 +178,7 @@ class ChartInfo extends React.Component {
             this.state.infoToChart.length !== 0
             ?
             <div className="chartDisplay">
-              <Chart dataRange={this.state.infoToChart} title={this.state.title} key={Math.random()}/>
+              <Chart dataRange={this.state.infoToChart} title={this.state.title} />
             </div>
             :
             <h1></h1>
