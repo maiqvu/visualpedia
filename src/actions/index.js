@@ -18,10 +18,13 @@ export const login = (credentials) => (dispatch, getState) => {
         localStorage.setItem('auth_token', res.data.auth_token);
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('email', res.data.email);
+
+        return Promise.resolve();
       })
       .catch((error) => {
         console.warn(error);
-        loginFail();
+        dispatch(loginFail());
+        return Promise.reject(error);
       });
 };
 
