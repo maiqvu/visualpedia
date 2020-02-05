@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import _ from 'lodash/math';
 import * as actionCreators from '../../actions';
 import Question from '../Question';
 import './style.scss';
@@ -8,19 +9,19 @@ import './style.scss';
 class Quiz extends Component {
   initialState = {
     showSolution: false,
-    answerIsCorrect: null,
+    submissions: Array(5).fill(null),
     correctCount: 0,
   };
 
   state = {...this.initialState};
 
-  handleSubmission = ((answerIsCorrect) => {
+  handleChooseAnswer = ((answerIsCorrect) => {
+    const {currentQuestion} = this.props;
+    const submissions = [...this.state.submissions];
+    submissions[currentQuestion] = answerIsCorrect;
     this.setState({
       ...this.state,
-      answerIsCorrect,
-      correctCount: answerIsCorrect
-          ? this.state.correctCount + 1
-          : this.state.correctCount,
+      submissions,
     });
   });
 
@@ -28,6 +29,13 @@ class Quiz extends Component {
     const {questions = [], currentQuestion} = this.props;
 
     return currentQuestion === questions.length - 1 && this.state.showSolution;
+  };
+
+  handleShowSolution = () => {
+    this.setState({
+      showSolution: true,
+      correctCount: _.sum(this.state.submissions.map((a) => a ? 1 : 0)),
+    });
   };
 
   handleNext = () => {
@@ -66,7 +74,7 @@ class Quiz extends Component {
           <Question
               question={questions[currentQuestion]}
               showSolution={this.state.showSolution}
-              handleSubmission={this.handleSubmission}
+              handleChooseAnswer={this.handleChooseAnswer}
               seq={currentQuestion}
           />}
           {
@@ -74,8 +82,8 @@ class Quiz extends Component {
             <button
                 type="button"
                 className="btn btn-secondary float-right"
-                onClick={() => this.setState({showSolution: true})}
-                disabled={this.state.answerIsCorrect !== null
+                onClick={this.handleShowSolution}
+                disabled={this.state.submissions[currentQuestion] !== null
                     ? ''
                     : 'disabled'}>
               Submit
