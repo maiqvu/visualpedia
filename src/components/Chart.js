@@ -8,8 +8,7 @@ const colorWheel = [
       'rgba(54, 162, 235, 1)',
       'rgba(255, 206, 86, 1)',
       'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgba(255, 159, 64, 1)'
+      'rgba(153, 102, 255, 1)'
 ];
 const chartStyle = () => ({
   // fill: false,
@@ -68,20 +67,43 @@ class Chart extends React.Component {
 
   }
 
-  componentDidMount(){
-    this.updateDataSets(this.props.dataRange);
-  };
+  // componentDidMount(){
+  //   this.updateDataSets(this.props.dataRange);
+  // };
+  //
+  // componentDidUpdate(prevProps){
+  //   if (prevProps.dataRange !== this.props.dataRange) {
+  //     this.updateDataSets(this.props.dataRange);
+  //   }
+  // }
 
-  componentDidUpdate(prevProps){
+  addColors = () => {
+    const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
+    this.setState({
+      data: {...this.state.data, datasets: dataWithColors}
+    }, () => {
+      console.log('data:', this.state.data);
+    });
+  }
+
+  componentDidMount() {
+    this.setState({ data: this.props.dataRange }, () => {
+      this.addColors();
+    });
+  }
+
+  componentDidUpdate(prevProps) {
     if (prevProps.dataRange !== this.props.dataRange) {
-      this.updateDataSets(this.props.dataRange);
+      this.setState({data: this.props.dataRange}, () => {
+        this.addColors();
+      });
     }
   }
 
   render(){
     return(
       <div className="Chart">
-        <Bar data={this.state.data} options={{ //this.props.dataRange
+        <Bar data={this.state.data} options={{ //this.props.data
         maintainAspectRatio: true,
         title: {
           display: true,
