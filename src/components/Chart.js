@@ -63,7 +63,7 @@ class Chart extends React.Component {
       let countries = _.sortBy(resultsToSort[country], ['date'])
       // const bg = {backgroundColor: colorWheel[counter]}
       // push new
-      console.log('new counter', counter);
+      // console.log('new counter', counter);
       datasets.push({
         // side datasets chart js need label and data
         label: country,
@@ -78,7 +78,7 @@ class Chart extends React.Component {
     // state of data is being changed therefore inner data can replace*
     this.setState({data: {datasets: datasets } } );
     // () => console.log('STATE', this.state) );  // ...this.state.data,
-    console.log(datasets);
+    // console.log(datasets);
   }
 
   componentDidMount(){

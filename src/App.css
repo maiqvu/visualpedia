@@ -79,7 +79,7 @@ body {
 }
 
 .chartDisplay {
-  margin: 10px 10px;
+  margin: 17px 10px;
   height: 80%;
   width: 90%;
   display: inline-block;
@@ -188,4 +188,8 @@ a {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+#welcomeMessage {
+  color: white;
 }

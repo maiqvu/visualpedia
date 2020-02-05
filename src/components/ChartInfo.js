@@ -54,7 +54,7 @@ class ChartInfo extends React.Component {
       () => this.updateChartDisplay()
     );
 
-    console.log(this.state.infoToChart);
+    // console.log(this.state.infoToChart);
     // search sorted results to rawData
     // this.setState({sortedResults: rawData})
     // this.setState({infoToChart: rawData})
@@ -73,7 +73,7 @@ class ChartInfo extends React.Component {
 
       this.splitData(res.data[1]);
 
-      console.log('this.updateChartDisplay()');
+      // console.log('this.updateChartDisplay()');
     })
     // .then(() => {
     //   this.updateChartDisplay();
@@ -120,7 +120,7 @@ class ChartInfo extends React.Component {
   } // handleChange
 
   changeIndicator = (e) => {
-    console.log('change dropdown:', e.target.value);
+    // console.log('change dropdown:', e.target.value);
     this.setState({indicatorToDisplay: e.target.value});
     this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
   } // changeIndicator
@@ -134,13 +134,13 @@ class ChartInfo extends React.Component {
     let listToCompareObject = this.state.sortedResults;
     let listToCompareName = this.state.resultsToDisplay;
 
-    console.log('FULL:', listToCompareObject);
+    // console.log('FULL:', listToCompareObject);
 
     listToCompareName.forEach(c => {
       listToUpdateState[c] = listToCompareObject[c]
     });
 
-    console.log('FILTERED:', listToUpdateState);
+    // console.log('FILTERED:', listToUpdateState);
 
     this.setState({infoToChart: listToUpdateState})
   }
@@ -211,7 +211,7 @@ class ChartInfo extends React.Component {
               <SelectChart handleChange={this.changeChart}/>
             </div>
           </div>
-          
+
         </div>
         <div className="newsFeed">
           <NewsFeed localSearch={this.getNews()}/>
