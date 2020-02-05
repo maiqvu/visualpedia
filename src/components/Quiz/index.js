@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions';
 import Question from '../Question';
 import './style.scss';
 
 class Quiz extends Component {
-  state = {
+  initialState = {
     showSolution: false,
     answerIsCorrect: null,
     correctCount: 0,
   };
+
+  state = {...this.initialState};
 
   handleSubmission = ((answerIsCorrect) => {
     this.setState({
@@ -23,30 +24,33 @@ class Quiz extends Component {
     });
   });
 
+  finished = () => {
+    const {questions = [], currentQuestion} = this.props;
+
+    return currentQuestion === questions.length - 1 && this.state.showSolution;
+  };
+
   handleNext = () => {
     const {nextQuestion} = this.props;
     this.setState({showSolution: false, answerIsCorrect: null});
     nextQuestion();
   };
 
-  componentDidMount() {
+  loadQuiz = () => {
+    this.setState({...this.initialState});
+
     console.log('Fetching questions...');
 
     const auth_token = localStorage.getItem('auth_token');
 
-    const {questionsFetched} = this.props;
+    const {fetchQuestions} = this.props;
     console.log('Token', auth_token);
 
-    axios.get('http://localhost:3000/quiz/5.json', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth_token}`,
-      },
-    }).then((res) => {
-      console.log(res);
-      questionsFetched(res.data);
-    }).catch(console.warn);
+    fetchQuestions(auth_token);
+  };
+
+  componentDidMount() {
+    this.loadQuiz();
   }
 
   render() {
@@ -57,7 +61,7 @@ class Quiz extends Component {
     return (
         <div className="quiz-pane">
           <span>Correct Rate: {`${this.state.correctCount} / ${questions.length}`}</span>
-          <h2>Question #{currentQuestion + 1}</h2>
+          <h3>Question #{currentQuestion + 1}</h3>
           {questions && currentQuestion !== undefined &&
           <Question
               question={questions[currentQuestion]}
@@ -86,6 +90,23 @@ class Quiz extends Component {
               Next
             </button>
           }
+          {
+            this.finished() &&
+            <>
+              <div className="alert alert-success" role="alert">
+                <h3>You
+                  answered {`${this.state.correctCount}`} question{this.state.correctCount >
+                  1 ? 's' : ''} correctly out of {questions.length}.</h3>
+              </div>
+              <button
+                  type="button"
+                  className="btn btn-info float-right"
+                  onClick={this.loadQuiz}>
+                Play again
+              </button>
+            </>
+
+          }
         </div>
     );
   }
@@ -93,7 +114,7 @@ class Quiz extends Component {
 
 Quiz.propTypes = {
   authResult: PropTypes.object.isRequired,
-  questionsFetched: PropTypes.func.isRequired,
+  fetchQuestions: PropTypes.func.isRequired,
   nextQuestion: PropTypes.func.isRequired,
 };
 
