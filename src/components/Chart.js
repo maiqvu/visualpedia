@@ -2,7 +2,7 @@ import React from 'react'
 import {Bar, Line, Radar, HorizontalBar} from 'react-chartjs-2';
 import _ from 'lodash/collection';
 import randomColor from 'randomcolor';
-
+let counter
 const colorWheel = [
       'rgba(255, 99, 132, 1)',
       'rgba(54, 162, 235, 1)',
@@ -11,23 +11,7 @@ const colorWheel = [
       'rgba(153, 102, 255, 1)'
 ];
 const chartStyle = () => ({
-  // fill: false,
-  // lineTension: 0.1,
-  // borderColor: randomColor(),
-  //backgroundColor: randomColor(),
-  // borderCapStyle: 'butt',
-  // borderDash: [],
-  // borderDashOffset: 0.0,
-  // borderJoinStyle: 'miter',
-  // pointBorderColor: randomColor(),
-  // pointBackgroundColor: randomColor(),
-  // pointBorderWidth: 1,
-  // pointHoverRadius: 5,
-  // pointHoverBackgroundColor: randomColor(),
-  // pointHoverBorderColor: randomColor(),
-  // pointHoverBorderWidth: 2,
-  // pointRadius: 1,
-  // pointHitRadius: 10,
+
 });
 
 class Chart extends React.Component {
@@ -52,58 +36,74 @@ class Chart extends React.Component {
     for (const country in resultsToSort) {
       // sort counrties by order of dates
       let countries = _.sortBy(resultsToSort[country], ['date'])
-      const bg = {backgroundColor: colorWheel[counter]}
-      counter++;
+      // const bg = {backgroundColor: colorWheel[counter]}
       // push new
+      console.log('new counter', counter);
       datasets.push({
         // side datasets chart js need label and data
         label: country,
         // map through data give the value and spread the chartStyle
-        data: countries.map(v => v.value), ...bg // ...chartStyle(),
+        data: countries.map(v => v.value),
+
+        backgroundColor: colorWheel[counter]
+         // ...chartStyle(),
       });// push
+      counter++;
     } // for
     // state of data is being changed therefore inner data can replace*
-    this.setState({data: {datasets: datasets}});  // ...this.state.data,
-
+    this.setState({data: {datasets: datasets } } );
+    // () => console.log('STATE', this.state) );  // ...this.state.data,
+    console.log(datasets);
   }
 
-  // componentDidMount(){
-  //   this.updateDataSets(this.props.dataRange);
-  // };
-  //
-  // componentDidUpdate(prevProps){
-  //   if (prevProps.dataRange !== this.props.dataRange) {
-  //     this.updateDataSets(this.props.dataRange);
-  //   }
-  // }
+  componentDidMount(){
+    this.updateDataSets(this.props.dataRange);
+  };
 
-  addColors = () => {
-    const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
-    this.setState({
-      data: {...this.state.data, datasets: dataWithColors}
-    }, () => {
-      console.log('data:', this.state.data);
-    });
-  }
-
-  componentDidMount() {
-    this.setState({ data: this.props.dataRange }, () => {
-      this.addColors();
-    });
-  }
-
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps){
     if (prevProps.dataRange !== this.props.dataRange) {
-      this.setState({data: this.props.dataRange}, () => {
-        this.addColors();
-      });
+      this.updateDataSets(this.props.dataRange);
     }
   }
 
+
+
+  // addColors = () => {
+  //   const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
+  //   this.setState({
+  //     data: {...this.state.data, datasets: dataWithColors}
+  //   }, () => {
+  //     console.log('data:', this.state.data);
+  //   });
+  // }
+  //
+  // componentDidMount() {
+  //   this.setState({ data: this.props.dataRange }, () => {
+  //     this.addColors();
+  //   });
+  // }
+  //
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.dataRange !== this.props.dataRange) {
+  //     this.setState({data: this.props.dataRange}, () => {
+  //       this.addColors();
+  //     });
+  //   }
+  // }
+
   render(){
+    const components = {
+        bar: Bar,
+        line: Line,
+        horizontal: HorizontalBar,
+        radar: Radar
+      };
+
+    const ChartTag = components[this.props.chart];
+
     return(
       <div className="Chart">
-        <Bar data={this.state.data} options={{ //this.props.data
+        <ChartTag data={this.state.data} options={{ //this.props.data
         maintainAspectRatio: true,
         title: {
           display: true,

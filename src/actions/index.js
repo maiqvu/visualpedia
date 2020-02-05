@@ -25,6 +25,41 @@ export const login = (credentials) => (dispatch, getState) => {
       });
 };
 
+export const signup = (userInfo) => (dispatch, getState) => {
+  const {name, email, password, passwordConfirmation} = userInfo;
+  return axios.post('http://localhost:3000/users.json'
+      , {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+        user: {
+          name, email, password, password_confirmation: passwordConfirmation,
+        },
+      })
+      .then(() => {
+        dispatch(login({email, password}));
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+
+};
+
+export const fetchQuestions = (auth_token) => (dispatch, getState) => {
+  axios.get('http://localhost:3000/quiz/5.json', {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`,
+    },
+  }).then((res) => {
+    console.log(res);
+    dispatch(questionsFetched(res.data));
+  }).catch(console.warn);
+};
+
+
 export const loginSuccess = (payload) => ({
   type: AUTH.LOGIN_SUCCESS,
   payload,
@@ -40,7 +75,7 @@ export const logout = () => ({
 
 export const questionsFetched = (payload) => ({
   type: QUIZ.QUESTIONS_FETCHED,
-  payload
+  payload,
 });
 
 export const nextQuestion = () => ({
