@@ -2,7 +2,7 @@ import React from 'react';
 import './style.scss';
 
 const Question = (props) => {
-  const {question: {question, answers}, showSolution, handleSubmission, seq} = props;
+  const {question: {question, answers}, showSolution, handleChooseAnswer, seq} = props;
   console.log(answers);
   return (
       <div className="question-pane">
@@ -14,7 +14,7 @@ const Question = (props) => {
                               tag={i}
                               correct={a.is_correct}
                               showSolution={showSolution}
-                              handleSubmission={handleSubmission}
+                              handleChooseAnswer={handleChooseAnswer}
             />,
         )}
       </div>
@@ -22,13 +22,13 @@ const Question = (props) => {
 };
 
 const Answer = (props) => {
-  const {answer, tag, correct, showSolution, handleSubmission, checked} = props;
+  const {answer, tag, correct, showSolution, handleChooseAnswer, checked} = props;
   console.log(correct);
   return (
       <h4 className={`form-check answers`}>
         <input className="form-check-input" type="radio" name="answerRadios"
                id={`answer_${tag}`} value={tag}
-               onClick={() => handleSubmission(correct)}
+               onClick={() => handleChooseAnswer(correct)}
                disabled={showSolution}
         />
         <label className={`form-check-label ${correct && showSolution

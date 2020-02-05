@@ -247,7 +247,7 @@ function ContinentMap(props) {
 
           {/* Africa */}
           <Link to="/africa/charts" className={styles.africa}>
-            {mapCountriesToContinents(['Algeria', 'Egypt', 'Libya', 'Morocco', 'S. Sudan', 'Tunisia', 'W. Sahara', 'Burundi', 'Comoros', 'Djibouti', 'Eritrea', 'Ethiopia', 'Kenya', 'Madagascar','Malawi', 'Mauritius', 'Mayotte', 'Mozambique', 'Reunion', 'Rwanda', 'Seychelles', 'Somalia', 'Tanzania', 'Uganda', 'Sudan', 'Angola', 'Congo', 'Dem. Rep. Congo', 'Guinea', 'Gabon', 'São Tomé and Principe', 'Botswana', 'Lesotho', 'Namibia', 'Zambia', 'Zimbabwe', 'South Africa', 'Central African Rep.', 'Benin', 'Burkina Faso', 'Cape Verde', 'Gambia', 'Ghana', 'Guinea-Bissau', 'Liberia', 'Mali', 'Mauritania', 'Niger', 'Nigeria', 'Senegal', 'Sierra Leone', 'Togo', 'Chad', 'Cameroon'])}
+            {mapCountriesToContinents(['Algeria', 'Egypt', 'Libya', 'Morocco', 'S. Sudan', 'Tunisia', 'W. Sahara', 'Burundi', 'Comoros', 'Djibouti', 'Eritrea', 'Ethiopia', 'Kenya', 'Madagascar','Malawi', 'Mauritius', 'Mayotte', 'Mozambique', 'Reunion', 'Rwanda', 'Seychelles', 'Somalia', 'Tanzania', 'Uganda', 'Sudan', 'Angola', 'Congo', 'Dem. Rep. Congo', 'Guinea', 'Gabon', 'São Tomé and Principe', 'Botswana', 'Lesotho', 'Namibia', 'Zambia', 'Zimbabwe', 'South Africa', 'Central African Rep.', 'Benin', 'Burkina Faso', 'Cape Verde', 'Gambia', 'Ghana', 'Guinea-Bissau', 'Liberia', 'Mali', 'Mauritania', 'Niger', 'Nigeria', 'Senegal', 'Sierra Leone', 'Togo', 'Chad', 'Cameroon', 'Côte d\'Ivoire'])}
           </Link>
 
           {/* Asia */}
