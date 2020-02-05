@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export const login = (credentials) => (dispatch, getState) => {
   const {email, password} = credentials;
-  return axios.post('http://localhost:3000/authenticate'
+  // return axios.post('http://localhost:3000/authenticate'
+  return axios.post('https://visualpedia-backend.herokuapp.com/authenticate'
       , {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -30,7 +31,8 @@ export const login = (credentials) => (dispatch, getState) => {
 
 export const signup = (userInfo) => (dispatch, getState) => {
   const {name, email, password, passwordConfirmation} = userInfo;
-  return axios.post('http://localhost:3000/users.json'
+  // return axios.post('http://localhost:3000/users.json'
+  return axios.post('https://visualpedia-backend.herokuapp.com/users.json'
       , {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -50,7 +52,8 @@ export const signup = (userInfo) => (dispatch, getState) => {
 };
 
 export const fetchQuestions = (auth_token) => (dispatch, getState) => {
-  axios.get('http://localhost:3000/quiz/5.json', {
+  // axios.get('http://localhost:3000/quiz/5.json', {
+  axios.get('https://visualpedia-backend.herokuapp.com/quiz/5.json', {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
