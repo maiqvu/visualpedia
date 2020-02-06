@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/visualpedia/static/css/main.695cfee2.chunk.css",
-    "main.js": "/visualpedia/static/js/main.e2cd4a08.chunk.js",
-    "main.js.map": "/visualpedia/static/js/main.e2cd4a08.chunk.js.map",
+    "main.js": "/visualpedia/static/js/main.f71e1336.chunk.js",
+    "main.js.map": "/visualpedia/static/js/main.f71e1336.chunk.js.map",
     "runtime-main.js": "/visualpedia/static/js/runtime-main.3acc8df6.js",
     "runtime-main.js.map": "/visualpedia/static/js/runtime-main.3acc8df6.js.map",
     "static/css/2.47e06e2e.chunk.css": "/visualpedia/static/css/2.47e06e2e.chunk.css",
     "static/js/2.c6639a0e.chunk.js": "/visualpedia/static/js/2.c6639a0e.chunk.js",
     "static/js/2.c6639a0e.chunk.js.map": "/visualpedia/static/js/2.c6639a0e.chunk.js.map",
     "index.html": "/visualpedia/index.html",
-    "precache-manifest.443cf6c968d00254fc88ac3c9cccd1ee.js": "/visualpedia/precache-manifest.443cf6c968d00254fc88ac3c9cccd1ee.js",
+    "precache-manifest.e82b193cae70b95cb0fadb6b4d0b9b7d.js": "/visualpedia/precache-manifest.e82b193cae70b95cb0fadb6b4d0b9b7d.js",
     "service-worker.js": "/visualpedia/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/visualpedia/static/css/2.47e06e2e.chunk.css.map",
     "static/css/main.695cfee2.chunk.css.map": "/visualpedia/static/css/main.695cfee2.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.c6639a0e.chunk.js",
     "static/css/main.695cfee2.chunk.css",
-    "static/js/main.e2cd4a08.chunk.js"
+    "static/js/main.f71e1336.chunk.js"
   ]
 }
