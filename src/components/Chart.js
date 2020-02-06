@@ -19,31 +19,7 @@ class Chart extends React.Component {
     data: {
       labels: Array(10).fill(2006).map((y, i) => String(y + i)),
       datasets: [],
-      options: {
-        title: {
-          display: true,
-          fontColor: 'white'
-        },
-        legend: {
-          display: true,
-          labels: {
-            fontColor: 'white'
-          }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                }
-          }],
-          xAxes: [{
-              ticks: {
-                  fontColor: "white",
-              }
-          }]
         }
-      }
-    }
   }
 
   static defaultProps = {
