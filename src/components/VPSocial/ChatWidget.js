@@ -63,6 +63,17 @@ class ChatWidget extends React.Component {
   }
 
   renderChatLog() {
+    const url = "localhost:3000/messages";
+    fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Network response was not ok.");
+    })
+    .then(response => this.setState({ messages: response }))
+    .catch(err => console.warn(err));
+
     return this.state.chatLogs.map((el) => {
       return (
         <li key={`chat_${el.id}`}>
