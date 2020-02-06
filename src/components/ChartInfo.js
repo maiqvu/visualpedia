@@ -9,6 +9,9 @@ import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
 const INDICATOR_BASE_URL = 'https://visualpedia-backend.herokuapp.com/indicators/';
+const host = (env) => env === 'production'
+    ? 'https://visualpedia-backend.herokuapp.com/indicators/'
+    : 'http://localhost:3000/indicators/';
 
 const COUNTRY_ABBREVIATIONS = {
   northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
@@ -33,9 +36,7 @@ class ChartInfo extends React.Component {
     chartType: 'line'
   }
 
-  const host = (env) => env === 'production'
-      ? 'https://visualpedia-backend.herokuapp.com/indicators/'
-      : 'http://localhost:3000';
+
 
 
   splitData = (arrayToGroup) => {
