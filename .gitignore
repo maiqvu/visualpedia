@@ -25,4 +25,4 @@ log/
 
 .idea/
 
-.env
+./src/.env

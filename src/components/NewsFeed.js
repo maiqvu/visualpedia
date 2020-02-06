@@ -4,7 +4,7 @@ import '../NewsFeed.css'
 const URL = 'https://newsapi.org/v2/top-headlines?country='
 const CATAGORY = '&category=science'
 const API_KEY = process.env.REACT_APP_NEWS_FEED_API_KEY
-
+// process.env.REACT_APP_NEWS_FEED_API_KEY
 class NewsFeed extends React.Component {
 
   state = {

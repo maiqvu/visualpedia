@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 function UserBadge(props) {
   const {authResult} = props;
   return (
-      <span>
+      <span id="welcomeMessage">
         {authResult.name && `Welcome, ${authResult.name}!`}
       </span>
   );
