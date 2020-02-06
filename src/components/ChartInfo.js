@@ -28,6 +28,7 @@ class ChartInfo extends React.Component {
     currentContinent: [],
     countriesToSearch: '',
     indicatorToDisplay: 'AG.LND.AGRI.ZS',
+    indicatorLabels: [],
     title: '',
     chartType: 'line'
   }
@@ -122,20 +123,22 @@ class ChartInfo extends React.Component {
 
   changeIndicator = (e) => {
     const indicatorSubString = e.target.value;
-    console.log('change dropdown:', indicatorSubString);
     axios.get(`${INDICATOR_BASE_URL}${indicatorSubString}.json`)
       .then(res => {
-        console.log('RES INdicators', res);
+        let labels = [];
+        labels = res.data.map(r => r.label);
+        this.setState({indicatorLabels: labels});
+        console.log('labels:', labels);
+
         if (res.data.length === 1) {
           this.setState({indicatorToDisplay: res.data[0].indicator_search});
-        } else {
-          this.setState({indicatorToDisplay: ''});
         }
       })
-      .catch(res => console.warn());
-    console.log('INDICATOR',this.state.indicatorToDisplay);
-    // this.setState({indicatorToDisplay: e.target.value});
-    //this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
+      .catch(res => {
+        this.setState({indicatorLabels: []});
+        console.warn(res);
+      });
+
   } // changeIndicator
 
   submitIndicator = e => {
@@ -143,9 +146,6 @@ class ChartInfo extends React.Component {
     const indicator = this.state.indicatorToDisplay;
     if (indicator) {
       this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
-    }
-    else {
-      // indicator not found
     }
   }
 
@@ -212,7 +212,8 @@ class ChartInfo extends React.Component {
               <SelectIndicator
               countriesLabels={this.state.countriesLabel}
               handleSubmit={this.submitIndicator}
-              handleChange={this.changeIndicator} />
+              handleChange={this.changeIndicator}
+              labels={this.state.indicatorLabels} />
             </div>
           </div>
           </div>

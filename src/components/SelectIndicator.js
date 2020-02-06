@@ -18,11 +18,11 @@ function SelectIndicator(props){
         <input type="text" onChange={props.handleChange} />
         <input type="submit" value="Search" />
       </form>
-      {/*<ul>
-        {props.searchResults.map(r => {
-          return (<li key={r.}>{r}</li>);
+      <ul>
+        {props.labels.map((res, ind) => {
+          return <li key={ind}>{res}</li>;
         })}
-      </ul>*/}
+      </ul>
       </div>
       :
       <h1></h1>
