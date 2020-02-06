@@ -7,6 +7,8 @@ const auth = (state = {}, action) => {
       return action.payload;
     case AUTH.LOGIN_FAIL:
       return {error: 'login failed'};
+    case AUTH.SIGNUP_FAIL:
+      return {error: 'signup failed'};
     case AUTH.LOGOUT:
       return {};
     default:

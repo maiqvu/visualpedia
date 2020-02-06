@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import axios from 'axios';
 import {Alert} from 'react-bootstrap';
 import * as actionCreators from '../../actions';
 import './style.scss';
@@ -20,7 +19,7 @@ class Signup extends Component {
     event.preventDefault();
     signup(this.state).then(() => {
       this.props.history.push('/');
-    });
+    }).catch(console.warn);
   };
 
   handleChange = (event) => {
@@ -35,7 +34,8 @@ class Signup extends Component {
           {
             authResult.hasOwnProperty('error') &&
             <Alert variant="danger">
-              Incorrect email or password.
+              Sign-up failed. Please make sure the password and password
+              confirmation match."
             </Alert>
           }
           <form onSubmit={this.handleSubmit}>

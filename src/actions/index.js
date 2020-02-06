@@ -46,11 +46,18 @@ export const signup = (userInfo) => (dispatch, getState) => {
           name, email, password, password_confirmation: passwordConfirmation,
         },
       })
-      .then(() => {
+      .then((res) => {
+        if (res.data.hasOwnProperty('error')) {
+          dispatch(signUpFail());
+          return Promise.reject();
+        }
         dispatch(login({email, password}));
+
+        return Promise.resolve();
       })
       .catch((error) => {
         console.warn(error);
+        return Promise.reject(error);
       });
 
 };
@@ -81,6 +88,10 @@ export const loginSuccess = (payload) => ({
 
 export const loginFail = () => ({
   type: AUTH.LOGIN_FAIL,
+});
+
+export const signUpFail = () => ({
+  type: AUTH.SIGNUP_FAIL,
 });
 
 export const logout = () => ({
