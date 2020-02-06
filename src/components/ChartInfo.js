@@ -37,8 +37,6 @@ class ChartInfo extends React.Component {
   }
 
 
-
-
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
@@ -58,15 +56,9 @@ class ChartInfo extends React.Component {
       {
         countriesLabel: countryEach,
         sortedResults: rawData,
-        // infoToChart: rawData
       },
       () => this.updateChartDisplay()
     );
-
-    // console.log(this.state.infoToChart);
-    // search sorted results to rawData
-    // this.setState({sortedResults: rawData})
-    // this.setState({infoToChart: rawData})
     } // spilt data
 
   getCountryAbbreviations = continent => {
@@ -82,11 +74,10 @@ class ChartInfo extends React.Component {
 
       this.splitData(res.data[1]);
       console.log(res.data[1]);
-      // console.log('this.updateChartDisplay()');
     })
-    // .then(() => {
-    //   this.updateChartDisplay();
-    // })
+    .then(() => {
+      this.updateChartDisplay();
+    })
     .catch( err => {
       console.warn(err)
     })
