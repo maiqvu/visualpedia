@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
+
 .question-pane {
   color: white;
   margin-top: 2em;
+
+  h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2.2em;
+  }
 
   .correct {
     font-size: 1.2em;

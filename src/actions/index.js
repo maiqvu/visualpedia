@@ -55,7 +55,12 @@ export const signup = (userInfo) => (dispatch, getState) => {
 
 };
 
+export const preFetchQuestions = () => ({
+  type: QUIZ.PRE_FETCH_QUESTIONS,
+});
+
 export const fetchQuestions = (auth_token) => (dispatch, getState) => {
+  dispatch(preFetchQuestions());
   axios.get(`${host(process.env.NODE_ENV)}/quiz/5.json`, {
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -64,6 +69,7 @@ export const fetchQuestions = (auth_token) => (dispatch, getState) => {
     },
   }).then((res) => {
     console.log(res);
+    // setTimeout(() => {dispatch(questionsFetched(res.data))}, 1000);
     dispatch(questionsFetched(res.data));
   }).catch(console.warn);
 };

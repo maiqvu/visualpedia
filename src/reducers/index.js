@@ -16,6 +16,9 @@ const auth = (state = {}, action) => {
 
 const quiz = (state = {}, action) => {
   switch (action.type) {
+    case QUIZ.PRE_FETCH_QUESTIONS: {
+      return {...state, questions: [], currentQuestion: 0};
+    }
     case QUIZ.QUESTIONS_FETCHED:
       return {...state, questions: action.payload, currentQuestion: 0};
     case QUIZ.NEXT_QUESTION:
