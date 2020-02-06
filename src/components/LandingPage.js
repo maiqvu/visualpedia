@@ -19,7 +19,6 @@ import VPSocial from './VPSocial/VPSocial';
 import ChatWidget from './VPSocial/ChatWidget';
 
 
-
 class LandingPage extends React.Component {
   // checkLogin = () => this.props.authResult.auth_token;
   checkLogin = () => localStorage.getItem('auth_token');

@@ -1,25 +1,24 @@
 import React from 'react'
+import axios from 'axios';
 
-function SelectIndicator(props){
+function SelectionIndicator (props){
 
-  return(
-    <div className='CheckBox'>
-      {
-      props.countriesLabels.length !== 0
-      ?
-      <div>
-      <select onChange={props.handleChange}>
-        <option value="AG.LND.AGRI.ZS">Agricultural land (%)</option>
-        <option value="EG.FEC.RNEW.ZS">Renewable Consupstion</option>
-        <option value="NY.GDP.TOTL.RT.ZS">Natural Resource Rents</option>
-        <option value="NY.GDP.MKTP.CD">Gross Domestic Product</option>
-      </select>
+    return(
+      <div className='CheckBox'>
+        {
+        0 !== 0
+        ?
+        <div>
+          <form onSubmit={props.handleSubmit}>
+            <input type="text"onChange={props.handleChange}/>
+            <input type="submit" value="search" />
+          </form>
+        </div>
+        :
+        <h1></h1>
+      }
       </div>
-      :
-      <h1></h1>
-    }
-    </div>
-  ) // return
+    ) // return
 
 } // SelectSeach
 
