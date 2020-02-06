@@ -35,7 +35,7 @@ class Signup extends Component {
             authResult.hasOwnProperty('error') &&
             <Alert variant="danger">
               Sign-up failed. Please make sure the password and password
-              confirmation match."
+              confirmation match.
             </Alert>
           }
           <form onSubmit={this.handleSubmit}>
