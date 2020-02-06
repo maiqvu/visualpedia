@@ -18,7 +18,31 @@ class Chart extends React.Component {
   state = {
     data: {
       labels: Array(10).fill(2006).map((y, i) => String(y + i)),
-      datasets: []
+      datasets: [],
+      options: {
+        title: {
+          display: true,
+          fontColor: 'white'
+        },
+        legend: {
+          display: true,
+          labels: {
+            fontColor: 'white'
+          }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                }
+          }],
+          xAxes: [{
+              ticks: {
+                  fontColor: "white",
+              }
+          }]
+        }
+      }
     }
   }
 
@@ -72,9 +96,19 @@ class Chart extends React.Component {
     switch(chart) {
       case 'line':
         options = {
+          legend: {
+            labels: {
+                fontColor: 'white',
+                fontSize: 18
+            }
+        },
           scales: {
             yAxes: [{
-                stacked: true
+
+              stacked: true,
+              ticks: {
+                fontColor: 'white'
+              }
             }]
         }
         };
@@ -137,31 +171,6 @@ class Chart extends React.Component {
 
     return data;
   }
-
-
-
-  // addColors = () => {
-  //   const dataWithColors = this.state.data.datasets.map((c, i) => ({...c, backgroundColor: colorWheel[i]}));
-  //   this.setState({
-  //     data: {...this.state.data, datasets: dataWithColors}
-  //   }, () => {
-  //     console.log('data:', this.state.data);
-  //   });
-  // }
-  //
-  // componentDidMount() {
-  //   this.setState({ data: this.props.dataRange }, () => {
-  //     this.addColors();
-  //   });
-  // }
-  //
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.dataRange !== this.props.dataRange) {
-  //     this.setState({data: this.props.dataRange}, () => {
-  //       this.addColors();
-  //     });
-  //   }
-  // }
 
   render(){
     const components = {

@@ -12,10 +12,14 @@ import Signup from './Signup';
 import Quiz from '../components/Quiz';
 import PrivateRoute from './PrivateRoute';
 import ChartInfo from './ChartInfo';
-import ChatWidget from './ChatWidget/ChatWidget.js';
 import * as actionCreators from '../actions';
 import ChartAPIRequest from './ChartAPIRequest';
 import NewsFeed from './NewsFeed'
+import VPSocial from './VPSocial/VPSocial';
+import ChatWidget from './VPSocial/ChatWidget';
+
+
+
 class LandingPage extends React.Component {
   // checkLogin = () => this.props.authResult.auth_token;
   checkLogin = () => localStorage.getItem('auth_token');
@@ -35,8 +39,7 @@ class LandingPage extends React.Component {
           <Route exact path='/:continent/charts' component={ChartInfo} />
           <Route exact path='/newsfeed' component={NewsFeed} />
           <PrivateRoute exact path='/quiz' component={Quiz} handleAuthCheck={this.checkLogin}/>
-
-          <PrivateRoute exact path='/chat' component={ChatWidget} handleAuthCheck={this.checkLogin}/>
+          <PrivateRoute exact path='/vpsocial' component={ChatWidget} handleAuthCheck={this.checkLogin}/>
 
         </Router>
 
