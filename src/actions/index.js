@@ -1,10 +1,14 @@
 import {AUTH, QUIZ} from './types';
 import axios from 'axios';
 
+const host = (env) => env === 'production'
+    ? 'https://visualpedia-backend.herokuapp.com'
+    : 'http://localhost:3000';
+
 export const login = (credentials) => (dispatch, getState) => {
   const {email, password} = credentials;
-  // return axios.post('http://localhost:3000/authenticate'
-  return axios.post('https://visualpedia-backend.herokuapp.com/authenticate'
+
+  return axios.post(`${host(process.env.NODE_ENV)}/authenticate`
       , {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -31,8 +35,8 @@ export const login = (credentials) => (dispatch, getState) => {
 
 export const signup = (userInfo) => (dispatch, getState) => {
   const {name, email, password, passwordConfirmation} = userInfo;
-  // return axios.post('http://localhost:3000/users.json'
-  return axios.post('https://visualpedia-backend.herokuapp.com/users.json'
+
+  return axios.post(`${host(process.env.NODE_ENV)}/users.json`
       , {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -52,8 +56,7 @@ export const signup = (userInfo) => (dispatch, getState) => {
 };
 
 export const fetchQuestions = (auth_token) => (dispatch, getState) => {
-  // axios.get('http://localhost:3000/quiz/5.json', {
-  axios.get('https://visualpedia-backend.herokuapp.com/quiz/5.json', {
+  axios.get(`${host(process.env.NODE_ENV)}/quiz/5.json`, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
@@ -64,7 +67,6 @@ export const fetchQuestions = (auth_token) => (dispatch, getState) => {
     dispatch(questionsFetched(res.data));
   }).catch(console.warn);
 };
-
 
 export const loginSuccess = (payload) => ({
   type: AUTH.LOGIN_SUCCESS,

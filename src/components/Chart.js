@@ -78,7 +78,7 @@ class Chart extends React.Component {
     // state of data is being changed therefore inner data can replace*
     this.setState({data: {datasets: datasets} } );
     // () => console.log('STATE', this.state) );  // ...this.state.data,
-    // console.log(datasets);
+    console.log(datasets);
   }
 
   componentDidMount(){
@@ -132,30 +132,40 @@ class Chart extends React.Component {
 
   setGradientColor = (canvas, color, colorStop) => {
     const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-    gradient.addColorStop(0, color);
-    gradient.addColorStop(0.95, colorStop);
-    return gradient;
+    const gradientFill = ctx.createLinearGradient(0, 0, 400,0);
+    const gradientStroke = ctx.createLinearGradient(0, 0, 400, 0);
+    gradientStroke.addColorStop(0, color);
+    gradientStroke.addColorStop(0.95, colorStop);
+    gradientFill.addColorStop(0, color);
+    gradientFill.addColorStop(0.95, colorStop);
+    return [gradientFill, gradientStroke];
   }
 
   getChartData = canvas => {
     const data = this.state.data;
     if (data.datasets) {
-      const colors = ['rgba(255, 99, 132, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)'
+      const colors = ['rgba(255, 159, 192, 1)',
+                          'rgba(114, 222, 255, 1)',
+                          'rgba(255, 246, 146, 1)',
+                          'rgba(135, 242, 252, 1)',
+                          'rgba(213, 152, 255, 1)'
       ];
       const colorStops = ['rgba(255, 99, 132, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)'
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)'
       ];
       data.datasets.forEach((set, i) => {
-        set.backgroundColor = this.setGradientColor(canvas, colors[i], colorStops[i]);
-
+        const colorFill = this.setGradientColor(canvas, colors[i], colorStops[i])[0];
+        const colorStroke = this.setGradientColor(canvas, colors[i], colorStops[i])[1];
+        set.backgroundColor = colorFill;
+        set.borderColor = colorStroke;
+        set.borderColor = colorStroke;
+        set.pointBorderColor = colorStroke;
+        set.pointBackgroundColor = colorStroke;
+        set.pointHoverBackgroundColor = colorStroke;
+        set.pointHoverBorderColor = colorStroke;
       });
     }
 
@@ -175,6 +185,7 @@ class Chart extends React.Component {
       title: {
         display: true,
         text: this.props.title,
+        fontColor: 'black',
         fontSize: 25
       },
       legend: {
@@ -183,15 +194,27 @@ class Chart extends React.Component {
         labels: {
           display: true
         }
-      }
-    }
+      },
+      animation: {
+            easing: "easeInQuad",
+          duration: 600
+      },
+      layout: {
+            padding: {
+                left: 50,
+                right: 50,
+                top: 0,
+                bottom: 0
+            }
+        }
+    };
 
 
     const ChartTag = components[this.props.chart];
 
     return(
       <div className="Chart">
-        <ChartTag data={this.getChartData} options={{...generalGlobalOptions, ...this.getOptionsForChart(this.props.chart)}}/>
+        <ChartTag data={this.getChartData} options={{...generalGlobalOptions,  ...this.getOptionsForChart(this.props.chart)}}/>
       </div>
     ) // return
   } //render
