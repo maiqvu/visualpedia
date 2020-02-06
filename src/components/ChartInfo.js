@@ -28,7 +28,7 @@ class ChartInfo extends React.Component {
     countriesToSearch: '',
     indicatorToDisplay: 'AG.LND.AGRI.ZS',
     title: '',
-    chartType: 'bar'
+    chartType: 'line'
   }
 
   splitData = (arrayToGroup) => {
@@ -221,4 +221,4 @@ class ChartInfo extends React.Component {
   } // render
 } //ChartCO2
 
-export default ChartInfo
+export default ChartInfo;
