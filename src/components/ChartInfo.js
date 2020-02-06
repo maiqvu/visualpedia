@@ -235,7 +235,8 @@ class ChartInfo extends React.Component {
               handleSubmit={this.submitIndicator}
               handleChange={this.changeIndicator}
               labels={this.state.indicatorLabels}
-              chooseIndicator={this.chooseIndicator}/>
+              chooseIndicator={this.chooseIndicator}
+              key={Math.random()}/>
             </div>
           </div>
           </div>
