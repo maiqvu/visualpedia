@@ -76,7 +76,7 @@ class Chart extends React.Component {
       counter++;
     } // for
     // state of data is being changed therefore inner data can replace*
-    this.setState({data: {datasets: datasets } } );
+    this.setState({data: {datasets: datasets} } );
     // () => console.log('STATE', this.state) );  // ...this.state.data,
     // console.log(datasets);
   }
