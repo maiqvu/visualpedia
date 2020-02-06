@@ -1,6 +1,7 @@
 import React from 'react';
 import ActionCable from 'action-cable-react-jwt';
-import ActionCableProvider from 'react-actioncable-provider';
+import {ActionCableProvider} from 'react-actioncable-provider';
+import {ActionCableConsumer} from 'react-actioncable-provider';
 import {API_WS_ROOT} from '../../constants';
 import './ChatWidget.css';
 
@@ -74,15 +75,16 @@ class ChatWidget extends React.Component {
     }
 
     fetch(url)
+        // .then( res => res.json() )
         .then(response => {
           if (response.ok) {
-            // return response.json();
-            this.setState({messages: response});
+            return response.json();
+            // this.setState({messages: response});
           } else {
             throw new Error('Network response was not ok.');
           }
         })
-        // .then(response => this.setState({ messages: response }))
+        .then(response => this.setState({ chatLogs: response }))
         .catch(err => console.warn(err));
   }
 
