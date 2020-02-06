@@ -32,7 +32,7 @@ class Signup extends Component {
     return (
         <div className="sign-panel">
           {
-            authResult.hasOwnProperty('error') &&
+            authResult.hasOwnProperty('signUpError') &&
             <Alert variant="danger">
               Sign-up failed. Please make sure the password and password
               confirmation match.

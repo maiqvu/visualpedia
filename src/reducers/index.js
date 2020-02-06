@@ -6,9 +6,9 @@ const auth = (state = {}, action) => {
     case AUTH.LOGIN_SUCCESS:
       return action.payload;
     case AUTH.LOGIN_FAIL:
-      return {error: 'login failed'};
+      return {loginError: 'login failed'};
     case AUTH.SIGNUP_FAIL:
-      return {error: 'signup failed'};
+      return {signUpError: 'signup failed'};
     case AUTH.LOGOUT:
       return {};
     default:
