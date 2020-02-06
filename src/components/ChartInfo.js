@@ -73,7 +73,7 @@ class ChartInfo extends React.Component {
       // take base url and call sortData() with data argument
 
       this.splitData(res.data[1]);
-
+      console.log(res.data[1]);
       // console.log('this.updateChartDisplay()');
     })
     // .then(() => {

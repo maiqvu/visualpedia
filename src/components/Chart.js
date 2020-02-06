@@ -78,7 +78,7 @@ class Chart extends React.Component {
     // state of data is being changed therefore inner data can replace*
     this.setState({data: {datasets: datasets} } );
     // () => console.log('STATE', this.state) );  // ...this.state.data,
-    // console.log(datasets);
+    console.log(datasets);
   }
 
   componentDidMount(){

@@ -1,24 +1,24 @@
 import React from 'react'
 
-function SelectionIndicator(props) {
+function SelectIndicator(props) {
 
-  return(
+  return (
     <div className='CheckBox'>
       {
-        1 !== 0
+        props.countriesLabels.length !== 0
         ?
         <div>
           <form onSubmit={props.handleSubmit}>
-            <input type="text" onChange={props.handleChange} />
-            <input type="submit" value="Search" />
+            <input type="text" onChange={props.handleChange}/>
+            <input type="submit" value='search'/>
           </form>
         </div>
         :
         <h1>...</h1>
       }
-    <div/>
-  )
+    </div>
 
+  )
 } // SelectSeach
 
 export default SelectIndicator
