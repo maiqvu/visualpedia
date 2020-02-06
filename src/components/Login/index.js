@@ -31,7 +31,7 @@ class Login extends Component {
     return (
         <div className="login-panel">
           {
-            authResult.hasOwnProperty('error') &&
+            authResult.hasOwnProperty('loginError') &&
             <Alert variant="danger">
               Incorrect email or password.
             </Alert>

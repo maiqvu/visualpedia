@@ -1,15 +1,9 @@
 import React from 'react'
-import {Bar, Line, Radar, HorizontalBar} from 'react-chartjs-2';
+import {Bar, Line, Radar, HorizontalBar, Polar, Bubble, Pie, Doughnut} from 'react-chartjs-2';
 import _ from 'lodash/collection';
 import randomColor from 'randomcolor';
-let counter
-const colorWheel = [
-      'rgba(255, 99, 132, 1)',
-      'rgba(54, 162, 235, 1)',
-      'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)'
-];
+
+
 const chartStyle = () => ({
 
 });
@@ -18,31 +12,7 @@ class Chart extends React.Component {
   state = {
     data: {
       labels: Array(10).fill(2006).map((y, i) => String(y + i)),
-      datasets: [],
-      options: {
-        title: {
-          display: true,
-          fontColor: 'white'
-        },
-        legend: {
-          display: true,
-          labels: {
-            fontColor: 'white'
-          }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                }
-          }],
-          xAxes: [{
-              ticks: {
-                  fontColor: "white",
-              }
-          }]
-        }
-      }
+      datasets: []
     }
   }
 
@@ -50,7 +20,6 @@ class Chart extends React.Component {
     displayTitle: true,
     displayLegend: true,
     legendPosition: 'right',
-
   }
 
   updateDataSets(resultsToSort) {
@@ -61,7 +30,6 @@ class Chart extends React.Component {
     for (const country in resultsToSort) {
       // sort counrties by order of dates
       let countries = _.sortBy(resultsToSort[country], ['date'])
-      // const bg = {backgroundColor: colorWheel[counter]}
       // push new
       // console.log('new counter', counter);
       datasets.push({
@@ -70,14 +38,12 @@ class Chart extends React.Component {
         // map through data give the value and spread the chartStyle
         data: countries.map(v => v.value),
 
-        backgroundColor: colorWheel[counter]
+        //backgroundColor: colorWheel[counter]
          // ...chartStyle(),
       });// push
-      counter++;
     } // for
     // state of data is being changed therefore inner data can replace*
     this.setState({data: {datasets: datasets} } );
-    // () => console.log('STATE', this.state) );  // ...this.state.data,
     console.log(datasets);
   }
 
@@ -96,28 +62,37 @@ class Chart extends React.Component {
     switch(chart) {
       case 'line':
         options = {
-          legend: {
-            labels: {
-                fontColor: 'white',
-                fontSize: 18
-            }
-        },
           scales: {
             yAxes: [{
-
               stacked: true,
               ticks: {
                 fontColor: 'white'
               }
+            }],
+            xAxes: [{
+              ticks: {
+                fontColor: 'white'
+              }
             }]
-        }
+          }
         };
         break;
 
       case 'bar':
       case 'horziontal':
         options = {
-
+          scales: {
+            yAxes: [{
+              ticks: {
+                fontColor: 'white'
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                fontColor: 'white'
+              }
+            }]
+          }
         };
         break;
       case 'radar':
@@ -143,18 +118,19 @@ class Chart extends React.Component {
 
   getChartData = canvas => {
     const data = this.state.data;
+    const transparency = this.props.chart === 'radar' ? 0.4 : 1;
     if (data.datasets) {
-      const colors = ['rgba(255, 159, 192, 1)',
-                          'rgba(114, 222, 255, 1)',
-                          'rgba(255, 246, 146, 1)',
-                          'rgba(135, 242, 252, 1)',
-                          'rgba(213, 152, 255, 1)'
+      const colors = [`rgba(255, 159, 192, ${transparency})`,
+                          `rgba(114, 222, 255, ${transparency})`,
+                          `rgba(255, 246, 146, ${transparency})`,
+                          `rgba(135, 242, 252, ${transparency})`,
+                          `rgba(213, 152, 255, ${transparency})`
       ];
-      const colorStops = ['rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)'
+      const colorStops = [`rgba(255, 99, 132, ${transparency})`,
+                          `rgba(54, 162, 235, ${transparency})`,
+                          `rgba(255, 206, 86, ${transparency})`,
+                          `rgba(75, 192, 192, ${transparency})`,
+                          `rgba(153, 102, 255, ${transparency})`
       ];
       data.datasets.forEach((set, i) => {
         const colorFill = this.setGradientColor(canvas, colors[i], colorStops[i])[0];
@@ -177,7 +153,11 @@ class Chart extends React.Component {
         bar: Bar,
         line: Line,
         horizontal: HorizontalBar,
-        radar: Radar
+        radar: Radar,
+        // polar: Polar,
+        // bubble: Bubble,
+        // pie: Pie,
+        // doughnut: Doughnut
       };
 
     const generalGlobalOptions = {
@@ -185,14 +165,16 @@ class Chart extends React.Component {
       title: {
         display: true,
         text: this.props.title,
-        fontColor: 'black',
+        fontColor: 'white',
         fontSize: 25
       },
       legend: {
         display: this.props.displayLegend,
         position: this.props.legendPosition,
         labels: {
-          display: true
+          display: true,
+          fontColor: 'white',
+          fontSize: 18
         }
       },
       animation: {

@@ -8,6 +8,10 @@ function SelectChart (props) {
         <option value="bar">Bar</option>
         <option value="horizontal">Horizontal Bar</option>
         <option value="radar">Radar</option>
+        {/*<option value="polar">Polar</option>
+        <option value="bubble">Bubble</option>
+        <option value="pie">Pie</option>
+        <option value="doughnut">Doughnut</option>*/}
       </select>
     </div>
   );
