@@ -8,7 +8,7 @@ import SelectChart from './SelectChart';
 import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
-const INDICATOR_BASE_URL = 'http://localhost:3000/indicators/';
+const INDICATOR_BASE_URL = 'https://visualpedia-backend.herokuapp.com/indicators/';
 
 const COUNTRY_ABBREVIATIONS = {
   northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
@@ -32,6 +32,11 @@ class ChartInfo extends React.Component {
     title: '',
     chartType: 'line'
   }
+
+  const host = (env) => env === 'production'
+      ? 'https://visualpedia-backend.herokuapp.com/indicators/'
+      : 'http://localhost:3000';
+
 
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
@@ -123,7 +128,7 @@ class ChartInfo extends React.Component {
 
   changeIndicator = (e) => {
     const indicatorSubString = e.target.value;
-    axios.get(`${INDICATOR_BASE_URL}${indicatorSubString}.json`)
+    axios.get(`${host(process.env.NODE_ENV)}${indicatorSubString}.json`)
       .then(res => {
         let labels = [];
         labels = res.data.map(r => [r.label, r.indicator_search]);
