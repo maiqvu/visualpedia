@@ -43,6 +43,7 @@ class ChartInfo extends React.Component {
     // lodash group by array, constant, what should be returned
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
     // create list to get name of all countries from api call
+
     this.setState({title: arrayToGroup[0].indicator.value});
     let countryEach = []
     // loop through data get key values

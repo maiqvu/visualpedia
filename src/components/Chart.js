@@ -18,31 +18,7 @@ class Chart extends React.Component {
   state = {
     data: {
       labels: Array(10).fill(2006).map((y, i) => String(y + i)),
-      datasets: [],
-      options: {
-        title: {
-          display: true,
-          fontColor: 'white'
-        },
-        legend: {
-          display: true,
-          labels: {
-            fontColor: 'white'
-          }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                }
-          }],
-          xAxes: [{
-              ticks: {
-                  fontColor: "white",
-              }
-          }]
-        }
-      }
+      datasets: []
     }
   }
 
@@ -101,7 +77,7 @@ class Chart extends React.Component {
                 fontColor: 'white',
                 fontSize: 18
             }
-        },
+          },
           scales: {
             yAxes: [{
 
@@ -117,12 +93,22 @@ class Chart extends React.Component {
       case 'bar':
       case 'horziontal':
         options = {
-
+          legend: {
+            labels: {
+                fontColor: 'white',
+                fontSize: 18
+            }
+          },
         };
         break;
       case 'radar':
         options = {
-
+          legend: {
+            labels: {
+                fontColor: 'white',
+                fontSize: 18
+            }
+          },
         };
         break;
     }
@@ -185,14 +171,15 @@ class Chart extends React.Component {
       title: {
         display: true,
         text: this.props.title,
-        fontColor: 'black',
+        fontColor: 'white',
         fontSize: 25
       },
       legend: {
         display: this.props.displayLegend,
         position: this.props.legendPosition,
         labels: {
-          display: true
+          display: true,
+          fontColor: 'white'
         }
       },
       animation: {
