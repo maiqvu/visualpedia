@@ -14,7 +14,7 @@ function SelectIndicator(props) {
       </form>
       <ul>
         {props.labels.map((res, ind) => {
-          return <li key={ind} onClick={props.chooseIndicator} value={res}>{res}</li>;
+          return <li key={ind} onClick={props.handleSubmit} data-indicator={res[1]}>{res[0]}</li>;
         })}
       </ul>
       </div>

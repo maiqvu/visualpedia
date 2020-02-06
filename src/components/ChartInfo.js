@@ -126,7 +126,7 @@ class ChartInfo extends React.Component {
     axios.get(`${INDICATOR_BASE_URL}${indicatorSubString}.json`)
       .then(res => {
         let labels = [];
-        labels = res.data.map(r => r.label);
+        labels = res.data.map(r => [r.label, r.indicator_search]);
         this.setState({indicatorLabels: labels});
         console.log('labels:', labels);
 
@@ -143,6 +143,10 @@ class ChartInfo extends React.Component {
 
   submitIndicator = e => {
     e.preventDefault();
+    if (e.target.dataset.indicator) {
+      this.setState({indicatorToDisplay: e.target.dataset.indicator});
+    }
+    console.log('click:', e.target.dataset.indicator);
     const indicator = this.state.indicatorToDisplay;
     if (indicator) {
       this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
