@@ -1,14 +1,14 @@
 .quiz-pane {
-  opacity: 0.9;
+  opacity: 0.8;
+  background-color: #282c34;
   width: 60vw;
   margin: 3em auto;
   padding: 2em 2em 4em;
-  border: #4e555b 1px solid;
   border-radius: 15px;
   height: 40%;
   color: white;
   border: 2px solid white;
-  box-shadow: 5px 5px 5px;
+  box-shadow: 4px 4px 4px;
   .answers * {
     cursor: pointer;
   }

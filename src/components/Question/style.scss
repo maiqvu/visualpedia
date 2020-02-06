@@ -1,16 +1,14 @@
 .question-pane {
+  color: white;
   margin-top: 2em;
+
   .correct {
     font-size: 1.2em;
     font-weight: bold;
-    color: darkgreen !important;
+    color: greenyellow !important;
   }
 
-  label:disabled {
-    background: darkgreen !important;
-  }
-
-  input:disabled {
-    background: darkgreen !important;
+  .form-check-input:disabled ~ .form-check-label, .form-check-input[disabled] ~ .form-check-label {
+    color: white;
   }
 }
