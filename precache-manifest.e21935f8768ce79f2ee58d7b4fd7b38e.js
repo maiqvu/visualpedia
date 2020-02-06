@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "237e27a699bf0498fd18c087d898c33e",
+    "revision": "3ba9179b7d7ae1d09c819e649fef9849",
     "url": "/visualpedia/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/visualpedia/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "7272989333bc91d9eff3",
+    "revision": "4656882e3888688f8b24",
     "url": "/visualpedia/static/css/main.b2226487.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/visualpedia/static/js/2.4a945b15.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7272989333bc91d9eff3",
-    "url": "/visualpedia/static/js/main.b33ac3c8.chunk.js"
+    "revision": "4656882e3888688f8b24",
+    "url": "/visualpedia/static/js/main.70241cd9.chunk.js"
   },
   {
     "revision": "2325f206c5b36f1f0a4c",
