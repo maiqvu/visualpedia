@@ -8,6 +8,7 @@ import SelectChart from './SelectChart';
 import '../App.css'
 import _ from 'lodash/collection';
 const BASE_URL = `https://api.worldbank.org/v2/country/`;
+const INDICATOR_BASE_URL = 'http://localhost:3000/indicators/';
 
 const COUNTRY_ABBREVIATIONS = {
   northAmerica: 'us;ca;mx;cu;ni',  // US, Canada, Mexico, Cuba, Nicaragua
@@ -120,10 +121,32 @@ class ChartInfo extends React.Component {
   } // handleChange
 
   changeIndicator = (e) => {
-    // console.log('change dropdown:', e.target.value);
-    this.setState({indicatorToDisplay: e.target.value});
-    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
+    const indicatorSubString = e.target.value;
+    console.log('change dropdown:', indicatorSubString);
+    axios.get(`${INDICATOR_BASE_URL}${indicatorSubString}.json`)
+      .then(res => {
+        console.log('RES INdicators', res);
+        if (res.data.length === 1) {
+          this.setState({indicatorToDisplay: res.data[0].indicator_search});
+
+        }
+      })
+      .catch(res => console.warn());
+    console.log('INDICATOR',this.state.indicatorToDisplay);
+    // this.setState({indicatorToDisplay: e.target.value});
+    //this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), e.target.value);
   } // changeIndicator
+
+  submitIndicator = e => {
+    e.preventDefault();
+    const indicator = this.state.indicatorToDisplay;
+    if (indicator) {
+      this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
+    }
+    else {
+      // indicator not found
+    }
+  }
 
   changeChart = e => {
     this.setState({chartType: e.target.value});
@@ -187,6 +210,7 @@ class ChartInfo extends React.Component {
             <div className="indicator">
               <SelectIndicator
               countriesLabels={this.state.countriesLabel}
+              handleSubmit={this.submitIndicator}
               handleChange={this.changeIndicator} />
             </div>
           </div>

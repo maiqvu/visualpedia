@@ -66,3 +66,7 @@
 .path:hover {
   fill: #eee;
 }
+
+.bg-image {
+  background: 'black';
+}

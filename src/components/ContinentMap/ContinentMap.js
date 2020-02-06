@@ -225,6 +225,7 @@ function ContinentMap(props) {
 
 
   return (
+    <div className="bg-image">
     <svg className={styles.svg} version="1.1" viewBox="0 0 520.49 224.42" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       {/*<Link to="/chart/rec">*/}
       <g transform="translate(94.691 -26.885)">
@@ -262,6 +263,7 @@ function ContinentMap(props) {
         </g>
       </g>
     </svg>
+    </div>
   );
 }
 

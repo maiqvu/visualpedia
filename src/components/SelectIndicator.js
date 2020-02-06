@@ -1,24 +1,23 @@
 import React from 'react'
-import axios from 'axios';
 
-function SelectionIndicator (props){
+function SelectionIndicator(props) {
 
-    return(
-      <div className='CheckBox'>
-        {
-        0 !== 0
+  return(
+    <div className='CheckBox'>
+      {
+        1 !== 0
         ?
         <div>
           <form onSubmit={props.handleSubmit}>
-            <input type="text"onChange={props.handleChange}/>
-            <input type="submit" value="search" />
+            <input type="text" onChange={props.handleChange} />
+            <input type="submit" value="Search" />
           </form>
         </div>
         :
-        <h1></h1>
+        <h1>...</h1>
       }
-      </div>
-    ) // return
+    <div/>
+  )
 
 } // SelectSeach
 
