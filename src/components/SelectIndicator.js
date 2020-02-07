@@ -11,7 +11,7 @@ function SelectIndicator(props) {
       <div>
       <form onSubmit={props.handleSubmit}>
         <input type="text" onChange={props.handleChange}
-        placeholder="Search Indicator"
+        placeholder="Search indicator"
         />
       </form>
       {
