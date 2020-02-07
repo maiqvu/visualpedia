@@ -201,10 +201,9 @@ class ChartInfo extends React.Component {
   }
 
   chooseIndicator = (e) =>{
-    console.log(e.target.value);
+    console.log("event: ", e.target.getAttribute('value'));
     const indicator = this.state.indicatorToDisplay;
-    console.log(this.state.indicatorToDisplay);
-    console.log(indicator);
+
     this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
   }
 

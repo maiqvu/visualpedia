@@ -12,12 +12,19 @@ function SelectIndicator(props) {
       <form onSubmit={props.handleSubmit}>
         <input type="text" onChange={props.handleChange} />
       </form>
+      {
+        props.labels.length !== 0
+        ?
       <ul className={styles.menu}>
         {props.labels.map((res, ind) => {
           // console.log(res, ind);
           return <li key={ind} onClick={props.chooseIndicator} value={res[1]} className={styles.item}>{res[0]}</li>;
         })}
+
       </ul>
+      :
+      <p></p>
+      }
       </div>
       :
       <h1></h1>
