@@ -6,6 +6,39 @@ import * as actionCreators from '../../actions';
 import Question from '../Question';
 import './style.scss';
 
+function Spinner() {
+  return <h3 className="spinner-pane">
+    <p>Loading...</p>
+    <div className="spinner-border text-primary" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-secondary" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-success" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-danger" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-warning" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-info" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+    &nbsp;
+    <div className="spinner-border text-light" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  </h3>;
+}
+
 class Quiz extends Component {
   initialState = {
     showSolution: false,
@@ -68,52 +101,57 @@ class Quiz extends Component {
     console.log(currentQuestion);
     return (
         <div className="quiz-pane">
-          <span>Correct Rate: {`${this.state.correctCount} / ${questions.length}`}</span>
-          <h3>Question #{currentQuestion + 1}</h3>
-          {questions && currentQuestion !== undefined &&
-          <Question
-              question={questions[currentQuestion]}
-              showSolution={this.state.showSolution}
-              handleChooseAnswer={this.handleChooseAnswer}
-              seq={currentQuestion}
-          />}
-          {
-            !this.state.showSolution &&
-            <button
-                type="button"
-                className="btn btn-secondary float-right"
-                onClick={this.handleShowSolution}
-                disabled={this.state.submissions[currentQuestion] !== null
-                    ? ''
-                    : 'disabled'}>
-              Submit
-            </button>
-          }
-          {
-            this.state.showSolution && currentQuestion < questions.length - 1 &&
-            <button
-                type="button"
-                className="btn btn-info float-right"
-                onClick={this.handleNext}>
-              Next
-            </button>
-          }
-          {
-            this.finished() &&
-            <>
-              <div className="alert alert-success" role="alert">
-                <h3>You
-                  answered {`${this.state.correctCount}`} question{this.state.correctCount >
-                  1 ? 's' : ''} correctly out of {questions.length}.</h3>
-              </div>
+          {questions.length === 0 && <Spinner/>}
+          {questions.length > 0 &&
+          <div>
+            <span>Correct Rate: {`${this.state.correctCount} / ${questions.length}`}</span>
+            <h3>Question #{currentQuestion + 1}</h3>
+            {questions && currentQuestion !== undefined &&
+            <Question
+                question={questions[currentQuestion]}
+                showSolution={this.state.showSolution}
+                handleChooseAnswer={this.handleChooseAnswer}
+                seq={currentQuestion}
+            />}
+            {
+              !this.state.showSolution &&
+              <button
+                  type="button"
+                  className="btn btn-secondary float-right"
+                  onClick={this.handleShowSolution}
+                  disabled={this.state.submissions[currentQuestion] !== null
+                      ? ''
+                      : 'disabled'}>
+                Submit
+              </button>
+            }
+            {
+              this.state.showSolution && currentQuestion < questions.length -
+              1 &&
               <button
                   type="button"
                   className="btn btn-info float-right"
-                  onClick={this.loadQuiz}>
-                Play again
+                  onClick={this.handleNext}>
+                Next
               </button>
-            </>
-
+            }
+            {
+              this.finished() &&
+              <>
+                <div className="alert alert-success" role="alert">
+                  <h3>You
+                    answered {`${this.state.correctCount}`} question{this.state.correctCount >
+                    1 ? 's' : ''} correctly out of {questions.length}.</h3>
+                </div>
+                <button
+                    type="button"
+                    className="btn btn-info float-right"
+                    onClick={this.loadQuiz}>
+                  Play again
+                </button>
+              </>
+            }
+          </div>
           }
         </div>
     );

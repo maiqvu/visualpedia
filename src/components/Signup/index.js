@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import axios from 'axios';
 import {Alert} from 'react-bootstrap';
 import * as actionCreators from '../../actions';
 import './style.scss';
@@ -18,9 +17,10 @@ class Signup extends Component {
     const {signup} = this.props;
 
     event.preventDefault();
+
     signup(this.state).then(() => {
       this.props.history.push('/');
-    });
+    }).catch(console.warn);
   };
 
   handleChange = (event) => {
@@ -33,9 +33,10 @@ class Signup extends Component {
     return (
         <div className="sign-panel">
           {
-            authResult.hasOwnProperty('error') &&
+            authResult.hasOwnProperty('signUpError') &&
             <Alert variant="danger">
-              Incorrect email or password.
+              Sign-up failed. Please make sure the password and password
+              confirmation match.
             </Alert>
           }
           <form onSubmit={this.handleSubmit}>
@@ -74,8 +75,6 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  loginSuccess: PropTypes.func.isRequired,
-  loginFail: PropTypes.func.isRequired,
   authResult: PropTypes.object.isRequired,
 };
 

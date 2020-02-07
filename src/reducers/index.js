@@ -6,7 +6,9 @@ const auth = (state = {}, action) => {
     case AUTH.LOGIN_SUCCESS:
       return action.payload;
     case AUTH.LOGIN_FAIL:
-      return {error: 'login failed'};
+      return {loginError: 'login failed'};
+    case AUTH.SIGNUP_FAIL:
+      return {signUpError: 'signup failed'};
     case AUTH.LOGOUT:
       return {};
     default:
@@ -16,6 +18,9 @@ const auth = (state = {}, action) => {
 
 const quiz = (state = {}, action) => {
   switch (action.type) {
+    case QUIZ.PRE_FETCH_QUESTIONS: {
+      return {...state, questions: [], currentQuestion: 0};
+    }
     case QUIZ.QUESTIONS_FETCHED:
       return {...state, questions: action.payload, currentQuestion: 0};
     case QUIZ.NEXT_QUESTION:

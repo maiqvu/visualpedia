@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import {Alert} from 'react-bootstrap';
 import * as actionCreators from '../../actions';
@@ -12,11 +12,14 @@ class Login extends Component {
   };
 
   handleSubmit = (event) => {
-    const {login, loginSuccess, loginFail} = this.props;
+    const {login} = this.props;
 
     event.preventDefault();
 
-    login({email: this.state.email, password: this.state.password}).then(() => {
+    login({
+      email: this.state.email,
+      password: this.state.password,
+    }).then(() => {
       this.props.history.push('/');
     }).catch(console.warn);
   };
@@ -31,7 +34,7 @@ class Login extends Component {
     return (
         <div className="login-panel">
           {
-            authResult.hasOwnProperty('error') &&
+            authResult.hasOwnProperty('loginError') &&
             <Alert variant="danger">
               Incorrect email or password.
             </Alert>
@@ -60,8 +63,6 @@ class Login extends Component {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  loginSuccess: PropTypes.func.isRequired,
-  loginFail: PropTypes.func.isRequired,
   authResult: PropTypes.object.isRequired,
 };
 

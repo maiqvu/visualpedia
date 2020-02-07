@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/visualpedia/static/css/main.b2226487.chunk.css",
+    "main.js": "/visualpedia/static/js/main.af670d28.chunk.js",
+    "main.js.map": "/visualpedia/static/js/main.af670d28.chunk.js.map",
+    "runtime-main.js": "/visualpedia/static/js/runtime-main.3acc8df6.js",
+    "runtime-main.js.map": "/visualpedia/static/js/runtime-main.3acc8df6.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/visualpedia/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.4a945b15.chunk.js": "/visualpedia/static/js/2.4a945b15.chunk.js",
+    "static/js/2.4a945b15.chunk.js.map": "/visualpedia/static/js/2.4a945b15.chunk.js.map",
+    "index.html": "/visualpedia/index.html",
+    "precache-manifest.7cf94bbbc5d4f9971c678e3518e286b5.js": "/visualpedia/precache-manifest.7cf94bbbc5d4f9971c678e3518e286b5.js",
+    "service-worker.js": "/visualpedia/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/visualpedia/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.b2226487.chunk.css.map": "/visualpedia/static/css/main.b2226487.chunk.css.map",
+    "static/js/2.4a945b15.chunk.js.LICENSE.txt": "/visualpedia/static/js/2.4a945b15.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3acc8df6.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.4a945b15.chunk.js",
+    "static/css/main.b2226487.chunk.css",
+    "static/js/main.af670d28.chunk.js"
+  ]
+}
