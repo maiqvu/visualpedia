@@ -31,7 +31,7 @@ class ChatWidget extends React.Component {
   }
 
   createSocket() {
-    const yourToken = localStorage.getItem('auth_token');   // get JWT token that is saved in local storage
+    const yourToken = localStorage.getItem('auth_token', 'name', 'user_id');   // get JWT token that is saved in local storage
 
     // this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
     if (process.env.NODE_ENV !== 'production') {
