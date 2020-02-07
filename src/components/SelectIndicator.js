@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './SelectIndicator.module.css'
 
 function SelectIndicator(props) {
 
@@ -9,14 +10,23 @@ function SelectIndicator(props) {
       ?
       <div>
       <form onSubmit={props.handleSubmit}>
-        <input type="text" onChange={props.handleChange} />
-        <input type="submit" value="Search" />
+        <input type="text" onChange={props.handleChange}
+        placeholder="Search Indicator"
+        />
       </form>
-      <ul>
+      {
+        props.labels.length !== 0
+        ?
+      <ul className={styles.menu}>
         {props.labels.map((res, ind) => {
-          return <li key={ind} onClick={props.handleSubmit} data-indicator={res[1]}>{res[0]}</li>;
+          // console.log(res, ind);
+          return <li key={ind} onClick={props.chooseIndicator} data-indicator={res[1]} className={styles.item}>{res[0]}</li>;
         })}
+
       </ul>
+      :
+      <p></p>
+      }
       </div>
       :
       <h1></h1>

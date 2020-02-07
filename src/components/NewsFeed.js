@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import '../NewsFeed.css'
+import KEY from '../.env.js'
 const URL = 'https://newsapi.org/v2/top-headlines?country='
 const CATAGORY = '&category=science'
-const API_KEY = 'fc488d7d92e0499888abe5ddb0f1b9d8'
-// process.env.REACT_APP_NEWS_FEED_API_KEY
+const API_KEY = KEY
+
 class NewsFeed extends React.Component {
 
   state = {
