@@ -64,11 +64,8 @@ class ChartInfo extends React.Component {
       },
       () => this.updateChartDisplay()
     );
-
-    // console.log(this.state.infoToChart);
     // search sorted results to rawData
-    // this.setState({sortedResults: rawData})
-    // this.setState({infoToChart: rawData})
+
     } // spilt data
 
   getCountryAbbreviations = continent => {
@@ -120,7 +117,7 @@ class ChartInfo extends React.Component {
    } else {
      console.log('selected true');
      // add new county to rest of state save as joined
-     // const joined = this.state.resultsToDisplay.concat(value);
+
      // update state with new value
      this.setState(
        { resultsToDisplay: [...this.state.resultsToDisplay, value] },
@@ -190,6 +187,7 @@ class ChartInfo extends React.Component {
     this.setState({infoToChart: listToUpdateState})
   }
 
+// get local news
   getNews(){
     let continent = this.props.match.params.continent
     let newsSearch;
