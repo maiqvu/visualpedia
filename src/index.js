@@ -9,6 +9,7 @@ import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-typeahead/css/Typeahead.css'
 
 const store = createStore(
     reducers,

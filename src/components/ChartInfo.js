@@ -236,7 +236,7 @@ class ChartInfo extends React.Component {
               handleChange={this.changeIndicator}
               labels={this.state.indicatorLabels}
               chooseIndicator={this.chooseIndicator}
-              key={Math.random()}/>
+              />
             </div>
           </div>
           </div>

@@ -51,15 +51,31 @@ body {
   justify-content: space-around;
   width: 100%;
 
-  padding: 68px 0;
+  padding: 50px 0;
 }
 
-.displaycheckBoxDiv, .displayselectChartDiv {
-  margin: 10px 50px;
+.displaycheckBoxDiv {
+  margin: 10px 20px;
   border: 2px solid white;
   display: inline-block;
+  font-size: 15px;
   height: 100%;
+  padding: 20px;
+  background-color: black;
+  color: white;
+  opacity: 0.8;
+  vertical-align: middle;
+  border-radius: 10px;
+  box-shadow: 2px 3px 2px;
+}
+
+.displayselectChartDiv {
+  margin-right: 10px;
   padding: 5px;
+  border: 2px solid white;
+  display: inline-block;
+  font-size: 15px;
+  height: 100%;
   background-color: black;
   color: white;
   opacity: 0.8;
@@ -70,27 +86,24 @@ body {
 
 .chartDiv {
 
-
   display: inline-block;
-  width: 80%;
+  
   height: 80%;
   justify-content: space-between;
   color: white;
 }
 
 .chartDisplay {
-  margin: 17px 10px;
   height: 80%;
-  width: 90%;
+  width: 45em;
   display: inline-block;
   border: 2px solid white;
-  padding: 15px;
+  padding: 5px;
   background-color: black;
   color: white;
   opacity: 0.9;
   border-radius: 15px;
   box-shadow: 5px 5px 5px;
-
 
 }
 
@@ -192,4 +205,16 @@ a {
 
 #welcomeMessage {
   color: white;
+}
+
+ul.searchIndicator {
+
+  list-style-type: none;
+  padding: 0;
+}
+
+.searchedIndicators {
+
+    margin: 0;
+    padding: 0;
 }
