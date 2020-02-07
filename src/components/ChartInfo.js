@@ -37,12 +37,15 @@ class ChartInfo extends React.Component {
   }
 
 
+
+
   splitData = (arrayToGroup) => {
     // lodash group by array, constant, what should be returned
     const rawData = _.groupBy(arrayToGroup, countryEach => countryEach.country.value)
     // create list to get name of all countries from api call
 
     this.setState({title: arrayToGroup[0].indicator.value});
+
     let countryEach = []
     // loop through data get key values
     for (let key in rawData){
@@ -52,13 +55,20 @@ class ChartInfo extends React.Component {
     // set countries each to eqaul counties searched for
 
     console.log('SPLITDATA');
+
     this.setState(
       {
         countriesLabel: countryEach,
         sortedResults: rawData,
+        // infoToChart: rawData
       },
       () => this.updateChartDisplay()
     );
+
+    // console.log(this.state.infoToChart);
+    // search sorted results to rawData
+    // this.setState({sortedResults: rawData})
+    // this.setState({infoToChart: rawData})
     } // spilt data
 
   getCountryAbbreviations = continent => {
@@ -74,10 +84,11 @@ class ChartInfo extends React.Component {
 
       this.splitData(res.data[1]);
       console.log(res.data[1]);
+      // console.log('this.updateChartDisplay()');
     })
-    .then(() => {
-      this.updateChartDisplay();
-    })
+    // .then(() => {
+    //   this.updateChartDisplay();
+    // })
     .catch( err => {
       console.warn(err)
     })
@@ -139,6 +150,14 @@ class ChartInfo extends React.Component {
 
   } // changeIndicator
 
+  chooseIndicator = (e) =>{
+    console.log(e.target.value);
+    const indicator = e.target.dataset.indicator;//this.state.indicatorToDisplay;
+    console.log(this.state.indicatorToDisplay);
+    console.log(indicator);
+    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
+  }
+
   submitIndicator = e => {
     e.preventDefault();
     if (e.target.dataset.indicator) {
@@ -189,13 +208,7 @@ class ChartInfo extends React.Component {
     return newsSearch
   }
 
-  chooseIndicator = (e) =>{
-    console.log(e.target.value);
-    const indicator = this.state.indicatorToDisplay;
-    console.log(this.state.indicatorToDisplay);
-    console.log(indicator);
-    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
-  }
+
 
   componentDidMount(){
     const continent = this.props.match.params.continent;
@@ -224,7 +237,8 @@ class ChartInfo extends React.Component {
               handleSubmit={this.submitIndicator}
               handleChange={this.changeIndicator}
               labels={this.state.indicatorLabels}
-              chooseIndicator={this.chooseIndicator}/>
+              chooseIndicator={this.chooseIndicator}
+              />
             </div>
           </div>
           </div>
