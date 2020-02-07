@@ -150,6 +150,14 @@ class ChartInfo extends React.Component {
 
   } // changeIndicator
 
+  chooseIndicator = (e) =>{
+    console.log(e.target.value);
+    const indicator = e.target.dataset.indicator;//this.state.indicatorToDisplay;
+    console.log(this.state.indicatorToDisplay);
+    console.log(indicator);
+    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
+  }
+
   submitIndicator = e => {
     e.preventDefault();
     if (e.target.dataset.indicator) {
@@ -192,7 +200,7 @@ class ChartInfo extends React.Component {
     } else if (continent === 'southAmerica'){
       newsSearch = 'ar'
     } else if (continent === "europe") {
-      newsSearch = 'gb'
+      newsSearch = 'fr'
     } else {
       newsSearch = 'au'
     }
@@ -200,12 +208,7 @@ class ChartInfo extends React.Component {
     return newsSearch
   }
 
-  chooseIndicator = (e) =>{
-    console.log("event: ", e.target.getAttribute('value'));
-    const indicator = this.state.indicatorToDisplay;
 
-    this.performSearch(this.getCountryAbbreviations(this.state.currentContinent), indicator);
-  }
 
   componentDidMount(){
     const continent = this.props.match.params.continent;
