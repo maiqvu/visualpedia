@@ -37,10 +37,7 @@ class ChatWidget extends React.Component {
     // this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
     if (process.env.NODE_ENV !== 'production') {
       this.cable = ActionCable.createConsumer('ws://localhost:3000/cable', yourToken);
-
-      console.log(yourToken);
-      
-
+      // console.log(yourToken);
     } else {
       this.cable = ActionCable.createConsumer('wss://visualpedia-backend.herokuapp.com/cable', yourToken);
     }
@@ -90,10 +87,11 @@ class ChatWidget extends React.Component {
         .catch(err => console.warn(err));
   }
 
-  componentDidUpdate() {
-    let element = document.getElementsByClassName('chat-logs');
-    element.scrollTop = element.scrollHeight;
-  }
+  // componentDidUpdate() {
+  //   this.bottom.current.scrollIntoView();
+  //   // let element = document.getElementsByClassName('chat-logs');
+  //   // element.scrollTop = element.scrollHeight;
+  // }
 
   componentWillUnmount() {
     // console.log('unmounting!');
@@ -110,16 +108,15 @@ class ChatWidget extends React.Component {
               <p>Share your knowledge with other quiz participants</p>
               <div className='chat-logs'>
                 <ul className='chat-logs'>
-                  {this.state.chatLogs.map((el) => {
-                    return (
-                        <li key={`chat_${el.id}`}>
-                          <strong>{el.sender}</strong>
-                          <span className='chat-message'>{el.content}</span>
-                          <span className='chat-created-at'>{el.created_at}</span>
-                        </li>
-                    );
-                  })
-
+                  {
+                    this.state.chatLogs.map((el) => {
+                      return (
+                          <li key={`chat_${el.id}`}>
+                            <span className='chat-message'><strong>{el.sender}</strong>: {el.content}</span>
+                            <span className='chat-created-at'>{el.created_at}</span>
+                          </li>
+                      );
+                    })
                   }
                 </ul>
               </div>
