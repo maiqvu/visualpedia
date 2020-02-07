@@ -21,6 +21,7 @@ export const login = (credentials) => (dispatch, getState) => {
     localStorage.setItem('auth_token', res.data.auth_token);
     localStorage.setItem('name', res.data.name);
     localStorage.setItem('email', res.data.email);
+    localStorage.setItem('user_id', res.data.user_id);
 
     return Promise.resolve();
   }).catch((error) => {
