@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2e4fe06679bae1a9b927fb31a3bc89bd",
+    "revision": "f3a6806d93e2824d320d760ba9e771e1",
     "url": "/visualpedia/index.html"
   },
   {
-    "revision": "7255e98d6a9df1839d3b",
+    "revision": "d2f1aa650ecb04ac43c9",
     "url": "/visualpedia/static/css/2.a255583a.chunk.css"
   },
   {
-    "revision": "1fc5a917388faefc1628",
+    "revision": "7cea9087666e935f5e1a",
     "url": "/visualpedia/static/css/main.c594142b.chunk.css"
   },
   {
-    "revision": "7255e98d6a9df1839d3b",
-    "url": "/visualpedia/static/js/2.f270e62c.chunk.js"
+    "revision": "d2f1aa650ecb04ac43c9",
+    "url": "/visualpedia/static/js/2.45fc59e6.chunk.js"
   },
   {
     "revision": "6e6198b0838f1b33cf5e66d002284e73",
-    "url": "/visualpedia/static/js/2.f270e62c.chunk.js.LICENSE.txt"
+    "url": "/visualpedia/static/js/2.45fc59e6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1fc5a917388faefc1628",
-    "url": "/visualpedia/static/js/main.ebe11e9b.chunk.js"
+    "revision": "7cea9087666e935f5e1a",
+    "url": "/visualpedia/static/js/main.bacb8041.chunk.js"
   },
   {
     "revision": "2325f206c5b36f1f0a4c",
