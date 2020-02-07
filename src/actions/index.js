@@ -8,58 +8,53 @@ const host = (env) => env === 'production'
 export const login = (credentials) => (dispatch, getState) => {
   const {email, password} = credentials;
 
-  return axios.post(`${host(process.env.NODE_ENV)}/authenticate`
-      , {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-        email,
-        password,
-      })
-      .then((res) => {
-        dispatch(loginSuccess(res.data));
+  return axios.post(`${host(process.env.NODE_ENV)}/authenticate`, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    },
+    email,
+    password,
+  }).then((res) => {
+    dispatch(loginSuccess(res.data));
 
-        localStorage.setItem('auth_token', res.data.auth_token);
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('email', res.data.email);
+    localStorage.setItem('auth_token', res.data.auth_token);
+    localStorage.setItem('name', res.data.name);
+    localStorage.setItem('email', res.data.email);
+    localStorage.setItem('user_id', res.data.user_id);
 
-        return Promise.resolve();
-      })
-      .catch((error) => {
-        console.warn(error);
-        dispatch(loginFail());
-        return Promise.reject(error);
-      });
+    return Promise.resolve();
+  }).catch((error) => {
+    console.warn(error);
+    dispatch(loginFail());
+    return Promise.reject(error);
+  });
 };
 
 export const signup = (userInfo) => (dispatch, getState) => {
   const {name, email, password, passwordConfirmation} = userInfo;
 
-  return axios.post(`${host(process.env.NODE_ENV)}/users.json`
-      , {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-        user: {
-          name, email, password, password_confirmation: passwordConfirmation,
-        },
-      })
-      .then((res) => {
-        if (res.data.hasOwnProperty('error')) {
-          dispatch(signUpFail());
-          return Promise.reject();
-        }
-        dispatch(login({email, password}));
+  return axios.post(`${host(process.env.NODE_ENV)}/users.json`, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    },
+    user: {
+      name, email, password, password_confirmation: passwordConfirmation,
+    },
+  }).then((res) => {
+    if (res.data.hasOwnProperty('error')) {
+      dispatch(signUpFail());
+      return Promise.reject();
+    }
 
-        return Promise.resolve();
-      })
-      .catch((error) => {
-        console.warn(error);
-        return Promise.reject(error);
-      });
+    dispatch(login({email, password}));
 
+    return Promise.resolve();
+  }).catch((error) => {
+    console.warn(error);
+    return Promise.reject(error);
+  });
 };
 
 export const preFetchQuestions = () => ({

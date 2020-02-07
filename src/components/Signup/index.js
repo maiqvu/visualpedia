@@ -17,6 +17,7 @@ class Signup extends Component {
     const {signup} = this.props;
 
     event.preventDefault();
+
     signup(this.state).then(() => {
       this.props.history.push('/');
     }).catch(console.warn);
@@ -74,8 +75,6 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  loginSuccess: PropTypes.func.isRequired,
-  loginFail: PropTypes.func.isRequired,
   authResult: PropTypes.object.isRequired,
 };
 
