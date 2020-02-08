@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/visualpedia/static/css/main.c594142b.chunk.css",
-    "main.js": "/visualpedia/static/js/main.bacb8041.chunk.js",
-    "main.js.map": "/visualpedia/static/js/main.bacb8041.chunk.js.map",
+    "main.js": "/visualpedia/static/js/main.d1d794d0.chunk.js",
+    "main.js.map": "/visualpedia/static/js/main.d1d794d0.chunk.js.map",
     "runtime-main.js": "/visualpedia/static/js/runtime-main.3acc8df6.js",
     "runtime-main.js.map": "/visualpedia/static/js/runtime-main.3acc8df6.js.map",
     "static/css/2.a255583a.chunk.css": "/visualpedia/static/css/2.a255583a.chunk.css",
-    "static/js/2.45fc59e6.chunk.js": "/visualpedia/static/js/2.45fc59e6.chunk.js",
-    "static/js/2.45fc59e6.chunk.js.map": "/visualpedia/static/js/2.45fc59e6.chunk.js.map",
+    "static/js/2.f270e62c.chunk.js": "/visualpedia/static/js/2.f270e62c.chunk.js",
+    "static/js/2.f270e62c.chunk.js.map": "/visualpedia/static/js/2.f270e62c.chunk.js.map",
     "index.html": "/visualpedia/index.html",
-    "precache-manifest.223ef729c67448f9f3e32644dc8dbe6c.js": "/visualpedia/precache-manifest.223ef729c67448f9f3e32644dc8dbe6c.js",
+    "precache-manifest.f5f84b53402455897fb76af690a57184.js": "/visualpedia/precache-manifest.f5f84b53402455897fb76af690a57184.js",
     "service-worker.js": "/visualpedia/service-worker.js",
     "static/css/2.a255583a.chunk.css.map": "/visualpedia/static/css/2.a255583a.chunk.css.map",
     "static/css/main.c594142b.chunk.css.map": "/visualpedia/static/css/main.c594142b.chunk.css.map",
-    "static/js/2.45fc59e6.chunk.js.LICENSE.txt": "/visualpedia/static/js/2.45fc59e6.chunk.js.LICENSE.txt"
+    "static/js/2.f270e62c.chunk.js.LICENSE.txt": "/visualpedia/static/js/2.f270e62c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3acc8df6.js",
     "static/css/2.a255583a.chunk.css",
-    "static/js/2.45fc59e6.chunk.js",
+    "static/js/2.f270e62c.chunk.js",
     "static/css/main.c594142b.chunk.css",
-    "static/js/main.bacb8041.chunk.js"
+    "static/js/main.d1d794d0.chunk.js"
   ]
 }
