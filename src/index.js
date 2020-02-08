@@ -15,9 +15,9 @@ const store = createStore(
     reducers,
     compose(applyMiddleware(thunk),
         // eslint-disable-next-line no-underscore-dangle
-        window.__REDUX_DEVTOOLS_EXTENSION__
+        process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
         // eslint-disable-next-line no-underscore-dangle
-        && window.__REDUX_DEVTOOLS_EXTENSION__()),
+        window.__REDUX_DEVTOOLS_EXTENSION__() : f => f),
 );
 
 ReactDOM.render(
